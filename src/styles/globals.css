@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+  /* Import the Montserrat font from Google Fonts */
+  /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
 
-/* Specify the font family */
-
-@layer base {
-  html {
-    font-family: Nunito,
+  /* Apply the Montserrat font to a specific element */
+/* body {
+    font-family: Nunito, sans-serif;
   }
-}
+  */

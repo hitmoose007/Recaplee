@@ -6,6 +6,9 @@ module.exports = {
   theme: {
     
     extend: {
+        fontFamily: {
+            sans:['var(--font-nunito)']
+        },
       colors: {
         primary: config.theme?.colors['blue'],
       },

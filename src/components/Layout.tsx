@@ -1,13 +1,13 @@
 import React from 'react';
 import useMobileStatus from '@/hooks/useMobileStatus';
-
+import BackButton from '@/components/BackButton';
 import Image from 'next/image';
-import {Nunito} from '@next/font/google'
+import { Nunito } from 'next/font/google';
 
 const nunito = Nunito({
-    subsets: ['cyrillic'],
-    variable: '--font-nunito',
-})
+  subsets: ['cyrillic'],
+  variable: '--font-nunito',
+});
 type Props = {};
 
 function Layout({ children }: { children: React.ReactNode }) {
@@ -15,7 +15,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <>
       <div className={`${nunito.variable} font-sans`}>
         <div
-          className="flex h-24 w-full justify-between  text-white"
+          className="flex h-24 w-full justify-between  rounded-b-2xl text-white"
           style={{
             background: 'linear-gradient(90deg, #111827 0%, #051840 100%)',
           }}
@@ -36,7 +36,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
           <div className="mr-8 flex  items-center justify-between space-x-12 text-sm ">
             <div className="flex ">
-              <p className="font-bold mr-3">Monthly Limits:</p>
+              <p className="mr-3 font-bold">Monthly Limits:</p>
               <div className="flex flex-col ">
                 <p>
                   <span className="text-[#30A3E4]">10/15 </span> query monitored
@@ -49,9 +49,9 @@ function Layout({ children }: { children: React.ReactNode }) {
                 </p>
               </div>
             </div>
-            <div className="flex-col justify-center mt-3 space-y-2 ">
+            <div className="mt-3 flex-col justify-center space-y-2 ">
               <button
-                className="h-[35px] w-[150px] rounded-full font-bold bg-[#705CF6] hover:brightness-90"
+                className="h-[35px] w-[150px] rounded-full bg-[#705CF6] font-bold hover:brightness-90"
                 onClick={() => console.log('subscription clicked!')}
               >
                 Your Subscription
@@ -74,7 +74,12 @@ function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </div>
-        <main>{children}</main>
+        <div className="md:mx-10 md:my-8">
+          <div className="md:mb-1">
+            <BackButton />
+          </div>
+          <main>{children}</main>
+        </div>
       </div>
     </>
   );

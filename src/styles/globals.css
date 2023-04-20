@@ -2,12 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import the Montserrat font from Google Fonts */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
 
-  /* Import the Montserrat font from Google Fonts */
-  /* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
-
-  /* Apply the Montserrat font to a specific element */
+/* Apply the Montserrat font to a specific element */
 /* body {
     font-family: Nunito, sans-serif;
   }
   */
+
+body {
+  background-color: #F5F5F;
+}
+button.ReactFlagsSelect-module_selectBtn__19wW7 {
+  border-radius: 25px;
+  width: 200px;
+  /* border: 1px solid #000; */
+  background-color: #fff;
+  height: 35px;
+  border: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ReactFlagsSelect-module_selectBtn__19wW7:before {
+  border: none;
+}
+
+button.ReactFlagsSelect-module_selectBtn__19wW7:after {
+  border: none;
+}
+
+select {
+  appearance: none;
+}

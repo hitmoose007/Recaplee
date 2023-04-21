@@ -4,25 +4,31 @@ import CountrySelect from './CountrySelect';
 import { countryDomains } from '../../utils/countryList';
 import Image from 'next/image';
 import { useContext } from 'react';
+import { FormContext } from '@/context/FormContext';
 import { PageContext } from '@/context/PageContext';
+import { PageView } from '@/utils/enums';
+
+import { QueryResultContext } from '../../context/QueryResultContext';
 type Props = {};
 
 const NewQueryForm = (props: Props) => {
-  const [query, setQuery] = useState('');
-  const [isPC, setIsPC] = useState(true);
-  const [countryDomain, setCountryDomain] = useState('google.com');
-  const [country, setCountry] = useState('SE');
-
+  const { formState, setFormState } = useContext(FormContext);
+  const { queryResult, setQueryResult } = useContext(QueryResultContext);
   const { page, setPage } = useContext(PageContext);
   const onSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!query) {
+    if (!formState.query) {
       alert('Please add a query');
       return;
     }
     console.log('SUBMIT');
-    console.log(query, isPC, countryDomain, country);
+    console.log(
+      formState.query,
+      formState.isPC,
+      formState.countryDomain,
+      formState.country
+    );
 
     //fetch
 
@@ -32,15 +38,28 @@ const NewQueryForm = (props: Props) => {
         headers: {
           'Content-type': 'application/json',
         },
-        body: JSON.stringify({ query, isPC, countryDomain, country }),
+        body: JSON.stringify({
+          query: formState.query,
+          isPC: formState.isPC,
+          countryDomain: formState.countryDomain,
+          country: formState.country,
+        }),
       });
 
       const data = await response.json();
-      console.log(data);
+    //   console.log(data, ' this is data');
+      setQueryResult(data);
+
+      setPage(PageView.STEP2VIEW);
+
+      console.log(queryResult, ' this is query result');
     } catch (error) {
       console.error(error);
     }
-    setPage('home/step1');
+    // setPage('home/step1');
+  };
+  const handleCountryChange = (newCountry: string) => {
+    setFormState({ ...formState, country: newCountry });
   };
 
   return (
@@ -50,7 +69,9 @@ const NewQueryForm = (props: Props) => {
           <div className=" flex-col  md:space-y-2">
             <p>Type the query:</p>
             <input
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) =>
+                setFormState({ ...formState, query: e.target.value })
+              }
               type="text"
               className="rounded-full md:h-[34px] md:w-[245px] md:pl-4"
             />
@@ -59,8 +80,10 @@ const NewQueryForm = (props: Props) => {
           <div className="md:space-y-2 ">
             <p>Select Search Engine:</p>
             <select
-              value={countryDomain}
-              onChange={(e) => setCountryDomain(e.target.value)}
+              value={formState.countryDomain}
+              onChange={(e) =>
+                setFormState({ ...formState, countryDomains: e.target.value })
+              }
               className="rounded-full md:h-[34px] md:w-[190px] md:pl-4"
             >
               {countryDomains.map((countryDomain) => {
@@ -70,16 +93,19 @@ const NewQueryForm = (props: Props) => {
           </div>
           <div className="space-y-2">
             <p>Select Country:</p>
-            <CountrySelect country={country} setCountry={setCountry} />
+            <CountrySelect
+              country={formState.country}
+              setCountry={handleCountryChange}
+            />
           </div>
 
           <div className="space flex-col text-[#4B5563] md:space-y-2">
             <p className="text-[#111827]">Select device:</p>
             <div className="flex     ">
               <div
-                onClick={() => setIsPC(true)}
+                onClick={() => setFormState({ ...formState, isPC: true })}
                 className={` ${
-                  isPC && 'border-[3px] border-[#705CF6]'
+                  formState.isPC && 'border-[3px] border-[#705CF6]'
                 } flex cursor-pointer items-center space-x-2 rounded-l-full bg-white hover:brightness-95 md:px-3 md:py-1`}
               >
                 <Image
@@ -91,9 +117,9 @@ const NewQueryForm = (props: Props) => {
                 <span>PC</span>
               </div>
               <div
-                onClick={() => setIsPC(false)}
+                onClick={() => setFormState({ ...formState, isPC: false })}
                 className={` ${
-                  !isPC && 'border-[3px] border-[#705CF6]'
+                  !formState.isPC && 'border-[3px] border-[#705CF6]'
                 } flex cursor-pointer items-center rounded-r-full bg-white hover:brightness-95 md:px-4 md:py-1 `}
               >
                 <Image

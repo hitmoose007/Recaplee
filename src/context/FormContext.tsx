@@ -1,16 +1,11 @@
-import {createContext} from 'react';
+import { createContext } from 'react';
 
 export const FormContext = createContext({
-    
-    formState: {
-        query: '',
-        country: 'SE',
-        countryDomain: 'google.com',
-        isPC: true
-    },
-    setFormState: (formState: any) => {},
-
-
+  formState: {
+    query: '',
+    country: 'SE',
+    countryDomain: 'google.com',
+    isPC: true,
+  },
+  setFormState: (formState: any) => {},
 });
-
-

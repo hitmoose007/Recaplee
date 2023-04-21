@@ -6,12 +6,7 @@ import { useState } from 'react';
 type Props = {};
 
 const Step1 = (props: Props) => {
-  const [query, setQuery] = useState('');
-  const [isPC, setIsPC] = useState(true);
-  const [countryDomain, setCountryDomain] = useState('google.com');
-  const [country, setCountry] = useState('SE');
-
-  
+ 
 
   return (
     <div>

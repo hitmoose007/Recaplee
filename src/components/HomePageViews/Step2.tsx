@@ -14,7 +14,7 @@ import { QueryResultContext } from '../../context/QueryResultContext';
 
 
 interface queryResult {
-    position: number;
+    position_overall: number;
     title: string;
     link: string;
     domain: string;
@@ -27,7 +27,18 @@ type Props = {};
 const Step1 = (props: Props) => {
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult, setQueryResult } = useContext(QueryResultContext);
-  console.log(queryResult, ' this is query result');
+  const [selectedCompetitors, setSelectedCompetitors] = useState([]);
+
+  const handleSelectCompetitor = (competitorKey:number) => {
+  setSelectedCompetitors((prevSelectedCompetitors:any) =>
+    prevSelectedCompetitors.includes(competitorKey)
+      ? prevSelectedCompetitors.filter((key:number) => key !== competitorKey)
+      : [...prevSelectedCompetitors, competitorKey]
+  );
+};
+//   console.log(queryResult, ' this is query result');
+  
+  console.log(selectedCompetitors, ' this is selected competitors');
   return (
     <div>
       <Header
@@ -130,12 +141,13 @@ const Step1 = (props: Props) => {
         <div className="grid md:mt-10 md:grid-cols-2 md:gap-x-14 md:gap-y-6">
           {queryResult?.map((competitor:queryResult) => {
             return <CompetitorCard 
-            key={competitor.position}
-            position={competitor.position}
+            key={competitor.position_overall}
+            position={competitor.position_overall}
             title={competitor.title}
             link={competitor.link}
             domain={competitor.domain}
-            
+            handleSelectCompetitor={handleSelectCompetitor}
+
              />;
           })}
         </div>

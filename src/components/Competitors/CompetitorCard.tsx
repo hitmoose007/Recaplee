@@ -1,23 +1,39 @@
 import React from 'react';
 import Image from 'next/image';
-
+import { useState } from 'react';
 type Props = {
   position: number;
   title: string;
   link: string;
   domain: string;
+  handleSelectCompetitor: (competitorKey: number) => void;
 };
 
-const CompetitorCard = ({ position, title, link, domain }: Props) => {
+const CompetitorCard = ({
+  position,
+  title,
+  link,
+  domain,
+  handleSelectCompetitor,
+}: Props) => {
+  const [isSelected, setIsSelected] = useState(false);
   return (
-    <div className="h-[101px] w-[100%] cursor-pointer  rounded-[30px] bg-white hover:brightness-95">
+    <div
+      onClick={() => {
+        handleSelectCompetitor(position);
+        setIsSelected(!isSelected);
+      }}
+      className={`h-[101px] w-[100%] cursor-pointer  rounded-[30px] bg-white hover:brightness-95 ${
+        isSelected && 'border-[3px] border-[#7E5DEB]'
+      }`}
+    >
       <div className="flex  md:space-x-10 md:px-6 md:py-3 ">
         <p className="text-[20px] font-bold text-[#705CF6]">{position}.</p>
         <div className="flex flex-col">
           <p className="text-[20px] font-bold text-[#705CF6]">{domain}</p>
           <p className="font-bold  ">{title}</p>
           <a
-            href="test.com"
+            href={link}
             className="flex cursor-pointer text-clip text-sm hover:underline"
           >
             <span className="md:mr-2"> {link}</span>

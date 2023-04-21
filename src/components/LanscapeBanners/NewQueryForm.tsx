@@ -14,7 +14,7 @@ type Props = {};
 const NewQueryForm = (props: Props) => {
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult, setQueryResult } = useContext(QueryResultContext);
-  const { page, setPage } = useContext(PageContext);
+  const { setPage } = useContext(PageContext);
   const onSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -47,7 +47,7 @@ const NewQueryForm = (props: Props) => {
       });
 
       const data = await response.json();
-    //   console.log(data, ' this is data');
+      //   console.log(data, ' this is data');
       setQueryResult(data);
 
       setPage(PageView.STEP2VIEW);
@@ -81,13 +81,26 @@ const NewQueryForm = (props: Props) => {
             <p>Select Search Engine:</p>
             <select
               value={formState.countryDomain}
-              onChange={(e) =>
-                setFormState({ ...formState, countryDomains: e.target.value })
-              }
+              onChange={(e) => {
+                setFormState({ ...formState, countryDomain: e.target.value });
+                console.log(formState.countryDomain);
+              }}
               className="rounded-full md:h-[34px] md:w-[190px] md:pl-4"
             >
               {countryDomains.map((countryDomain) => {
-                return <option value={countryDomain}>{countryDomain}</option>;
+                return (
+                  <option value={countryDomain}>
+                    {/* <div
+                      className=" h-5 w-4 bg-cover"
+                      style={{
+                        backgroundImage: `url('/saveIcon.svg')`,
+                        backgroundRepeat: 'repeat-x',
+                        backgroundSize: 'cover',
+                      }}
+                    >fsa</div> */}
+                    {countryDomain}
+                  </option>
+                );
               })}
             </select>
           </div>

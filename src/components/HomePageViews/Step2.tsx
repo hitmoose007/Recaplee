@@ -8,11 +8,26 @@ import { useContext } from 'react';
 import Image from 'next/image';
 import CountrySelect from '@/components/LanscapeBanners/CountrySelect';
 import { countryDomains } from '@/utils/countryList';
+import CompetitorCard from '../Competitors/CompetitorCard';
+import SaveButton from '../Competitors/SaveButton';
+import { QueryResultContext } from '../../context/QueryResultContext';
+
+
+interface queryResult {
+    position: number;
+    title: string;
+    link: string;
+    domain: string;
+}
+
+
+
 type Props = {};
 
 const Step1 = (props: Props) => {
   const { formState, setFormState } = useContext(FormContext);
-
+  const { queryResult, setQueryResult } = useContext(QueryResultContext);
+  console.log(queryResult, ' this is query result');
   return (
     <div>
       <Header
@@ -29,35 +44,32 @@ const Step1 = (props: Props) => {
           <div className=" flex-col  md:space-y-2">
             <p>Type the query:</p>
             <input
+              value={formState.query}
               onChange={(e) =>
                 setFormState({ ...formState, query: e.target.value })
               }
               type="text"
-              className="rounded-full md:h-[34px] md:w-[245px] md:pl-4"
+              className="pointer-events-none rounded-full font-bold text-[#334DD9] md:h-[34px] md:w-[245px] md:pl-4"
             />
           </div>
 
           <div className="md:space-y-2 ">
             <p>Select Search Engine:</p>
             <select
-            
               value={formState.countryDomain}
               onChange={(e) =>
                 setFormState({ ...formState, countryDomains: e.target.value })
               }
-              className="rounded-full md:h-[34px] md:w-[190px] md:pl-4 pointer-events-none text-[#334DD9] font-bold"
+              className="pointer-events-none rounded-full font-bold text-[#334DD9] md:h-[34px] md:w-[190px] md:pl-4"
             >
-              {/* {countryDomains.map((countryDomain) => {
-                return <option value={countryDomain}>{countryDomain}</option>;
-              })} */}
+              <option value={formState.countryDomain}>
+                {formState.countryDomain}
+              </option>
             </select>
           </div>
-          <div className="space-y-2 pointer-events-none">
+          <div className="pointer-events-none space-y-2">
             <p>Select Country:</p>
-            <CountrySelect
-              country={formState.country}
-              setCountry={() => {}}
-            />
+            <CountrySelect country={formState.country} setCountry={() => {}} />
           </div>
 
           <div className="space flex-col text-[#4B5563] md:space-y-2">
@@ -67,7 +79,7 @@ const Step1 = (props: Props) => {
                 onClick={() => setFormState({ ...formState, isPC: true })}
                 className={` ${
                   !formState.isPC && 'hidden'
-                } flex pointer-events-none items-center space-x-3 rounded-full bg-white hover:brightness-95 md:px-4 md:py-1 text-[#334DD9] font-bold`}
+                } pointer-events-none flex items-center space-x-3 rounded-full bg-white font-bold text-[#334DD9] hover:brightness-95 md:px-4 md:py-1`}
               >
                 <Image
                   src="landscapeIcons/pcIcon.svg"
@@ -81,7 +93,7 @@ const Step1 = (props: Props) => {
                 onClick={() => setFormState({ ...formState, isPC: false })}
                 className={` ${
                   formState.isPC && 'hidden'
-                } flex pointer-events-none items-center rounded-full bg-white hover:brightness-95 md:px-4 md:py-1 text-[#334DD9] font-bold`}
+                } pointer-events-none flex items-center rounded-full bg-white font-bold text-[#334DD9] hover:brightness-95 md:px-4 md:py-1`}
               >
                 <Image
                   src="landscapeIcons/mobileIcon.svg"
@@ -104,41 +116,29 @@ const Step1 = (props: Props) => {
           description={`Click the box to select or deselect a competitor that you want to monitor: we will inform you of any change in the content and SERP position!`}
         />
       </div>
-      <div className="rounded-[30px] bg-[#EEF6FF] md:mt-4 md:px-10 md:py-4">
-        <p className="mb-2">
-          Are you looking to select your competitors?
-          <br /> Soon you will be able to do it and get a periodical report
-          about all the changes! But first, fill the upper section with all the
-          needed informations:
-        </p>
+      <div className="rounded-[30px] bg-[#EEF6FF] text-[#4B5563] md:mt-4 md:px-10 md:py-4">
+        <div className="flex justify-between">
+          <div>
+            <span className="font-bold  ">7 out of 10 </span>competitors
+            selected
+          </div>
+          <div>
+            <SaveButton />
+          </div>
+        </div>
 
-        <ul className="ml-4 list-disc space-y-2">
-          <li>
-            <span className="text-[#705CF6]"> Type the query: </span>From this
-            keyword(s) we will scrape all the competitors that will be monitored
-            but don’t worry you will be able to modify this list!
-          </li>
-          <li>
-            <span className="text-[#705CF6]">Select the search Engine:</span>{' '}
-            What is the SE that you want to use? For example, if you have a
-            spanish website, maybe you will want to look for google.es search
-            results
-          </li>
-
-          <li>
-            <span className="text-[#705CF6]">Select the Country:</span> This
-            will be the location that will be used to search your input query,
-            so think what is the country that we should use.
-          </li>
-          <li>
-            <span className="text-[#705CF6]">Device Selection:</span> Results
-            can differ between PC and Mobile so let us know your preferences!{' '}
-          </li>
-        </ul>
-        <p className="mt-2">
-          Did you provide all the informations needed? Just click analyse and
-          let’s work!{' '}
-        </p>
+        <div className="grid md:mt-10 md:grid-cols-2 md:gap-x-14 md:gap-y-6">
+          {queryResult?.map((competitor:queryResult) => {
+            return <CompetitorCard 
+            key={competitor.position}
+            position={competitor.position}
+            title={competitor.title}
+            link={competitor.link}
+            domain={competitor.domain}
+            
+             />;
+          })}
+        </div>
       </div>
     </div>
   );

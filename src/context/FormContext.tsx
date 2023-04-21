@@ -4,7 +4,7 @@ export const FormContext = createContext({
   formState: {
     query: '',
     country: 'SE',
-    countryDomain: 'google.com',
+    countryDomain: '',
     isPC: true,
   },
   setFormState: (formState: any) => {},

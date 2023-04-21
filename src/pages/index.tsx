@@ -13,22 +13,22 @@ const home = (props: Props) => {
   const [formState, setFormState] = useState({
     query: '',
     country: 'SE',
-    countryDomain: 'google.com',
+    countryDomain: 'google.pk',
     isPC: true,
   });
  
   
   const { page} = useContext(PageContext);
 
-  const [queryResult, setQueryResult] = useState(null);
+  const [queryResult, setQueryResult] = useState([]);
 
   return (
     <QueryResultContext.Provider value={{ queryResult, setQueryResult }}>
     <FormContext.Provider value={{ formState, setFormState }}>
       
 
-      {/* {page === PageView.STEP1VIEW &&  <Step1View />} */}
-      {page !== PageView.STEP2VIEW &&  <Step2View />}
+      {page === PageView.STEP1VIEW &&  <Step1View />}
+      {page === PageView.STEP2VIEW &&  <Step2View />}
 
     </FormContext.Provider>
     </QueryResultContext.Provider>

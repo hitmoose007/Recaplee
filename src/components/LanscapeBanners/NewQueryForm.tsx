@@ -33,7 +33,7 @@ const NewQueryForm = (props: Props) => {
     //fetch
 
     try {
-      const response = await fetch('http://localhost:3000/api/search', {
+      const response = await fetch('/api/search', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -87,9 +87,9 @@ const NewQueryForm = (props: Props) => {
               }}
               className="rounded-full md:h-[34px] md:w-[190px] md:pl-4"
             >
-              {countryDomains.map((countryDomain) => {
+              {countryDomains.map((countryDomain,key) => {
                 return (
-                  <option value={countryDomain}>
+                  <option key={key}value={countryDomain}>
                     {/* <div
                       className=" h-5 w-4 bg-cover"
                       style={{

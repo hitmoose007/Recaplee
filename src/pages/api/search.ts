@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
-const maxPage = 2;
+const maxPage = 3;
 const maxResults = 10;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

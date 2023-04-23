@@ -11,7 +11,7 @@ const nunito = Nunito({
 });
 
 function Layout({ children }: { children: React.ReactNode }) {
-  const [page, setPage] = useState<PageView>(PageView.STEP1VIEW);
+  const [page, setPage] = useState<PageView>(PageView.DASHBOARD);
   return (
     <>
       <div className={`${nunito.variable} font-sans`}>

@@ -5,6 +5,8 @@ import NewQueryForm from '@/components/LanscapeBanners/NewQueryForm';
 import { useState, useEffect } from 'react';
 import QueryCards from '../QueryCards';
 import Image from 'next/image';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
 type Props = {};
 interface Query {
   query_name?: string;
@@ -16,13 +18,17 @@ interface Query {
 
 const Home = (props: Props) => {
   const [queryArray, setQueryArray] = useState<Query[]>([]);
+  const [isEmailEnabled, setIsEmailEnabled] = useState(false);
   useEffect(() => {
     const fetchQuery = async () => {
       const res = await fetch('/api/getQueries');
+
       const data = await res.json();
+
       setQueryArray(data);
     };
     fetchQuery();
+    console.log(queryArray);
   }, []);
 
   if (queryArray.length === 0) {
@@ -173,11 +179,23 @@ const Home = (props: Props) => {
                 new updates found for your queries, you can disable it from
                 here:
               </p>
-              <div className="flex justify-between">
-                <li className="mt-2 font-bold">Email Notification Enabled</li>
+              <div className="mt-2 flex justify-between">
+                <li className=" font-bold">Email Notification Enabled</li>
+                <Toggle
+                  defaultChecked={isEmailEnabled}
+                  onChange={() => setIsEmailEnabled(!isEmailEnabled)}
+                  aria-label="No label tag"
+                  icons={false}
+                  className=" toggle-custom bg-customPurple hover:brightness-90"
+                />
               </div>
             </div>
-            <div className="rounded-[30px] bg-[#EEF6FF] md:mt-8 md:p-8"></div>
+            <div className="rounded-[30px] bg-[#EEF6FF] md:mt-8 md:p-8 text-center">
+              <p>
+                Do you need help or you found a bug?<br/> Contact us by writing to:
+              <p className="font-bold text-customPurple">  hello@recaplee.com{' '}</p>
+              </p>
+            </div>
           </div>
         </div>
       </div>

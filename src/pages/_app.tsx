@@ -5,11 +5,11 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { useState } from 'react';
 import Layout from '@/components/Layout/Layout';
 import { PageContext } from '@/context/PageContext';
-
+import { PageView } from '@/utils/enums';
 export default function App({ Component, pageProps }: AppProps) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
 
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState(PageView.DASHBOARD);
   return (
     <SessionContextProvider
       supabaseClient={supabase}

@@ -43,3 +43,18 @@ select {
   appearance: none;
 }
 
+.toggle-custom .react-toggle-track {
+  background-color: #9c8ff3;
+}
+
+.toggle-custom.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #9c8ff3;
+}
+
+.toggle-custom.react-toggle--checked .react-toggle-track {
+  background-color: #705cf6;
+}
+.toggle-custom.react-toggle--checked:hover:not(.react-toggle--disabled)
+  .react-toggle-track {
+  background-color: #705cf6;
+}

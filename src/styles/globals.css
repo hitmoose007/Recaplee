@@ -28,13 +28,11 @@ button.ReactFlagsSelect-module_selectBtn__19wW7 {
 
 .ReactFlagsSelect-module_selectBtn__19wW7:before {
   border: none;
-
 }
 
 .step2 .ReactFlagsSelect-module_label__27pw9 {
-  color: #334DD9;
+  color: #334dd9;
   font-weight: bold;
- 
 }
 
 button.ReactFlagsSelect-module_selectBtn__19wW7:after {
@@ -44,3 +42,4 @@ button.ReactFlagsSelect-module_selectBtn__19wW7:after {
 select {
   appearance: none;
 }
+

@@ -11,6 +11,9 @@ module.exports = {
         },
       colors: {
         primary: config.theme?.colors['blue'],
+        customBlue: '#EEF6FF',
+        customPurple: '#705CF6',
+        customGray: '#4B5563',
       },
     },
   },

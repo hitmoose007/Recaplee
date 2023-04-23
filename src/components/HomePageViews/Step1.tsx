@@ -25,6 +25,7 @@ const Step1 = (props: Props) => {
           svgPath="headerIcons/tickIcon.svg"
           description="Select the Competitors"
         />
+        
         <HelperHeader
           description={`Click the box to select or deselect a competitor that you want to monitor: we will inform you of any change in the content and SERP position!`}
         />

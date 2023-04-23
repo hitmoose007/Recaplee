@@ -14,7 +14,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   const [page, setPage] = useState<PageView>(PageView.DASHBOARD);
   return (
     <>
-      <div className={`${nunito.variable} font-sans`}>
+      <div className={`${nunito.variable} font-sans `}>
         <PageContext.Provider value={{ page, setPage }}>
           <Banner />
           <div className="md:mx-10 md:my-8">

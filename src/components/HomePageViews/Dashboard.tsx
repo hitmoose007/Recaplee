@@ -2,11 +2,15 @@ import React from 'react';
 import Header from '@/components/Header';
 import HelperHeader from '@/components/HelperHeader';
 import NewQueryForm from '@/components/LanscapeBanners/NewQueryForm';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import QueryCards from '../QueryCards';
 import Image from 'next/image';
 import Toggle from 'react-toggle';
+
 import 'react-toggle/style.css';
+
+import { PageView } from '@/utils/enums';
+import { PageContext } from '@/context/PageContext';
 type Props = {};
 interface Query {
   query_name?: string;
@@ -19,6 +23,9 @@ interface Query {
 const Home = (props: Props) => {
   const [queryArray, setQueryArray] = useState<Query[]>([]);
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
+
+  const { page, setPage } = useContext(PageContext);
+
   useEffect(() => {
     const fetchQuery = async () => {
       const res = await fetch('/api/getQueries');
@@ -45,6 +52,17 @@ const Home = (props: Props) => {
       />
 
       <div className="rounded-[30px] bg-[#EEF6FF] md:mt-4 md:flex md:space-x-8 md:px-10 md:py-4 ">
+        <div
+          onClick={() => setPage(PageView.STEP1VIEW)}
+          className="cursor-pointer hover:brightness-50"
+        >
+          <Image
+            width={180}
+            height={160}
+            src="/landscapeIcons/addNewBigIcon.svg"
+            alt="add new query big icon"
+          />
+        </div>
         {queryArray.map((query: Query) => {
           return (
             <QueryCards
@@ -190,10 +208,14 @@ const Home = (props: Props) => {
                 />
               </div>
             </div>
-            <div className="rounded-[30px] bg-[#EEF6FF] md:mt-8 md:p-8 text-center">
+            <div className="rounded-[30px] bg-[#EEF6FF] text-center md:mt-8 md:p-8">
               <p>
-                Do you need help or you found a bug?<br/> Contact us by writing to:
-              <p className="font-bold text-customPurple">  hello@recaplee.com{' '}</p>
+                Do you need help or you found a bug?
+                <br /> Contact us by writing to:
+                <p className="font-bold text-customPurple">
+                  {' '}
+                  hello@recaplee.com{' '}
+                </p>
               </p>
             </div>
           </div>

@@ -51,18 +51,16 @@ const Home = (props: Props) => {
         description={`These are the queries that are currently monitored. We will analyze and report to you the changes that have been made on your competitors’ website.`}
       />
 
-      <div className="rounded-[30px] bg-[#EEF6FF] md:mt-4 md:flex md:space-x-8 md:px-10 md:py-4 ">
-        <div
+      <div className="flex-wrap rounded-[30px] bg-[#EEF6FF] md:mt-4  md:flex  md:space-x-8 md:space-y-5 md:py-4">
+        <Image
           onClick={() => setPage(PageView.STEP1VIEW)}
-          className="cursor-pointer hover:brightness-50"
-        >
-          <Image
-            width={180}
-            height={160}
-            src="/landscapeIcons/addNewBigIcon.svg"
-            alt="add new query big icon"
-          />
-        </div>
+          className="cursor-pointer hover:brightness-50 md:ml-8 md:mt-5"
+          width={180}
+          height={160}
+          src="/landscapeIcons/addNewBigIcon.svg"
+          alt="add new query big icon"
+        />
+
         {queryArray.map((query: Query) => {
           return (
             <QueryCards
@@ -198,7 +196,12 @@ const Home = (props: Props) => {
                 here:
               </p>
               <div className="mt-2 flex justify-between">
-                <li className=" font-bold">Email Notification Enabled</li>
+                {isEmailEnabled && (
+                  <li className=" font-bold">Email Notification Enabled</li>
+                )}
+                {!isEmailEnabled && (
+                  <li className=" font-bold">Email Notification Disabled</li>
+                )}
                 <Toggle
                   defaultChecked={isEmailEnabled}
                   onChange={() => setIsEmailEnabled(!isEmailEnabled)}

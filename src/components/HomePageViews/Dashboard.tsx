@@ -27,16 +27,18 @@ const Home = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
-    const fetchQuery = async () => {
+  const fetchQuery = async () => {
+    try {
       const res = await fetch('/api/getQueries');
-
       const data = await res.json();
-
       setQueryArray(data);
-    };
-    fetchQuery();
-    console.log(queryArray);
-  }, []);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchQuery();
+}, []);
 
   if (queryArray.length === 0) {
     return <></>;

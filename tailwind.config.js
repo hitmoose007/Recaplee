@@ -14,6 +14,10 @@ module.exports = {
         customBlue: '#EEF6FF',
         customPurple: '#705CF6',
         customGray: '#4B5563',
+        customGreen: '#57DA41',
+        customRed: '#FF5959',
+        customYellow: '#FFA149',
+
       },
     },
   },

@@ -991,13 +991,6 @@ export const array3 = [
 
 export const parsedJson1 = {
   response: [
-
-    {
-      h3: 'Solar Pump Inverters for a Rural Area in India\nContributing to Agricultural Development by Utilizing Solar Power Without Waste',
-    },
-    {
-      h3: 'Solar Pump Inverters for a Rural Area in India\nContributing to Agricultural Development by Utilizing Solar Power Without Waste',
-    },
     {
       h2: 'Topics',
     },
@@ -1010,7 +1003,6 @@ export const parsedJson1 = {
     {
       h3: 'Contract Awarded for a Geothermal Power Generation Facility for the Republic of Kenya',
     },
-    
     {
       h3: 'Launching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer Issues',
     },

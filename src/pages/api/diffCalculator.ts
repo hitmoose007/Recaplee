@@ -1,136 +1,107 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { getDiff } from 'json-difference';
-import { array3, array4, parsedJson1, parsedJson2 } from '../../utils/test';
+import { array3, array4 } from '../../utils/test';
 
-import similarity from 'similarity';
 // import { prisma } from '../../lib/db';
 import { diff, diffString } from 'json-diff';
-import { diffArrays, diffJson, diffWords } from 'diff';
-const json1 = {
-  chicken: 'chicken',
-  'Aidan Gillen': {
-    array: ['Game of Thrones', 'The Wire'],
-    string: 'some string',
-    int: 2,
-    aboolean: true,
-    boolean: true,
-    object: {
-      foo: 'bar',
-      object1: { 'new prop1': 'new prop value' },
-      object2: { 'new prop1': 'new prop value' },
-      object3: { 'new prop1': 'new prop value' },
-      object4: { 'new prop1': 'new prop value' },
-    },
-  },
-  'Amy Ryan': { one: 'In Treatment', two: 'The Wire' },
-  'Annie Fitzgerald': ['Big Love', 'True Blood'],
-  'Anwan Glover': ['Treme', 'The Wire'],
-  'Alexander Skarsgard': ['Generation Kill', 'True Blood'],
-  'Clarke Peters': null,
-};
+// import { diffArrays, diffJson, diffWords } from 'diff';
 
-const json2 = {
-  chicken: 'chicken',
-  'Aidan Gillen': {
-    array: ['Game of Thrones', 'The Wire'],
-    string: 'some string',
-    int: '2',
-    otherint: 4,
-    aboolean: 'true',
-    boolean: false,
-    object: { foo: 'bar' },
-  },
-  'Amy Ryan': ['In Treatment', 'The Wire'],
-  'Annie Fitzgerald': ['True Blood', 'Big Love', 'The Sopranos', 'Oz'],
-  'Anwan Glover': ['Treme', 'The Wire'],
-  'Alexander Skarsg?rd': ['Generation Kill', 'True Blood'],
-  'Alice Farmer': ['The Corner', 'Oz', 'The Wire'],
-};
+//todo list for this file
+//1. get previous content json for all the pages
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    // const response = differ.diff(json1, json2);
+    // const parsedJson1 = parseObject(array3);
+    // const parsedJson2 = parseObject(array4);
 
-    let response = diff(parsedJson1, parsedJson2);
+    // let response = diff(parsedJson1, parsedJson2);
 
-    response = filterResponse(response);
+    // response = filterResponse(response);
 
-    // let response = combinedparsedJson2;
-    //fiter response
-    // console.log(response);
+    let task_post_array = [];
+    task_post_array.push({
+      target: 'https://www.fujielectric.com/',
+      //   id: '04242333-2720-0216-0000-fef73e36d19e',
+      max_crawl_pages: 10,
+      enable_content_parsing: true,
+    });
+    const task_response = await axios({
+      method: 'post',
+      url: 'https://api.dataforseo.com/v3/on_page/task_post',
+      auth: {
+        username: 'admin@comprasocial.me',
+        password: '45b462e774105e74',
+      },
+      data: task_post_array,
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(function (task_response) {
+        var result = task_response['data']['tasks'];
+        // Result data
+        return result;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-    // const response = parseObject(array4);
-
-    // const response = diff(json1, json2);
-    // console.log(diff({ foo: 'bar' }, { foo: 'baz' }));
-    // const differ = new Differ({
-    //   detectCircular: true, // default `true`
-    //   maxDepth: Infinity, // default `Infinity`
-    //   showModifications: true, // default `true`
-    //   arrayDiffMethod: 'lcs', // default `"normal"`, but `"lcs"` may be more useful
-    // });
-
-    // const post_array = [];
+    const content_post_array = [];
     // const response = getDiff(json1, json2);
     // console.log(response);
-    // post_array.push({
-    //   target: 'https://www.fujielectric.com/',
-    //   //   id: '04242333-2720-0216-0000-fef73e36d19e',
-    //   max_crawl_pages: 10,
-    //       enable_content_parsing: true,
-    // });
-    // const response= await axios({
-    //   method: 'post',
-    //   url: 'https://api.dataforseo.com/v3/on_page/task_post',
-    //   auth: {
-    //     username: 'admin@comprasocial.me',
-    //     password: '45b462e774105e74',
-    //   },
-    //   data: post_array,
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    // })
-    //   .then(function (response) {
-    //     var result = response['data']['tasks'];
-    //     // Result data
-    //     return result;
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    console.log(task_response);
+    // sleep(20000);
+    content_post_array.push({
+      url: 'https://www.fujielectric.com/',
+    //   id: task_response[0].id,
+      id: '04292217-2720-0216-0000-7698cdeeadb3'
+      // id : '04292211-2720-0216-0000-78d80b859a12'
+    });
+    const content_response = await axios({
+      method: 'post',
+      url: 'https://api.dataforseo.com/v3/on_page/content_parsing',
+      auth: {
+        username: 'admin@comprasocial.me',
+        password: '45b462e774105e74',
+      },
+      data: content_post_array,
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(function (content_response) {
+        var result = content_response['data']['tasks'];
+        // Result data
+        return result;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-    // const post_array = [];
-    // // const response = getDiff(json1, json2);
-    // // console.log(response);
-    // post_array.push({
-    //   url: 'https://www.fujielectric.com/',
-    //   id: '04271730-2720-0216-0000-186f185f1851',
-    // });
-    // const response = await axios({
-    //   method: 'post',
-    //   url: 'https://api.dataforseo.com/v3/on_page/content_parsing',
-    //   auth: {
-    //     username: 'admin@comprasocial.me',
-    //     password: '45b462e774105e74',
-    //   },
-    //   data: post_array,
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    // })
-    //   .then(function (response) {
-    //     var result = response['data']['tasks'];
-    //     // Result data
-    //     return result;
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-    // //   console.log(response['result']);
+    const tasks_ready = await axios({
+      method: 'get',
+      url: 'https://api.dataforseo.com/v3/on_page/tasks_ready',
+      auth: {
+        username: 'admin@comprasocial.me',
+        password: '45b462e774105e74',
+      },
+      headers: {
+        'content-type': 'application/json',
+      },
+    })
+      .then(function (response) {
+        var result = response['data']['tasks'][0]['result'];
+        // Result data
+        return result;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      console.log(tasks_ready);
+    //   console.log(response['result']);
 
     // console.log(response[0].result[0].items[0].page_content);
     // // const json =await  result.json()
@@ -140,7 +111,8 @@ export default async function handler(
 
     res.status(200).json({
       // response: response[0].result[0].items[0].page_content.secondary_topic,
-      response,
+      tasks_ready: tasks_ready,
+      content_response: content_response,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -154,43 +126,12 @@ export default async function handler(
 }
 
 function filterResponse(response: any) {
-  let newResponse = response.response;
-  //   console.log(newResponse);
-  const filteredResponse = newResponse.filter((item: any) => {
+  const filteredResponse = response.filter((item: any) => {
     return item[0] !== ' ';
   });
-
-  const newMappedResponse = filteredResponse.map((item: any) => {
-    if (item[0] === '~') {
-      let newItem =
-        item[1].h1 ||
-        item[1].h2 ||
-        item[1].h3 ||
-        item[1].h4 ||
-        item[1].h5 ||
-        item[1].h6 ||
-        item[1].p;
-      let old = newItem.__old;
-      let neww = newItem.__new;
-
-      const words1 = old.split(' ');
-      const words2 = neww.split(' ');
-
-      // Loop through the words in the first string
-      for (let i = 0; i < words1.length; i++) {
-        const word = words1[i];
-
-        // Check if the second string includes the word
-        if (words2.includes(word)) {
-          console.log(`The word "${word}" appears in both strings`);
-          break;
-        }
-      }
-
-      console.log(similarity(old, neww));
-    }
-  });
   return filteredResponse;
+
+  // Loop through the words in the first string
 }
 
 function parseObject(jsonObject: any) {
@@ -247,11 +188,9 @@ function parseObject(jsonObject: any) {
     // create a new object with the appropriate tag and content
     const outputItem1 = {
       [tag]: item.h_title || '',
-      //   p: secondaryContent.trim() || '',
     };
 
     outputArray.push(outputItem1);
-    console.log(outputItem1);
     let outputItem2 = {};
     if (primaryContent) {
       console.log(primaryContent);
@@ -271,5 +210,11 @@ function parseObject(jsonObject: any) {
     }
     // add the output object to the output array
   }
+
   return outputArray;
+}
+
+function sleep(ms: number) {
+  const start = new Date().getTime();
+  while (new Date().getTime() - start < ms) {}
 }

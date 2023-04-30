@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '@/components/Header';
-import HelperHeader from '@/components/HelperHeader';
+import Header from '@/components/Header/Header';
+import HelperHeader from '@/components/Header/HelperHeader';
 import NewQueryForm from '@/components/LanscapeBanners/NewQueryForm';
 import { useState, useEffect, useContext } from 'react';
 import QueryCards from '../QueryCards';
@@ -27,18 +27,18 @@ const Home = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
-  const fetchQuery = async () => {
-    try {
-      const res = await fetch('/api/getQueries');
-      const data = await res.json();
-      setQueryArray(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    const fetchQuery = async () => {
+      try {
+        const res = await fetch('/api/getQueries');
+        const data = await res.json();
+        setQueryArray(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  fetchQuery();
-}, []);
+    fetchQuery();
+  }, []);
 
   if (queryArray.length === 0) {
     return <></>;

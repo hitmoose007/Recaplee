@@ -1,13 +1,11 @@
 import React from 'react';
-import Header from '@/components/Header';
-import HelperHeader from '@/components/HelperHeader';
+import Header from '@/components/Header/Header';
+import HelperHeader from '@/components/Header/HelperHeader';
 import NewQueryForm from '@/components/LanscapeBanners/NewQueryForm';
 import { useState } from 'react';
 type Props = {};
 
 const Step1 = (props: Props) => {
- 
-
   return (
     <div>
       <Header
@@ -25,7 +23,7 @@ const Step1 = (props: Props) => {
           svgPath="headerIcons/tickIcon.svg"
           description="Select the Competitors"
         />
-        
+
         <HelperHeader
           description={`Click the box to select or deselect a competitor that you want to monitor: we will inform you of any change in the content and SERP position!`}
         />

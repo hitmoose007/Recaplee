@@ -1178,3 +1178,73 @@ export const parsedJson2 = {
     },
   ],
 };
+
+export const parsedChanges1 = [
+  [
+    '+',
+    {
+      h3: 'Solar Pump Inverters for a Rural Area in India\nContributing to Agricultural Development by Utilizing Solar Power Without Waste',
+    },
+  ],
+  [
+    '-',
+    {
+      h3: "Interview 5. Fuji Electric's Food & Beverage Distribution Solutions: Responding to Environmental Needs\nThrough Energy Conservation and Automation",
+    },
+  ],
+  [
+    '~',
+    {
+      h3: {
+        __old:
+          'Announcement Regarding Changes to the Management of Fuji Electric Co., Ltd. to be Proposed at the Company’s\nOrdinary General Meeting of Shareholders',
+        __new:
+          'Interview about research and development to achieve carbon neutrality through open innovation',
+      },
+    },
+  ],
+  [
+    '~',
+    {
+      h3: {
+        __old:
+          'Contract Awarded for a Geothermal Power Generation Facility for the Republic of Kenya',
+        __new:
+          'Announcement Regarding Changes to the Management of Subsidiary as of October 1, 2022',
+      },
+    },
+  ],
+  [
+    '~',
+    {
+      h3: {
+        __old:
+          'Launching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer Issues',
+        __new:
+          'Work on virtual power plant, a key to the spread of renewable energy',
+      },
+    },
+  ],
+  [
+    '~',
+    {
+      h3: {
+        __old:
+          'Onshore Power Supply Systems Contributing to Carbon Neutrality at Ports',
+        __new:
+          'Interview about how we contributing to customers seeking to achieve carbon neutrality',
+      },
+    },
+  ],
+  [
+    '~',
+    {
+      p: {
+        __old:
+          'Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
+        __new:
+          'Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Multipurpose Vending Machine Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
+      },
+    },
+  ],
+];

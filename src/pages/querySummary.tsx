@@ -10,7 +10,11 @@ type Props = {};
 const querySummary = (props: Props) => {
   return (
     <>
-      <QueryHeader />
+      <QueryHeader
+        isCompetitor={false}
+        highlightedText="hardcoded comparare follow"
+      />
+      <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
       <div className="md:flex md:justify-between">
         <StaticQuery showQuery={false} />
         <QueryBanner />
@@ -24,8 +28,8 @@ const querySummary = (props: Props) => {
       </div>
       <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
       <div className="mt-4">
-      <AnalysisBanner />
-</div>
+        <AnalysisBanner />
+      </div>
     </>
   );
 };

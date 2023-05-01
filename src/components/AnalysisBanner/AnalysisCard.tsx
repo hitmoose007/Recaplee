@@ -66,7 +66,7 @@ const AnalysisCard = (props: Props) => {
         <p className="text-sm md:mt-1">of content changed</p>
       </div>
       <div className="flex flex-col text-center">
-        <p className={`font-bold   text-${changesColor} `}>{changesValue}</p>
+        <p className={`font-bold    text-${changesColor} `}>{changesValue}</p>
         <p className="text-sm md:mt-1">Changes detected</p>
       </div>
 

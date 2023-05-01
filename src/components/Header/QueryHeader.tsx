@@ -1,15 +1,27 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
-type Props = {};
+type Props = {
+  isCompetitor: boolean;
+  highlightedText: string;
+};
 //hardcoded query name
-const QueryHeader = (props: Props) => {
+const QueryHeader = ({ isCompetitor , highlightedText }: Props) => {
   return (
     <div className="flex">
-      <Header
-        svgPath="/headerIcons/cameraIcon.svg"
-        description="Query monitory for: "
-      />
-      <span className="text-[32px] font-bold text-customPurple md:pl-3 ">Fish eater</span>
+      {!isCompetitor ? (
+        <Header
+          svgPath="/headerIcons/cameraIcon.svg"
+          description="Query monitory for: "
+        />
+      ) : (
+        <Header
+          svgPath="/headerIcons/magnifyingGlassIcon.svg"
+          description="Competitor Analysis: "
+        />
+      )}
+      <span className="text-[32px] font-bold text-customPurple md:pl-3 ">
+        {highlightedText}
+      </span>
     </div>
   );
 };

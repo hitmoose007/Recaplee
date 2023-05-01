@@ -13,94 +13,94 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // const parsedJson1 = parseObject(array3);
-    // const parsedJson2 = parseObject(array4);
+    const parsedJson1 = parseObject(array3);
+    const parsedJson2 = parseObject(array4);
 
-    // let response = diff(parsedJson1, parsedJson2);
+    let response = diff(parsedJson1, parsedJson2);
 
-    // response = filterResponse(response);
+    response = filterResponse(response);
 
-    let task_post_array = [];
-    task_post_array.push({
-      target: 'https://www.fujielectric.com/',
-      //   id: '04242333-2720-0216-0000-fef73e36d19e',
-      max_crawl_pages: 10,
-      enable_content_parsing: true,
-    });
-    const task_response = await axios({
-      method: 'post',
-      url: 'https://api.dataforseo.com/v3/on_page/task_post',
-      auth: {
-        username: 'admin@comprasocial.me',
-        password: '45b462e774105e74',
-      },
-      data: task_post_array,
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then(function (task_response) {
-        var result = task_response['data']['tasks'];
-        // Result data
-        return result;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // let task_post_array = [];
+    // task_post_array.push({
+    //   target: 'https://www.fujielectric.com/',
+    //   //   id: '04242333-2720-0216-0000-fef73e36d19e',
+    //   max_crawl_pages: 10,
+    //   enable_content_parsing: true,
+    // });
+    // const task_response = await axios({
+    //   method: 'post',
+    //   url: 'https://api.dataforseo.com/v3/on_page/task_post',
+    //   auth: {
+    //     username: 'admin@comprasocial.me',
+    //     password: '45b462e774105e74',
+    //   },
+    //   data: task_post_array,
+    //   headers: {
+    //     'content-type': 'application/json',
+    //   },
+    // })
+    //   .then(function (task_response) {
+    //     var result = task_response['data']['tasks'];
+    //     // Result data
+    //     return result;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
-    const content_post_array = [];
-    // const response = getDiff(json1, json2);
-    // console.log(response);
-    console.log(task_response);
-    // sleep(20000);
-    content_post_array.push({
-      url: 'https://www.fujielectric.com/',
-    //   id: task_response[0].id,
-      id: '04292217-2720-0216-0000-7698cdeeadb3'
-      // id : '04292211-2720-0216-0000-78d80b859a12'
-    });
-    const content_response = await axios({
-      method: 'post',
-      url: 'https://api.dataforseo.com/v3/on_page/content_parsing',
-      auth: {
-        username: 'admin@comprasocial.me',
-        password: '45b462e774105e74',
-      },
-      data: content_post_array,
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then(function (content_response) {
-        var result = content_response['data']['tasks'];
-        // Result data
-        return result;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // const content_post_array = [];
+    // // const response = getDiff(json1, json2);
+    // // console.log(response);
+    // console.log(task_response);
+    // // sleep(20000);
+    // content_post_array.push({
+    //   url: 'https://www.fujielectric.com/',
+    // //   id: task_response[0].id,
+    //   id: '04292217-2720-0216-0000-7698cdeeadb3'
+    //   // id : '04292211-2720-0216-0000-78d80b859a12'
+    // });
+    // const content_response = await axios({
+    //   method: 'post',
+    //   url: 'https://api.dataforseo.com/v3/on_page/content_parsing',
+    //   auth: {
+    //     username: 'admin@comprasocial.me',
+    //     password: '45b462e774105e74',
+    //   },
+    //   data: content_post_array,
+    //   headers: {
+    //     'content-type': 'application/json',
+    //   },
+    // })
+    //   .then(function (content_response) {
+    //     var result = content_response['data']['tasks'];
+    //     // Result data
+    //     return result;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
-    const tasks_ready = await axios({
-      method: 'get',
-      url: 'https://api.dataforseo.com/v3/on_page/tasks_ready',
-      auth: {
-        username: 'admin@comprasocial.me',
-        password: '45b462e774105e74',
-      },
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then(function (response) {
-        var result = response['data']['tasks'][0]['result'];
-        // Result data
-        return result;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // const tasks_ready = await axios({
+    //   method: 'get',
+    //   url: 'https://api.dataforseo.com/v3/on_page/tasks_ready',
+    //   auth: {
+    //     username: 'admin@comprasocial.me',
+    //     password: '45b462e774105e74',
+    //   },
+    //   headers: {
+    //     'content-type': 'application/json',
+    //   },
+    // })
+    //   .then(function (response) {
+    //     var result = response['data']['tasks'][0]['result'];
+    //     // Result data
+    //     return result;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
-      console.log(tasks_ready);
+    //   console.log(tasks_ready);
     //   console.log(response['result']);
 
     // console.log(response[0].result[0].items[0].page_content);
@@ -111,8 +111,9 @@ export default async function handler(
 
     res.status(200).json({
       // response: response[0].result[0].items[0].page_content.secondary_topic,
-      tasks_ready: tasks_ready,
-      content_response: content_response,
+    //   tasks_ready: tasks_ready,
+    //   content_response: content_response,
+    response
     });
   } catch (error: unknown) {
     if (error instanceof Error) {

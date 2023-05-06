@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { FormContext } from '@/context/FormContext';
 import CountrySelect from '../CountrySelect';
 import Image from 'next/image';
+import DomainSelect from '../DomainSelect';
 type Props = {
   showQuery?: boolean;
 };
@@ -23,16 +24,17 @@ const StaticQuery = ({ showQuery = true }: Props) => {
           </div>
         )}
 
-        <div className="md:space-y-2 ">
+        <div className="md:space-y-2 pointer-events-none ">
           <p>Select Search Engine:</p>
-          <select
+          {/* <select
             value={formState.countryDomain}
             className="pointer-events-none rounded-full font-bold text-[#334DD9] md:h-[34px] md:w-[190px] md:pl-4"
           >
             <option value={formState.countryDomain}>
               {formState.countryDomain}
             </option>
-          </select>
+          </select> */}
+          <DomainSelect domain={formState.countryDomain} setDomain={() => {}} />
         </div>
         <div className="pointer-events-none space-y-2">
           <p>Select Country:</p>

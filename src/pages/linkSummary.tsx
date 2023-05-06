@@ -7,10 +7,12 @@ import { useState } from 'react';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 import QueryBanner from '@/components/ChangesBanner/ChangesBanner';
+import ExpandedView from '@/components/CompetitorAnalysis/ExpandedView';
 type Props = {};
 
 const linkSummary = (props: Props) => {
   const [showExpandedView, setShowExpandedView] = useState(false);
+  
   return (
     <>
       <QueryHeader
@@ -18,7 +20,7 @@ const linkSummary = (props: Props) => {
         isCompetitor={true}
       />
       <HelperHeader description="Read and analyse all the differences found between two versions. You can compare all the changes made in the web page content." />
-      <div className="mt-2 flex justify-between">
+      <div className="mt-2 flex justify-between ">
         <div>
           <SubHeader title={'Monitored competitor page: '} />
           <div className="flex space-x-2">
@@ -44,6 +46,9 @@ const linkSummary = (props: Props) => {
         </div>
         <QueryBanner />
       </div>
+
+        <ExpandedView/>
+
     </>
   );
 };

@@ -7,7 +7,6 @@ import { useContext } from 'react';
 import { FormContext } from '@/context/FormContext';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
-import { Listbox } from '@headlessui/react';
 import DomainSelect from './DomainSelect';
 import { QueryResultContext } from '../../context/QueryResultContext';
 type Props = {};
@@ -84,22 +83,7 @@ const NewQueryForm = (props: Props) => {
 
           <div className="md:space-y-2 ">
             <p>Select Search Engine:</p>
-            {/* <select
-              value={formState.countryDomain}
-              onChange={(e) => {
-                setFormState({ ...formState, countryDomain: e.target.value });
-                console.log(formState.countryDomain);
-              }}
-              className="rounded-full md:h-[34px] md:w-[190px] md:pl-4"
-            >
-              {countryDomains.map((countryDomain, key) => {
-                return (
-                  <option key={key} value={countryDomain}>
-                    {countryDomain}
-                  </option>
-                );
-              })}
-            </select> */}
+          
             <DomainSelect domain={formState.countryDomain} setDomain={handleDomainChange}/>
           </div>
           <div className="space-y-2">
@@ -116,7 +100,7 @@ const NewQueryForm = (props: Props) => {
               <div
                 onClick={() => setFormState({ ...formState, isPC: true })}
                 className={` ${
-                  formState.isPC && 'border-[3px] border-[#705CF6]'
+                  formState.isPC ? 'border-[3px] border-[#705CF6]' : 'border-[3px] border-transparent'
                 } flex cursor-pointer items-center space-x-2 rounded-l-full bg-white hover:brightness-95 md:px-3 md:py-1`}
               >
                 <Image
@@ -130,7 +114,7 @@ const NewQueryForm = (props: Props) => {
               <div
                 onClick={() => setFormState({ ...formState, isPC: false })}
                 className={` ${
-                  !formState.isPC && 'border-[3px] border-[#705CF6]'
+                  !formState.isPC ? 'border-[3px] border-[#705CF6]' : 'border-[3px] border-transparent'
                 } flex cursor-pointer items-center rounded-r-full bg-white hover:brightness-95 md:px-4 md:py-1 `}
               >
                 <Image

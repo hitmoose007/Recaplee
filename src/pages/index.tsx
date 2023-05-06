@@ -1,6 +1,7 @@
 import React from 'react';
 import Step1View from '../components/HomePageViews/Step1';
 import Step2View from '../components/HomePageViews/Step2';
+import Step2LoadingView from '../components/HomePageViews/Step2Loading';
 import { FormContext } from '../context/FormContext';
 import { useState } from 'react';
 import { QueryResultContext } from '../context/QueryResultContext';
@@ -27,7 +28,7 @@ const home = (props: Props) => {
       <FormContext.Provider value={{ formState, setFormState }}>
         {page === PageView.DASHBOARD && <DashboardView />}
         {page === PageView.STEP1VIEW && <Step1View />}
-        {page === PageView.STEP2VIEW && <Step2View />}
+        {page === PageView.STEP2VIEW && <Step2LoadingView />}
       </FormContext.Provider>
     </QueryResultContext.Provider>
   );

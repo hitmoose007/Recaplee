@@ -15,7 +15,7 @@ const StaticQuery = ({ showQuery = true }: Props) => {
       <div className="flex md:space-x-10">
         {showQuery && (
           <div className=" flex-col  md:space-y-2">
-            <p>Type the query:</p>
+            <p>Your query:</p>
             <input
               value={formState.query}
               type="text"
@@ -25,7 +25,7 @@ const StaticQuery = ({ showQuery = true }: Props) => {
         )}
 
         <div className="md:space-y-2 pointer-events-none ">
-          <p>Select Search Engine:</p>
+          <p>Search Engine:</p>
           {/* <select
             value={formState.countryDomain}
             className="pointer-events-none rounded-full font-bold text-[#334DD9] md:h-[34px] md:w-[190px] md:pl-4"
@@ -37,12 +37,12 @@ const StaticQuery = ({ showQuery = true }: Props) => {
           <DomainSelect domain={formState.countryDomain} setDomain={() => {}} />
         </div>
         <div className="pointer-events-none space-y-2">
-          <p>Select Country:</p>
+          <p>Country:</p>
           <CountrySelect country={formState.country} setCountry={() => {}} />
         </div>
 
         <div className="space flex-col text-[#4B5563] md:space-y-2">
-          <p className="text-[#111827]">Select device:</p>
+          <p className="text-[#111827]">Device:</p>
           <div className="flex ">
             <div
               onClick={() => setFormState({ ...formState, isPC: true })}

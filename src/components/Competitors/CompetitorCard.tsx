@@ -24,7 +24,7 @@ const CompetitorCard = ({
         setIsSelected(!isSelected);
       }}
       className={`h-[101px] w-[100%] cursor-pointer  rounded-[30px] bg-white hover:brightness-95 ${
-        isSelected && 'border-[3px] border-[#7E5DEB]'
+        isSelected ? 'border-[3px] border-[#7E5DEB]' : 'border-[3px] border-transparent'
       }`}
     >
       <div className="flex  md:space-x-10 md:px-6 md:py-3 ">
@@ -34,9 +34,9 @@ const CompetitorCard = ({
           <p className="font-bold  ">{title}</p>
           <a
             href={link}
-            className="flex cursor-pointer text-clip text-sm hover:underline"
+            className="flex cursor-pointer text-clip text-sm hover:underline md:w-11/12"
           >
-            <span className="md:mr-2"> {link}</span>
+            <span className="md:mr-2 truncate block  "> {link}</span>
 
             <Image src="/linkIcon.svg" width={10} height={10} alt="link icon" />
           </a>

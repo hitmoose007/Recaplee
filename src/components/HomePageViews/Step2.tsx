@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import HelperHeader from '@/components/Header/HelperHeader';
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import { FormContext } from '../../context/FormContext';
 import { useContext } from 'react';
 import CompetitorCard from '../Competitors/CompetitorCard';
@@ -11,7 +11,7 @@ import StaticQueryForm from '../LanscapeBanners/StaticQueryForm/StaticQueryForm'
 import { PageContext } from '../../context/PageContext';
 import { PageView } from '../../utils/enums';
 import CustomCompetitorInput from '../Competitors/CustomCompetitorInput';
-import { cp } from 'fs';
+import extractDomain from 'extract-domain'
 interface queryResult {
   position_overall: number;
   title: string;
@@ -27,52 +27,41 @@ const Step2 = (props: Props) => {
   const { queryResult } = useContext(QueryResultContext);
   const [selectedCompetitors, setSelectedCompetitors] = useState<number[]>([]);
   const { page, setPage } = useContext(PageContext);
-
+  const [totalCustomCompetitors, setTotalCustomCompetitors] = useState(0);
+  const [customCompetitorArray, setCustomCompetitorArray] = useState<string[]>(
+    []
+  );
   const handleSelectCompetitor = (competitorKey: number) => {
+    console.log('trying to udpate selected competitors')
     setSelectedCompetitors((prevSelectedCompetitors: any) =>
       prevSelectedCompetitors.includes(competitorKey)
         ? prevSelectedCompetitors.filter((key: number) => key !== competitorKey)
         : [...prevSelectedCompetitors, competitorKey]
     );
 
-    console.log(selectedCompetitors);
   };
-  const [customCompetitorArray, setCustomCompetitorArray] = useState<string[]>(
-    []
-  );
 
-  const handleSave = async (e) => {
-    
-    e.preventDefault();
+ 
+
+  const handleSave = async () => {
     const filteredQuery = queryResult.filter((item: queryResult) => {
       return selectedCompetitors.includes(item.position_overall);
     });
 
-    // console.log(queryResult)
-
-    // console.log(filteredQuery);
-    // console.log(selectedCompetitors);
-
-    //filter out custom competitors by checking if position value is negative
     const selectedCustomCompetitors = selectedCompetitors.filter(
       (item: number) => {
-        console.log('this is item', item)
         return item <= 0;
       }
     );
-    console.log('this is selected ' ,selectedCustomCompetitors)
 
     const filteredCustomCompetitors = customCompetitorArray.filter(
       (item: string, index: number) => {
-        console.log('this is the index', index*-1)
-        console.log('this is the item', item)
-        return selectedCustomCompetitors.includes(index*-1);
+        return selectedCustomCompetitors.includes(index * -1);
       }
     );
 
     console.log(filteredCustomCompetitors);
     // console.log(filteredCustomCompetitors);
-    return null;
 
     await fetch('/api/saveQuery', {
       method: 'POST',
@@ -142,17 +131,23 @@ const Step2 = (props: Props) => {
           {customCompetitorArray?.map((competitor: string, index: number) => {
             return (
               <CompetitorCard
+              selectedCompetitors={selectedCompetitors}
                 customCompetitor={true}
-                key={competitor}
-                position={index * -1 }
+                key={index*-1}
+                position={index * -1}
                 title={competitor}
                 link={competitor}
-                domain={competitor}
+                domain={extractDomain(competitor)}
+                totalCustomCompetitors={totalCustomCompetitors}
+                setTotalCustomCompetitors={setTotalCustomCompetitors}
                 handleSelectCompetitor={handleSelectCompetitor}
+                setCustomCompetitorArray={setCustomCompetitorArray}
               />
             );
           })}
           <CustomCompetitorInput
+            totalCustomCompetitors={totalCustomCompetitors}
+            setTotalCustomCompetitors={setTotalCustomCompetitors}
             setCustomCompetitorArray={setCustomCompetitorArray}
           />
         </div>

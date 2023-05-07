@@ -13,7 +13,6 @@ export default function CountrySelect({ country, setCountry }: props) {
 
   const [select, setSelect] = useState('SE');
   const onSelect = (code: string) => setCountry(code);
-  console.log('SELECT', select);
   return (
     <div
         className={`${page === PageView.STEP2VIEW && 'step2'}`}

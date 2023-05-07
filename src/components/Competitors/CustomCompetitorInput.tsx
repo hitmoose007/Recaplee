@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Image from 'next/image';
-
+import validUrl from 'valid-url';
+import { TotalCustomCompetitorsContext } from '../../context/TotalCustomCompetitorsContext';
 type Props = {
   setCustomCompetitorArray: React.Dispatch<React.SetStateAction<string[]>>;
+  totalCustomCompetitors: number;
+  setTotalCustomCompetitors: (totalCustomCompetitors: number) => void;
 };
 
-const CustomCompetitorInput = ({ setCustomCompetitorArray }: Props) => {
+const CustomCompetitorInput = ({
+  setCustomCompetitorArray,
+  totalCustomCompetitors,
+  setTotalCustomCompetitors,
+}: Props) => {
   const [competitorInput, setCompetitorInput] = useState('');
-  const [totalCompetitors, setTotalCompetitors] = useState(0);
+  //   const [totalCustomCompetitors, setTotalCompetitors] = useState(0);
 
   const onSubmit = (e: any) => {
-    console.log('submit');
     e.preventDefault();
-    if (totalCompetitors === 3) {
+    if (!validUrl.isUri(competitorInput)) {
+      alert('Please enter a valid URL');
+      return;
+    }
+
+    if (totalCustomCompetitors === 3) {
       alert('You can only add 3 competitors');
       return;
     }
@@ -20,7 +31,8 @@ const CustomCompetitorInput = ({ setCustomCompetitorArray }: Props) => {
       alert('You must enter a competitor');
       return;
     }
-    setTotalCompetitors(totalCompetitors + 1);
+    setTotalCustomCompetitors(totalCustomCompetitors + 1);
+
     setCustomCompetitorArray((prevArray) => [...prevArray, competitorInput]);
     setCompetitorInput('');
   };
@@ -39,17 +51,16 @@ const CustomCompetitorInput = ({ setCustomCompetitorArray }: Props) => {
           <span className="text-customPurple">
             Insert a link to a competitor's page:
           </span>
-          <span className="text-customGray">{totalCompetitors}/3</span>
+          <span className="text-customGray">{totalCustomCompetitors}/3</span>
         </div>
 
-          <form
-            onSubmit={(e) => {
-                e.preventDefault();
-                onSubmit(e);
-            }}
-          >
-        <div className="flex justify-between space-x-4 md:h-[34px]">
-
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(e);
+          }}
+        >
+          <div className="flex justify-between space-x-4 md:h-[34px]">
             <input
               value={competitorInput}
               onChange={(e) => setCompetitorInput(e.target.value)}
@@ -70,8 +81,8 @@ const CustomCompetitorInput = ({ setCustomCompetitorArray }: Props) => {
 
               <span className="text-sm text-white">Add</span>
             </button>
-        </div>
-          </form>
+          </div>
+        </form>
       </div>
     </div>
   );

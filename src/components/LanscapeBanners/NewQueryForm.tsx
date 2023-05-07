@@ -9,9 +9,11 @@ import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import DomainSelect from './DomainSelect';
 import { QueryResultContext } from '../../context/QueryResultContext';
-type Props = {};
+type Props = {
+    setIsLoading : (isLoading : boolean) => void;
+};
 
-const NewQueryForm = (props: Props) => {
+const NewQueryForm = ({setIsLoading}: Props) => {
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult, setQueryResult } = useContext(QueryResultContext);
   const { setPage } = useContext(PageContext);
@@ -22,14 +24,8 @@ const NewQueryForm = (props: Props) => {
       alert('Please add a query');
       return;
     }
-    console.log('SUBMIT');
-    console.log(
-      formState.query,
-      formState.isPC,
-      formState.countryDomain,
-      formState.country
-    );
-
+    
+    setIsLoading(true);
     //fetch
 
     try {
@@ -77,7 +73,7 @@ const NewQueryForm = (props: Props) => {
                 setFormState({ ...formState, query: e.target.value })
               }
               type="text"
-              className="rounded-full md:h-[34px] md:w-[245px] md:pl-4"
+              className="rounded-full md:h-[34px] md:w-[245px] md:pl-4 focus:outline-none "
             />
           </div>
 

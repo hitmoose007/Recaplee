@@ -31,6 +31,7 @@ const Home = (props: Props) => {
       try {
         const res = await fetch('/api/getQueries');
         const data = await res.json();
+
         setQueryArray(data);
       } catch (error) {
         console.error(error);
@@ -63,7 +64,7 @@ const Home = (props: Props) => {
           alt="add new query big icon"
         />
 
-        {queryArray.map((query: Query) => {
+        {Array.isArray(queryArray) && queryArray.map((query: Query) => {
           return (
             <QueryCards
               queryTitle={query.query_name || ''}

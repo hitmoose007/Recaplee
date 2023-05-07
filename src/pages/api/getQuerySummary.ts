@@ -9,22 +9,16 @@ export default async function handler(
 ) {
   try {
 
-    const previousQueries = await prisma.targetQuery.findMany({
-      select: {
-        id: true,
-        query_name: true,
-        country: true,
-        last_update: true,
-        competitors_tracked: true,
-        new_changes: true
-      },
-      orderBy: {
-        created_at: 'desc'
-      },
-      take: 15
-    });
+    const id = '02dfe7ac-2708-4312-86bf-2510a710c03b'
 
-    res.status(200).json(previousQueries);
+const result = await prisma.targetQuery.findFirst({
+    where: {
+        id: id,
+    },
+});
+
+
+    res.status(200).json({result});
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error

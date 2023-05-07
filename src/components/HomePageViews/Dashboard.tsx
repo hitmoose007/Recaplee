@@ -11,8 +11,10 @@ import 'react-toggle/style.css';
 
 import { PageView } from '@/utils/enums';
 import { PageContext } from '@/context/PageContext';
+import Link from 'next/link';
 type Props = {};
 interface Query {
+    id: string;
   query_name?: string;
   country?: string;
   last_update?: Date;
@@ -24,6 +26,7 @@ const Home = (props: Props) => {
   const [queryArray, setQueryArray] = useState<Query[]>([]);
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
   const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
@@ -38,10 +41,14 @@ const Home = (props: Props) => {
       }
     };
 
+    if(queryArray.length === 0)
+    {
+        setIsLoading(false);
+    }
     fetchQuery();
   }, []);
 
-  if (queryArray.length === 0) {
+  if (isLoading) {
     return <></>;
   }
   return (
@@ -66,7 +73,10 @@ const Home = (props: Props) => {
 
         {Array.isArray(queryArray) && queryArray.map((query: Query) => {
           return (
+            <Link href={`/querySummary/${query.id}`}>
             <QueryCards
+                key={query.id}
+               
               queryTitle={query.query_name || ''}
               countryCode={query.country || ''}
               competitorsTracked={query.competitors_tracked || 0}
@@ -76,6 +86,7 @@ const Home = (props: Props) => {
                   : ''
               }
             />
+            </Link>
           );
         })}
       </div>

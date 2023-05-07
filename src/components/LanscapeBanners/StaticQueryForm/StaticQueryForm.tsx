@@ -4,8 +4,10 @@ import { FormContext } from '@/context/FormContext';
 import CountrySelect from '../CountrySelect';
 import Image from 'next/image';
 import DomainSelect from '../DomainSelect';
+import { QuerySummary } from '@/types/my-types';
 type Props = {
   showQuery?: boolean;
+  querySummary?: QuerySummary
 };
 
 const StaticQuery = ({ showQuery = true }: Props) => {

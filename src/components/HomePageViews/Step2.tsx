@@ -62,8 +62,7 @@ const Step2 = (props: Props) => {
 
     console.log(filteredCustomCompetitors);
     // console.log(filteredCustomCompetitors);
-
-    await fetch('/api/saveQuery', {
+   const response =  await fetch('/api/saveQuery', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,18 +73,18 @@ const Step2 = (props: Props) => {
         countryDomain: formState.countryDomain,
         isPC: formState.isPC,
         competitors: filteredQuery,
-        competitors_tracked: filteredQuery.length,
-        filteredCustomCompetitors: filteredCustomCompetitors,
+        competitors_tracked: filteredQuery.length + customCompetitorArray.length,
+        customCompetitors: filteredCustomCompetitors,
       }),
     });
-
+console.log(response)
     setPage(PageView.DASHBOARD);
   };
   return (
     <div>
       <Header
         svgPath="headerIcons/plusTargetIcon.svg"
-        description="Add neww Target Query"
+        description="Add new Target Query"
       />
       <HelperHeader
         description={`Type the query that you want to monitor, select the search engine,

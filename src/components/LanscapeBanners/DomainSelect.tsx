@@ -11,6 +11,7 @@ type Props = {
 };
 
 export default function DomainSelect({ domain, setDomain }: Props) {
+console.log(domain, ' this is domain');
 
     const { page } = useContext(PageContext);
   const onChange = (code: string) => setDomain(code);

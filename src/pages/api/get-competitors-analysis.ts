@@ -1,3 +1,4 @@
+
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 
@@ -8,23 +9,23 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const id = '02dfe7ac-2708-4312-86bf-2510a710c03b';
 
-    const queryResult = await prisma.targetQuery.findFirst({
-      where: {
-        id: id,
+    const previousQueries = await prisma.targetQuery.findMany({
+      select: {
+        id: true,
+        query_name: true,
+        country: true,
+        last_update: true,
+        competitors_tracked: true,
+        new_changes: true
       },
+      orderBy: {
+        created_at: 'desc'
+      },
+      take: 15
     });
 
-    const competitorsResult = await prisma.competitor.findMany({
-      where: {
-        query_id: id,
-      },
-    });
-
-    res
-      .status(200)
-      .json({ querySummary: queryResult, competitors: competitorsResult });
+    res.status(200).json(previousQueries);
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error
@@ -33,5 +34,5 @@ export default async function handler(
       // handle error of unknown type
       res.status(500).json({ error: 'Unknown error occurred' });
     }
-  }
+  } 
 }

@@ -6,7 +6,7 @@ export interface QuerySummary {
   is_pc: boolean;
   country: string;
   new_changes: null;
-  serp_chnages: string;
-  changes_per_website: string;
+  serp_chnages: number;
+  changes_per_website: number;
 }
 

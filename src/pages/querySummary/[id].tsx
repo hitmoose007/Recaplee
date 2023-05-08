@@ -73,7 +73,8 @@ const querySummary = (props: Props) => {
               <AnalysisCard
                 competitor={competitor}
                 querySummary={querySummary}
-              />
+              /> 
+              
             );
           }
         })}

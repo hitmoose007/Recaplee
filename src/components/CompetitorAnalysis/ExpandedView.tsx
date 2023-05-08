@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { parsedChanges1 } from '@/utils/test';
 import ExpandedCard from './ExpandedCard';
+import TestBanner from './TestBanner';
 type Props = {};
 
 const ExpandedView = (props: Props) => {
@@ -8,8 +9,9 @@ const ExpandedView = (props: Props) => {
   return (
     <>
       <div className="flex md:mt-8  md:space-x-12 ">
-        <ExpandedCard isRemoved={true} />
-        <ExpandedCard isRemoved={false} />
+        <TestBanner />
+        {/* <ExpandedCard isRemoved={true} />
+        <ExpandedCard isRemoved={false} /> */}
       </div>
     </>
   );

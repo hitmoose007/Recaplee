@@ -12,7 +12,7 @@ type Props = {};
 
 const linkSummary = (props: Props) => {
   const [showExpandedView, setShowExpandedView] = useState(true);
-  
+
   return (
     <>
       <QueryHeader
@@ -47,8 +47,13 @@ const linkSummary = (props: Props) => {
         <QueryBanner />
       </div>
 
-       {showExpandedView && <ExpandedView/>}
-
+      {showExpandedView && (
+        <div className="flex md:mt-8  md:space-x-12 ">
+          <ExpandedView />
+          {/* <ExpandedCard isRemoved={true} />
+        <ExpandedCard isRemoved={false} /> */}
+        </div>
+      )}
     </>
   );
 };

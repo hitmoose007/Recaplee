@@ -9,8 +9,8 @@ datasource db {
 
 model Competitor {
   created_at       DateTime?    @default(now()) @db.Timestamptz(6)
-  current_position BigInt?
-  last_position    BigInt?
+  current_position Int?         @db.SmallInt
+  last_position    Int?         @db.SmallInt
   current_content  Json?
   title            String?
   domain           String?
@@ -19,6 +19,8 @@ model Competitor {
   id               String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   current_change   Json?
   is_custom        Boolean?     @default(false)
+  content_changed  Int?         @db.SmallInt
+  changes_detected Int?         @db.SmallInt
   Query            TargetQuery? @relation(fields: [query_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
@@ -26,7 +28,7 @@ model TargetQuery {
   id                  String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   created_at          DateTime?    @default(now()) @db.Timestamptz(6)
   competitors_tracked Int?
-  last_update         DateTime?    @default(now()) @db.Date
+  old_update          DateTime?    @default(now()) @db.Date
   query_name          String?
   google_domain       String?
   is_pc               Boolean?
@@ -34,5 +36,6 @@ model TargetQuery {
   new_changes         Int?
   serp_chnages        Decimal?     @default(0) @db.Decimal
   changes_per_website Decimal?     @default(0) @db.Decimal
+  recent_update       DateTime?    @default(now()) @db.Date
   Competitor          Competitor[]
 }

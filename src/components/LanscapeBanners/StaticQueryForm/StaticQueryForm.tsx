@@ -9,11 +9,10 @@ type Props = {
   isQuerySummaryPage?: boolean;
   querySummary?: QuerySummary;
 };
-
+ 
 const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
   const { formState, setFormState } = useContext(FormContext);
 
-  console.log(querySummary, ' this is query summary');
   return (
     <div className=" inline-flex   items-center rounded-[30px]  bg-[#EEF6FF] md:mt-4 md:h-[125px] md:px-10 md:pt-4">
       <div className="flex md:space-x-10">
@@ -65,7 +64,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
               } pointer-events-none flex items-center space-x-3 rounded-full bg-white font-bold text-[#334DD9] hover:brightness-95 md:px-4 md:py-1`}
             >
               <Image
-                src="landscapeIcons/pcIcon.svg"
+                src="/landscapeIcons/pcIcon.svg"
                 width={25}
                 height={25}
                 alt="mobileIcon"
@@ -81,7 +80,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
               } pointer-events-none flex items-center rounded-full bg-white font-bold text-[#334DD9] hover:brightness-95 md:px-4 md:py-1`}
             >
               <Image
-                src="landscapeIcons/mobileIcon.svg"
+                src="/landscapeIcons/mobileIcon.svg"
                 width={25}
                 height={25}
                 alt="mobileIcon"

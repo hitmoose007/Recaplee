@@ -14,7 +14,7 @@ export default async function handler(
         id: true,
         query_name: true,
         country: true,
-        last_update: true,
+        recent_update: true,
         competitors_tracked: true,
         new_changes: true
       },

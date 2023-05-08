@@ -5,31 +5,31 @@ import StaticQuery from '@/components/LanscapeBanners/StaticQueryForm/StaticQuer
 import QueryBanner from '@/components/ChangesBanner/ChangesBanner';
 import ChangeCard from '@/components/ChangesBanner/ChangeCard';
 import HelperHeader from '@/components/Header/HelperHeader';
-import AnalysisBanner from '@/components/AnalysisBanner/AnalysisBanner';
 import { QuerySummary } from '@/types/my-types';
 import AnalysisCard from '@/components/AnalysisBanner/AnalysisCard';
+import { useRouter } from 'next/router';
 type Props = {};
 
 const querySummary = (props: Props) => {
   const [querySummary, setQuerySummary] = useState<QuerySummary>();
   const [loading, setLoading] = useState(true);
   const [competitorArray, setCompetitorArray] = useState<any[]>([]);
+
+  const router = useRouter();
+  console.log(router.query.id);
   useEffect(() => {
     async function fetchQuerySummary() {
-      const res = await fetch('/api/getQuerySummary');
+      const res = await fetch(`/api/getQuerySummary/${router.query['id']}`);
       const json = await res.json();
-      setQuerySummary(json.result);
+      setQuerySummary(json.querySummary);
+      setCompetitorArray(json.competitors);
     }
     fetchQuerySummary();
-    // setLoading(false);
-
-    console.log(`%c',${querySummary} `, 'color: red; font-size: 24px;');
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (querySummary) {
       setLoading(false);
-      console.log(`%c',${querySummary} `, 'color: red; font-size: 24px;');
     }
   }, [querySummary]);
 
@@ -67,10 +67,16 @@ const querySummary = (props: Props) => {
       </div>
       <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
       <div className="mt-4 flex flex-col rounded-[30px] bg-customBlue md:space-y-3 md:px-8 md:py-4">
-         
-        <AnalysisCard />
-        <AnalysisCard />
-        <AnalysisCard />
+        {competitorArray.map((competitor) => {
+          if (querySummary) {
+            return (
+              <AnalysisCard
+                competitor={competitor}
+                querySummary={querySummary}
+              />
+            );
+          }
+        })}
       </div>
     </>
   );

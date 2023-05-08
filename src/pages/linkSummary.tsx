@@ -11,7 +11,7 @@ import ExpandedView from '@/components/CompetitorAnalysis/ExpandedView';
 type Props = {};
 
 const linkSummary = (props: Props) => {
-  const [showExpandedView, setShowExpandedView] = useState(false);
+  const [showExpandedView, setShowExpandedView] = useState(true);
   
   return (
     <>
@@ -47,7 +47,7 @@ const linkSummary = (props: Props) => {
         <QueryBanner />
       </div>
 
-        <ExpandedView/>
+       {showExpandedView && <ExpandedView/>}
 
     </>
   );

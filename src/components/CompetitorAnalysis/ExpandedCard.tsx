@@ -4,11 +4,9 @@ import { parsedChanges1 } from '@/utils/test';
 import { diff_match_patch } from 'diff-match-patch';
 type Props = {
   isRemoved: boolean;
-  removedRef: React.RefObject<HTMLDivElement>;
-  notRemovedRef: React.RefObject<HTMLDivElement>;
 };
 
-const ExpandedCard = ({ isRemoved, removedRef, notRemovedRef }: Props) => {
+const ExpandedCard = ({ isRemoved }: Props) => {
   const dmp = new diff_match_patch();
 
   return (
@@ -48,14 +46,8 @@ const ExpandedCard = ({ isRemoved, removedRef, notRemovedRef }: Props) => {
           const tag = printTagIfExists(change);
           response = dmp.diff_main(tag.__old, tag.__new);
           dmp.diff_cleanupSemantic(response);
-          let height;
-          if (removedRef && notRemovedRef) {
-            console.log('heelo');
-            console.log(removedRef.current?.offsetHeight);
-          }
           return (
             <div
-              ref={isRemoved ? removedRef : notRemovedRef}
               className={` pointer-events-none rounded-[30px] bg-white  p-2    text-sm font-bold   `}
             >
               {response?.map((item, index) => {
@@ -69,8 +61,14 @@ const ExpandedCard = ({ isRemoved, removedRef, notRemovedRef }: Props) => {
                   return (
                     <>
                       {isRemoved && (
+                        
                         <span className="text-red-500  "> {item[1]}</span>
                       )}
+                      {!isRemoved && (
+                        
+                        <span className="text-red-500 invisible "> {item[1]}</span>
+                      )}
+                      
                     </>
                   );
                 }
@@ -79,6 +77,10 @@ const ExpandedCard = ({ isRemoved, removedRef, notRemovedRef }: Props) => {
                     <>
                       {!isRemoved && (
                         <span className="text-green-500 "> {item[1]}</span>
+                      )}
+                      {isRemoved && (
+                        
+                        <span className="text-red-500 invisible "> {item[1]}</span>
                       )}
                     </>
                   );

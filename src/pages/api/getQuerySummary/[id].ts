@@ -8,10 +8,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const id = '02dfe7ac-2708-4312-86bf-2510a710c03b';
+    // const id = '02dfe7ac-2708-4312-86bf-2510a710c03b';
+    //extract id from req
+    //how to extract parameters from req
+   console.log('hello')
+     const { id } = req.query;
 
-    const queryResult = await prisma.targetQuery.findFirst({
-      where: {
+    const queryResult = await prisma.targetQuery.findFirst({ where: {
         id: id,
       },
     });
@@ -21,13 +24,15 @@ export default async function handler(
         query_id: id,
       },
     });
+    console.log(competitorsResult);
 
-    res
-      .status(200)
+
+    res.status(200)
       .json({ querySummary: queryResult, competitors: competitorsResult });
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error
+      console.log(error.message)
       res.status(500).json({ error: error.message });
     } else {
       // handle error of unknown type

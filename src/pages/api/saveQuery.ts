@@ -53,7 +53,6 @@ export default async function handler(
           title: extractDomain(competitor),
           link: competitor,
           domain: extractDomain(competitor),
-          current_position: -1,
           is_custom: true,
           query_id: query.id,
         };

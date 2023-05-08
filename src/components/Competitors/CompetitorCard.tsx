@@ -54,7 +54,6 @@ const CompetitorCard = ({
     // }
 
     setIsSelected(false);
-    console.log('this is position and WE DELETE', position);
 
     if (setCustomCompetitorArray) {
       setCustomCompetitorArray((prevArray) =>
@@ -113,7 +112,7 @@ const CompetitorCard = ({
             )}
           </div>
 
-          <p className="font-bold  ">{title}</p>
+          <p className="font-bold truncate w-8/12 ">{title}</p>
 
           <div className="flex w-11/12 truncate ">
             <a

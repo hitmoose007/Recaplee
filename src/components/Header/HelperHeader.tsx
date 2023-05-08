@@ -9,7 +9,7 @@ const HelperHeader = ({description}: Props) => {
       
     <div className="flex md:space-x-4 md:ml-[3px]">
       <Image
-        src='headerIcons/helperIcon.svg'
+        src='/headerIcons/helperIcon.svg'
         alt="logo"
         width={20}
         height={20}

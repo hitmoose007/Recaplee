@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { parsedChanges1 } from '@/utils/test';
 
 import { diff_match_patch } from 'diff-match-patch';
 import HeaderTagView from './HeaderTagView';
-type Props = {};
+import { Competitor, QuerySummary } from '@/types/my-types';
+type Props = {
+  competitorAnalysed: Competitor;
+  querySummary: QuerySummary;
+};
 
-const ExpandedView = ({}: Props) => {
+const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   const dmp = new diff_match_patch();
-
+  //   const [parsedChanges, setParsedChanges] = useState<string[][]>([]);
   return (
     <>
       <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue text-sm md:px-4 md:py-20">
-        {parsedChanges1.map((change, index) => {
+        {competitorAnalysed.changed_content?.map((change, index) => {
           if (change[0] === '-') {
             const removedChange = printTagIfExists(change);
             return (
               <div key={index} className="flex space-x-20">
                 <div
-                  className={`w-full pointer-events-none rounded-[30px] bg-white  p-2    text-sm font-bold text-customRed md:space-x-4  md:space-y-4 `}
+                  className={`pointer-events-none w-full rounded-[30px] bg-white  p-2    text-sm font-bold text-customRed md:space-x-4  md:space-y-4 `}
                 >
                   <p>
                     <HeaderTagView tag={removedChange?.tag || ''} />
@@ -25,7 +29,7 @@ const ExpandedView = ({}: Props) => {
                   </p>
                 </div>
                 <div
-                  className={` w-full pointer-events-none rounded-[30px]  bg-[#E0E8F0]   p-2 text-sm font-bold md:space-x-4  md:space-y-4 `}
+                  className={` pointer-events-none w-full rounded-[30px]  bg-[#E0E8F0]   p-2 text-sm font-bold md:space-x-4  md:space-y-4 `}
                 >
                   <p className={'invisible'}>{removedChange?.value}</p>
                 </div>
@@ -37,17 +41,17 @@ const ExpandedView = ({}: Props) => {
             return (
               <div key={index} className="flex space-x-20">
                 <div
-                  className={` w-full  pointer-events-none rounded-[30px] bg-[#E0E8F0]  p-2    text-sm font-bold  md:space-x-4  md:space-y-4 `}
+                  className={` pointer-events-none  w-full rounded-[30px] bg-[#E0E8F0]  p-2    text-sm font-bold  md:space-x-4  md:space-y-4 `}
                 >
                   <p className={'invisible'}>{removedChange?.value}</p>
                 </div>
                 <div
-                  className={` w-full pointer-events-none rounded-[30px] bg-white  p-2    text-sm font-bold text-customGreen md:space-x-4  md:space-y-4 `}
+                  className={` pointer-events-none w-full rounded-[30px] bg-white  p-2    text-sm font-bold text-customGreen md:space-x-4  md:space-y-4 `}
                 >
                   <p>
                     <HeaderTagView tag={removedChange?.tag || ''} />
-                    {removedChange?.value}</p>
-
+                    {removedChange?.value}
+                  </p>
                 </div>
               </div>
             );
@@ -64,8 +68,8 @@ const ExpandedView = ({}: Props) => {
                 <div
                   className={` pointer-events-none w-1/2 rounded-[30px] bg-white  p-2    text-sm font-bold   `}
                 >
-                    <HeaderTagView tag={tag?.tag || ''} />
-                    {/* <HeaderTagView tag={tag?.tag || ''} /> */}
+                  <HeaderTagView tag={tag?.tag || ''} />
+                  {/* <HeaderTagView tag={tag?.tag || ''} /> */}
                   {response?.map((item, index) => {
                     if (item[0] === 0) {
                       //span affecting padding how?
@@ -74,7 +78,7 @@ const ExpandedView = ({}: Props) => {
                     if (item[0] == -1) {
                       return (
                         <>
-                          {<span className="text-red-500  "> {item[1]}</span>}
+                          {<span className="text-customRed"> {item[1]}</span>}
                         </>
                       );
                     }
@@ -83,7 +87,7 @@ const ExpandedView = ({}: Props) => {
                 <div
                   className={`pointer-events-none w-1/2 rounded-[30px] bg-white  p-2    text-sm font-bold   `}
                 >
-                    <HeaderTagView tag={tag?.tag || ''} />
+                  <HeaderTagView tag={tag?.tag || ''} />
                   {response?.map((item, index) => {
                     if (item[0] === 0) {
                       //span affecting padding how?

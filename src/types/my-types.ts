@@ -8,7 +8,7 @@ export interface QuerySummary {
   google_domain: string;
   is_pc: boolean;
   country: string;
-  new_changes: null;
+  new_changes: number;
   serp_chnages: number;
   changes_per_website: number;
 }
@@ -24,4 +24,52 @@ export type Competitor = {
   is_custom?: boolean;
   content_changed?: number;
   changes_detected?: number;
+  changed_content?: ChangedContent[];
 };
+type ChangedContent = [
+  '+' | '-' | '~',
+  {
+    h1?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+    h2?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+    h3?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+    h4?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+    h5?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+    h6?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+    p?:
+      | string
+      | {
+          __new: string;
+          __old: string;
+        };
+  }
+];

@@ -17,7 +17,7 @@ model Competitor {
   link             String?
   query_id         String?      @db.Uuid
   id               String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  current_change   Json?
+  changed_content  Json?
   is_custom        Boolean?     @default(false)
   content_changed  Int?         @db.SmallInt
   changes_detected Int?         @db.SmallInt

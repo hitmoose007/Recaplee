@@ -1,15 +1,24 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { Competitor, QuerySummary } from '@/types/my-types';
+import { PageContext } from '@/context/PageContext';
+import { PageView } from '@/utils/enums';
+import { useContext } from 'react';
 type Props = {
   competitor: Competitor;
   querySummary: QuerySummary;
+  setCompetitorAnalysed: (competitor: Competitor) => void;
 };
 
-const AnalysisCard = ({ competitor, querySummary }: Props) => {
+const AnalysisCard = ({
+  setCompetitorAnalysed,
+  competitor,
+  querySummary,
+}: Props) => {
   const [contentColor, setContentColor] = useState('');
   const [changesColor, setChangesColor] = useState('');
   const [positionChange, setPositionChange] = useState<number>();
+  const { setPage } = useContext(PageContext);
   const contentChangedValue = competitor.content_changed || 0;
   const changesValue = competitor.changes_detected || 0;
 
@@ -17,6 +26,7 @@ const AnalysisCard = ({ competitor, querySummary }: Props) => {
   const recent_update = new Date(
     querySummary.recent_update
   ).toLocaleDateString();
+  
   useEffect(() => {
     if (contentChangedValue > 25) {
       setContentColor('customRed');
@@ -41,7 +51,6 @@ const AnalysisCard = ({ competitor, querySummary }: Props) => {
     }
   }, []);
 
-  console.log(contentColor, changesColor, ' this is color');
   return (
     <div className="flex items-center justify-around rounded-full bg-white align-middle text-customGray md:space-x-4 md:px-4 md:py-4">
       <div className="flex text-customYellow">
@@ -96,6 +105,10 @@ const AnalysisCard = ({ competitor, querySummary }: Props) => {
 
       {competitor?.changes_detected || 0 > 0 ? (
         <button
+          onClick={() => {
+            setCompetitorAnalysed(competitor);
+            setPage(PageView.COMPETITORVIEW);
+          }}
           type="submit"
           className="flex cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] font-bold text-white hover:brightness-90  md:px-12 md:py-2"
         >

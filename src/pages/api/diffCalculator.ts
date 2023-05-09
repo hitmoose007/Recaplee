@@ -1,20 +1,54 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import { array3, array4 } from '../../utils/test';
-
-// import { prisma } from '../../lib/db';
+//create prisma client
+import { PrismaClient } from '@prisma/client';
 import { diff, diffString } from 'json-diff';
-// import { diffArrays, diffJson, diffWords } from 'diff';
 
-//todo list for this file
-//1. get previous content json for all the pages
+const prisma = new PrismaClient();
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const parsedJson1 = parseObject(array3);
-    const parsedJson2 = parseObject(array4);
+    const currentDate = new Date();
+    // const parsedJson1 = parseObject(array3);
+    // const parsedJson2 = parseObject(array4);
+
+    //prisma query to get the task
+
+    const allQueries = await prisma.targetQuery.findMany({});
+
+    //filter out using dates that are more than 3 days old
+    const queryDate = new Date().getTime();
+    const tutti = allQueries[0]?.recent_update?.getTime();
+
+    const filteredQueries = allQueries.filter((query) => {
+      const queryTime = query.recent_update?.getTime();
+
+      if (queryTime !== undefined) {
+        const diffDays = Math.floor(
+          (currentDate.getTime() - queryTime) / (1000 * 60 * 60 * 24)
+        );
+
+        if (diffDays >= 1) {
+          return query;
+        }
+      }
+    });
+
+    const competitors = await prisma.competitor.findMany({
+      where: {
+        query_id: {
+          in: filteredQueries.map((query) => query.id),
+        },
+      },
+    });
+
+    
+    // console.log(filteredQueries);
+    // const filteredQueries = allQueries.filter((query) => {
+    //     const queryDate = new Date(query.recent_update);
 
     // let response = diff(parsedJson1, parsedJson2);
 
@@ -27,45 +61,41 @@ export default async function handler(
     //   max_crawl_pages: 10,
     //   enable_content_parsing: true,
     // });
-   
-    const content_post_array = [];
-    // const response = getDiff(json1, json2);
-    // console.log(response);
-    // sleep(20000);
-    content_post_array.push({
-      url: 'https://www.fujielectric.com/',
-    //   id: task_response[0].id,
-      // id : '04292211-2720-0216-0000-78d80b859a12'
-    });
-    const response = await axios({
-      method: 'post',
-      url: 'https://api.dataforseo.com/v3/on_page/content_parsing/live',
-      auth: {
-        username: 'admin@comprasocial.me',
-        password: '45b462e774105e74',
-      },
-      data: content_post_array,
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
-      .then(function (content_response) {
-        var result = content_response['data']['tasks'];
-        // Result data
-        return result;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
 
-  
-    console.log(response[0].result[0].items[0].page_content);
+    // const content_post_array = [];
+    // content_post_array.push({
+    //   url: 'https://www.fujielectric.com/',
+    //   //   id: task_response[0].id,
+    //   // id : '04292211-2720-0216-0000-78d80b859a12'
+    // });
+    // const response = await axios({
+    //   method: 'post',
+    //   url: 'https://api.dataforseo.com/v3/on_page/content_parsing/live',
+    //   auth: {
+    //     username: 'admin@comprasocial.me',
+    //     password: '45b462e774105e74',
+    //   },
+    //   data: content_post_array,
+    //   headers: {
+    //     'content-type': 'application/json',
+    //   },
+    // })
+    //   .then(function (content_response) {
+    //     var result = content_response['data']['tasks'];
+    //     // Result data
+    //     return result;
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    // console.log(response[0].result[0].items[0].page_content);
 
     res.status(200).json({
       // response: response[0].result[0].items[0].page_content.secondary_topic,
-    //   tasks_ready: tasks_ready,
-    //   content_response: content_response,
-    response
+      //   tasks_ready: tasks_ready,
+      //   content_response: content_response,
+      competitors,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {

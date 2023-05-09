@@ -11,7 +11,6 @@ export default async function handler(
     // const id = '02dfe7ac-2708-4312-86bf-2510a710c03b';
     //extract id from req
     //how to extract parameters from req
-   console.log('hello')
      const { id } = req.query;
 
     const queryResult = await prisma.targetQuery.findFirst({ where: {

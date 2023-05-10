@@ -1,10 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { array3, array4 } from '../../utils/test';
-//create prisma client
-import { PrismaClient } from '@prisma/client';
-import { diff, diffString } from 'json-diff';
-
+import { parseObject, maxPage, maxResults } from '@/utils/apiHelper';
+import { PrismaClient, Prisma } from '@prisma/client';
+import { diff } from 'json-diff';
 const prisma = new PrismaClient();
 export default async function handler(
   req: NextApiRequest,
@@ -12,16 +10,8 @@ export default async function handler(
 ) {
   try {
     const currentDate = new Date();
-    // const parsedJson1 = parseObject(array3);
-    // const parsedJson2 = parseObject(array4);
-
-    //prisma query to get the task
 
     const allQueries = await prisma.targetQuery.findMany({});
-
-    //filter out using dates that are more than 3 days old
-    const queryDate = new Date().getTime();
-    const tutti = allQueries[0]?.recent_update?.getTime();
 
     const filteredQueries = allQueries.filter((query) => {
       const queryTime = query.recent_update?.getTime();
@@ -31,13 +21,15 @@ export default async function handler(
           (currentDate.getTime() - queryTime) / (1000 * 60 * 60 * 24)
         );
 
-        if (diffDays >= 1) {
+        if (diffDays >= 0) {
           return query;
         }
       }
     });
 
-    const competitors = await prisma.competitor.findMany({
+    // use promise .all
+    // console.log('hello')
+    let competitors = await prisma.competitor.findMany({
       where: {
         query_id: {
           in: filteredQueries.map((query) => query.id),
@@ -45,57 +37,168 @@ export default async function handler(
       },
     });
 
-    
-    // console.log(filteredQueries);
-    // const filteredQueries = allQueries.filter((query) => {
-    //     const queryDate = new Date(query.recent_update);
+    const topResultsArray = await Promise.all(
+      filteredQueries.map(async (query, index) => {
+        const params = {
+          api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
+          q: query.query_name,
+          max_page: maxPage,
+          google_domain: query.google_domain?.toLocaleLowerCase(),
+          //   gl: query.country?.toLocaleLowerCase,
+          //   device: query.is_pc === true ? 'desktop' : 'mobile',
+        };
 
-    // let response = diff(parsedJson1, parsedJson2);
+        let response;
+        try {
+          response = await axios.get('https://api.valueserp.com/search', {
+            params,
+          });
+        } catch (error) {
+          return [null];
+        }
+        // print the JSON response from VALUE SERP
+        const topResults = response?.data.organic_results.slice(0, maxResults);
+        // console.log('heelo')
+        console.log('heelo');
+        competitors.map(async (competitor, index) => {
+          if (competitor.query_id === query.id) {
+            competitor.last_position = competitor.current_position;
+            //check if competitor.link in  top results
+            topResults.forEach((result: any) => {
+              if (result.link === competitor.link) {
+                console.log(competitor.domain);
+                console.log(result.position_overall, 'overall ppoopy');
+                competitor.current_position = result.position_overall;
+              }
+            });
+          }
+        });
 
-    // response = filterResponse(response);
+        return topResults;
+      })
+    );
 
-    // let task_post_array = [];
-    // task_post_array.push({
-    //   target: 'https://www.fujielectric.com/',
-    //   //   id: '04242333-2720-0216-0000-fef73e36d19e',
-    //   max_crawl_pages: 10,
-    //   enable_content_parsing: true,
-    // });
+    // console.log(competitors.length, 'length');
+    const changedContentArray = await Promise.all(
+      competitors.map(async (competitor) => {
+        const post_array = [];
+        post_array.push({
+          url: competitor.link,
+        });
+        try {
+          const response = await axios({
+            method: 'post',
+            url: 'https://api.dataforseo.com/v3/on_page/content_parsing/live',
+            auth: {
+              username: 'admin@comprasocial.me',
+              password: '45b462e774105e74',
+            },
+            data: post_array,
+            headers: {
+              'content-type': 'application/json',
+            },
+          });
+          const result = response['data']['tasks'];
 
-    // const content_post_array = [];
-    // content_post_array.push({
-    //   url: 'https://www.fujielectric.com/',
-    //   //   id: task_response[0].id,
-    //   // id : '04292211-2720-0216-0000-78d80b859a12'
-    // });
-    // const response = await axios({
-    //   method: 'post',
-    //   url: 'https://api.dataforseo.com/v3/on_page/content_parsing/live',
-    //   auth: {
-    //     username: 'admin@comprasocial.me',
-    //     password: '45b462e774105e74',
-    //   },
-    //   data: content_post_array,
-    //   headers: {
-    //     'content-type': 'application/json',
-    //   },
-    // })
-    //   .then(function (content_response) {
-    //     var result = content_response['data']['tasks'];
-    //     // Result data
-    //     return result;
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+          return result;
+        } catch (error) {
+          console.log(error);
+          return null; // or handle the error in an appropriate way
+        }
+      })
+    );
 
-    // console.log(response[0].result[0].items[0].page_content);
+    const currentContentArray: Prisma.NullableJsonNullValueInput[] = [];
+    const filteredContentArray = changedContentArray.map((item) => {
+      const parsedContent = parseObject(
+        item?.[0]?.result?.[0]?.items?.[0]?.page_content?.main_topic
+      );
+      if (parsedContent === null) return null;
+
+      currentContentArray.push(filterResponse(parsedContent));
+      return filterResponse(parsedContent);
+    });
+
+    //do a diff on the content and return the diff
+    const diffArray: Prisma.NullableJsonNullValueInput[] = [];
+    const changesCountArray: number[] = [];
+    const percentageChangedContentArray: number[] = [];
+    for (let i = 0; i < filteredContentArray.length; i++) {
+      const diffObject = diff(
+        filteredContentArray[i],
+        competitors[i]?.changed_content
+      );
+
+      diffArray.push(diffObject);
+
+      if (diffObject !== undefined && diffObject !== null) {
+        const changesCount = Object.keys(diffObject).length;
+        changesCountArray.push(changesCount);
+
+        //   console.log('hey')
+        if (
+          competitors[i]?.current_content !== null &&
+          Array.isArray(competitors?.[i]?.changed_content)
+        ) {
+          const percentageChangedContent =
+            (diffArray[i].length / competitors[i].current_content.length) * 100;
+          percentageChangedContentArray.push(
+            Math.round(percentageChangedContent)
+          );
+          //   console.log('teri amma');
+        } else {
+          const percentageChangedContent = 0;
+          percentageChangedContentArray.push(percentageChangedContent);
+        }
+      } else {
+        changesCountArray.push(0);
+        percentageChangedContentArray.push(0);
+      }
+    }
+
+    //update the changed content in the database using promise.all
+    const content_response = await Promise.all(
+      competitors.map(async (competitor, index) => {
+        console.log(competitor.current_position);
+        console.log(competitor.last_position);
+
+        const updatedCompetitor = await prisma.competitor.update({
+          where: {
+            id: competitor.id,
+          },
+          data: {
+            changed_content: diffArray[index],
+            current_content: currentContentArray[index],
+            changes_detected: changesCountArray[index],
+            content_changed: percentageChangedContentArray[index],
+            current_position: competitor.current_position,
+            last_position: competitor.last_position,
+          },
+        });
+        return updatedCompetitor;
+      })
+    );
+
+    //update the filtered queries time stamp
+    const tasks_ready = await Promise.all(
+      filteredQueries.map(async (query) => {
+        const updatedQuery = await prisma.targetQuery.update({
+          where: {
+            id: query.id,
+          },
+          data: {
+            recent_update: currentDate,
+          },
+        });
+        return updatedQuery;
+      })
+    );
 
     res.status(200).json({
       // response: response[0].result[0].items[0].page_content.secondary_topic,
       //   tasks_ready: tasks_ready,
       //   content_response: content_response,
-      competitors,
+      content_response,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -115,89 +218,4 @@ function filterResponse(response: any) {
   return filteredResponse;
 
   // Loop through the words in the first string
-}
-
-function parseObject(jsonObject: any) {
-  let outputArray = [];
-
-  // iterate through the input array
-  for (let i = 0; i < jsonObject.length; i++) {
-    const item = jsonObject[i];
-
-    // check the level of the item and assign the appropriate heading tag
-    let tag;
-    switch (item.level) {
-      case 1:
-        tag = 'h1';
-        break;
-      case 2:
-        tag = 'h2';
-        break;
-      case 3:
-        tag = 'h3';
-        break;
-      case 4:
-        tag = 'h4';
-        break;
-      case 5:
-        tag = 'h5';
-        break;
-      case 6:
-        tag = 'h6';
-        break;
-      default:
-        // if level is not specified, default to h1
-        tag = 'h1';
-    }
-
-    // if the item has primary_content, concatenate all text fields
-    let primaryContent = '';
-    if (item.primary_content) {
-      for (let j = 0; j < item.primary_content.length; j++) {
-        const contentItem = item.primary_content[j];
-        primaryContent += contentItem.text + ' ';
-      }
-    }
-
-    // if the item has secondary_content, concatenate all text fields
-    let secondaryContent = '';
-    if (item.secondary_content) {
-      for (let j = 0; j < item.secondary_content.length; j++) {
-        const contentItem = item.secondary_content[j];
-        secondaryContent += contentItem.text + ' ';
-      }
-    }
-
-    // create a new object with the appropriate tag and content
-    const outputItem1 = {
-      [tag]: item.h_title || '',
-    };
-
-    outputArray.push(outputItem1);
-    let outputItem2 = {};
-    if (primaryContent) {
-      console.log(primaryContent);
-      outputItem2 = {
-        p: primaryContent.trim() || '',
-      };
-      outputArray.push(outputItem2);
-    }
-
-    let outputItem3 = {};
-    if (secondaryContent) {
-      outputItem3 = {
-        p: secondaryContent.trim() || '',
-      };
-
-      outputArray.push(outputItem3);
-    }
-    // add the output object to the output array
-  }
-
-  return outputArray;
-}
-
-function sleep(ms: number) {
-  const start = new Date().getTime();
-  while (new Date().getTime() - start < ms) {}
 }

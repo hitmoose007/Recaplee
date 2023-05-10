@@ -257,7 +257,6 @@ export const countries = [
 ];
 
 export const countryDomains = [
-  'Google.com',
   'Google.ad',
   'Google.ae',
   'Google.com.af',

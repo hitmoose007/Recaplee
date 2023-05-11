@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient,Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -14,13 +14,13 @@ export default async function handler(
      const { id } = req.query;
 
     const queryResult = await prisma.targetQuery.findFirst({ where: {
-        id: id,
+        id: id as Prisma.UuidFilter,
       },
     });
 
     const competitorsResult = await prisma.competitor.findMany({
       where: {
-        query_id: id,
+        query_id: id as Prisma.UuidFilter,
       },
     });
     console.log(competitorsResult);

@@ -61,7 +61,13 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
             //   console.log('hello');
             let response;
             const tag = printTagIfExists(change);
+            if (!tag) {
+              console.log('teri maa tag');
+              return null;
+            }
+
             response = dmp.diff_main(tag?.value.__old, tag?.value.__new);
+
             dmp.diff_cleanupSemantic(response);
             return (
               <div key={index} className="flex space-x-20">

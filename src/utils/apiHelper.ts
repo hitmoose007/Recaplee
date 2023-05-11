@@ -1,13 +1,26 @@
-
-
-
 export const maxPage = 3;
 export const maxResults = 10;
+
+export function filterResponse(response: any) {
+  if (response === undefined || response === null) {
+    return [];
+  }
+  if (Array.isArray(response)) {
+    const filteredResponse = response.filter((item: any) => {
+      return item[0] !== ' ';
+    });
+  return filteredResponse;
+  }
+
+  return []
+  // Loop through the words in the first string
+}
 export function parseObject(jsonObject: any) {
   let outputArray = [];
 
-  if (jsonObject === undefined) {
-    return null;
+  //   console.log(jsonObject);
+  if (jsonObject === undefined || jsonObject === null) {
+    return [];
   }
 
   for (let i = 0; i < jsonObject.length; i++) {

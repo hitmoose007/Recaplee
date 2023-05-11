@@ -1,6 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
-import { parseObject, maxPage, maxResults } from '@/utils/apiHelper';
+import {
+  parseObject,
+  maxPage,
+  maxResults,
+  filterResponse,
+} from '@/utils/apiHelper';
 import { PrismaClient, Prisma } from '@prisma/client';
 import { diff } from 'json-diff';
 const prisma = new PrismaClient();
@@ -44,8 +49,8 @@ export default async function handler(
           q: query.query_name,
           max_page: maxPage,
           google_domain: query.google_domain?.toLocaleLowerCase(),
-          //   gl: query.country?.toLocaleLowerCase,
-          //   device: query.is_pc === true ? 'desktop' : 'mobile',
+          gl: query.country?.toLocaleLowerCase,
+          device: query.is_pc === true ? 'desktop' : 'mobile',
         };
 
         let response;
@@ -59,15 +64,15 @@ export default async function handler(
         // print the JSON response from VALUE SERP
         const topResults = response?.data.organic_results.slice(0, maxResults);
         // console.log('heelo')
-        console.log('heelo');
+        // console.log('heelo');
         competitors.map(async (competitor, index) => {
           if (competitor.query_id === query.id) {
             competitor.last_position = competitor.current_position;
             //check if competitor.link in  top results
             topResults.forEach((result: any) => {
               if (result.link === competitor.link) {
-                console.log(competitor.domain);
-                console.log(result.position_overall, 'overall ppoopy');
+                // console.log(competitor.domain);
+                // console.log(result.position_overall, 'overall ppoopy');
                 competitor.current_position = result.position_overall;
               }
             });
@@ -103,34 +108,69 @@ export default async function handler(
           return result;
         } catch (error) {
           console.log(error);
-          return null; // or handle the error in an appropriate way
+          return []; // or handle the error in an appropriate way
         }
       })
     );
+    // console.log('first tutti');
+    changedContentArray.forEach((item, index) => {
+      //   console.log(index, item?.[0]?.data.url);
+    });
 
+    // console.log('later tutti');
+    competitors.forEach((competitor, index) => {
+      //   console.log(index, competitor.link);
+    });
+
+    // console.log('eh')
+    // console.log(changedContentArray, 'changedContentArray')
     const currentContentArray: Prisma.NullableJsonNullValueInput[] = [];
-    const filteredContentArray = changedContentArray.map((item) => {
+
+    const filteredContentArray = changedContentArray.map((item, index) => {
       const parsedContent = parseObject(
         item?.[0]?.result?.[0]?.items?.[0]?.page_content?.main_topic
       );
-      if (parsedContent === null) return null;
+      if (parsedContent === null) {
+        // console.log(index, 'index')
+        // console.log(changedContentArray[index]?.[0]?.data.url)
+        // console.log(item?.[0]?.result?.[0]?.items?.[0]?.page_content?.main_topic)
+        // console.log('oh no ');
+        // console.log(parsedContent);
+        return [];
+      }
 
       currentContentArray.push(filterResponse(parsedContent));
       return filterResponse(parsedContent);
     });
+    // console.log('hello')
+    // console.log(filteredContentArray, 'meri maa idhr dekhu')
+    // console.log(filteredContentArray[0], 'meri maa idhr dekhu')
+    // console.log(competitors[0]?.current_content, 'teri maa idhr dekhu')
+    // console.log(filteredContentArray.length, 'filteredContentArray');
 
     //do a diff on the content and return the diff
     const diffArray: Prisma.NullableJsonNullValueInput[] = [];
     const changesCountArray: number[] = [];
     const percentageChangedContentArray: number[] = [];
+    let poopy;
+    let poop2;
+    let poop3;
     for (let i = 0; i < filteredContentArray.length; i++) {
-      const diffObject = diff(
-        filteredContentArray[i],
-        competitors[i]?.changed_content
+      if (competitors[i]?.link === 'https://www.britannica.com/animal/fish') {
+        console.log(filteredContentArray[i], 'filteredContentArray[i]');
+        poopy = filteredContentArray[i];
+        poop2 = competitors[i]?.current_content;
+        console.log(
+          competitors[i]?.current_content,
+          'competitors[i]?.current_content'
+        );
+      }
+      const diffObject = filterResponse(
+        diff(filteredContentArray[i], competitors[i]?.current_content)
       );
 
       diffArray.push(diffObject);
-
+      // console.log('peechay')
       if (diffObject !== undefined && diffObject !== null) {
         const changesCount = Object.keys(diffObject).length;
         changesCountArray.push(changesCount);
@@ -140,8 +180,9 @@ export default async function handler(
           competitors[i]?.current_content !== null &&
           Array.isArray(competitors?.[i]?.changed_content)
         ) {
-          const percentageChangedContent =
-            (diffArray[i].length / competitors[i].current_content.length) * 100;
+          //   const percentageChangedContent =
+          //     (diffArray[i].length / competitors[i].current_content.length) * 100;
+          const percentageChangedContent = 0;
           percentageChangedContentArray.push(
             Math.round(percentageChangedContent)
           );
@@ -156,21 +197,23 @@ export default async function handler(
       }
     }
 
+    // console.log('this is the diff array', diffArray, 'diffArray[0]')
+    // console.log(diffArray.length, 'diffArray');
     //update the changed content in the database using promise.all
     const content_response = await Promise.all(
       competitors.map(async (competitor, index) => {
-        console.log(competitor.current_position);
-        console.log(competitor.last_position);
-
+        // console.log(competitor.current_content, 'competitor.current_content');
+        // console.log(currentContentArray[index], 'currentContentArray[index]');
         const updatedCompetitor = await prisma.competitor.update({
           where: {
             id: competitor.id,
           },
           data: {
-            changed_content: diffArray[index],
+            changed_content:
+              diffArray[index] === undefined || null ? [] : diffArray[index],
             current_content: currentContentArray[index],
             changes_detected: changesCountArray[index],
-            content_changed: percentageChangedContentArray[index],
+            // content_changed: percentageChangedContentArray[index],
             current_position: competitor.current_position,
             last_position: competitor.last_position,
           },
@@ -198,7 +241,10 @@ export default async function handler(
       // response: response[0].result[0].items[0].page_content.secondary_topic,
       //   tasks_ready: tasks_ready,
       //   content_response: content_response,
-      content_response,
+      //   content_response,
+      poopy,
+      poop2,
+      poop3,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -209,13 +255,4 @@ export default async function handler(
       res.status(500).json({ error: 'Unknown error occurred' });
     }
   }
-}
-
-function filterResponse(response: any) {
-  const filteredResponse = response.filter((item: any) => {
-    return item[0] !== ' ';
-  });
-  return filteredResponse;
-
-  // Loop through the words in the first string
 }

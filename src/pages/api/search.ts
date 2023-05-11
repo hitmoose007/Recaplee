@@ -11,17 +11,21 @@ export default async function handler(
     q: req.body['query'],
     max_page: maxPage,
     google_domain: req.body['countryDomain'],
-    gl: req.body['country'],
+    gl: req.body['country'].toLowerCase(),
     device: req.body['isPC'] === true ? 'desktop' : 'mobile',
   };
 
   try {
+    console.log(params);
+    console.log('eahlo')
     const response = await axios.get('https://api.valueserp.com/search', {
       params,
     });
 
-
+    console.log(response.status)
+    // console.log('teri maa ki chut')
     // print the JSON response from VALUE SERP
+
     const topResults = response.data.organic_results.slice(0, maxResults);
 
     res.status(200).json(topResults);

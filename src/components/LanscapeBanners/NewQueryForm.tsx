@@ -44,6 +44,15 @@ const NewQueryForm = ({setIsLoading}: Props) => {
 
       const data = await response.json();
       //   console.log(data, ' this is data');
+      console.log(data, ' this is data');
+
+      //check if data is error 
+        if (data.error) {
+            alert(data.error);
+            setIsLoading(false);
+            return;
+        }
+
       setQueryResult(data);
 
       setPage(PageView.STEP2VIEW);

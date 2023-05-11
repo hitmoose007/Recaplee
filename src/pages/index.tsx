@@ -14,7 +14,7 @@ const home = (props: Props) => {
   const [formState, setFormState] = useState({
     query: '',
     country: 'SE',
-    countryDomain: 'Google.pk',
+    countryDomain: 'Google.com.pk',
     isPC: true,
   });
 

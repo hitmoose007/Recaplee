@@ -989,196 +989,48 @@ export const array3 = [
   },
 ];
 
-export const parsedJson1 = {
-  response: [
-    {
-      h2: 'Topics',
-    },
-    {
-      h3: "Interview 5. Fuji Electric's Food & Beverage Distribution Solutions: Responding to Environmental Needs\nThrough Energy Conservation and Automation",
-    },
-    {
-      h3: 'Announcement Regarding Changes to the Management of Fuji Electric Co., Ltd. to be Proposed at the Company’s\nOrdinary General Meeting of Shareholders',
-    },
-    {
-      h3: 'Contract Awarded for a Geothermal Power Generation Facility for the Republic of Kenya',
-    },
-    {
-      h3: 'Launching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer Issues',
-    },
-    {
-      h3: 'Onshore Power Supply Systems Contributing to Carbon Neutrality at Ports',
-    },
-    {
-      h2: 'Global Network',
-    },
-    {
-      p: 'Asia/Middle East Regional Websites',
-    },
-    {
-      h2: 'Regional Websites',
-    },
-    {
-      p: 'Hong Kong',
-    },
-    {
-      h2: 'Products & Solutions',
-    },
-    {
-      p: 'Food and Beverage Distribution',
-    },
-    {
-      p: 'Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
-    },
-    {
-      h2: 'News Release',
-    },
-    {
-      p: 'Learn More',
-    },
-    {
-      h2: 'Notice',
-    },
-    {
-      p: 'Learn More',
-    },
-    {
-      h3: 'Stories',
-    },
-    {
-      p: "Introducing Fuji Electric's efforts to solve social and environmental issues.",
-    },
-    {
-      h3: 'Group Companies',
-    },
-    {
-      p: 'Find Fuji Electric group companies nearest to you.',
-    },
-    {
-      h3: 'Research & Development',
-    },
-    {
-      p: 'Discover how we innovate energy technjology.',
-    },
-    {
-      h3: 'SDGs',
-    },
-    {
-      p: 'Find out how we are committed to contributing to the realization of a sustainable society.',
-    },
-    {
-      h3: 'ESG',
-    },
-    {
-      p: 'Find out about our ESG initiatives for sustainable growth.',
-    },
-    {
-      h3: 'Business Overview',
-    },
-    {
-      h3: 'Important Notices',
-    },
-    {
-      p: 'Warning regarding suspicious solicitations using our company name',
-    },
-  ],
-};
-
-export const parsedJson2 = {
-  response: [
-    {
-      h3: 'Solar Pump Inverters for a Rural Area in India\nContributing to Agricultural Development by Utilizing Solar Power Without Waste',
-    },
-    {
-      h2: 'Topics',
-    },
-    {
-      h3: 'Interview about research and development to achieve carbon neutrality through open innovation',
-    },
-    {
-      h3: 'Announcement Regarding Changes to the Management of Subsidiary as of October 1, 2022',
-    },
-    {
-      h3: 'Work on virtual power plant, a key to the spread of renewable energy',
-    },
-    {
-      h3: 'Interview about how we contributing to customers seeking to achieve carbon neutrality',
-    },
-    {
-      h2: 'Global Network',
-    },
-    {
-      p: 'Asia/Middle East Regional Websites',
-    },
-    {
-      h2: 'Regional Websites',
-    },
-    {
-      p: 'Hong Kong',
-    },
-    {
-      h2: 'Products & Solutions',
-    },
-    {
-      p: 'Food and Beverage Distribution',
-    },
-    {
-      p: 'Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Multipurpose Vending Machine Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
-    },
-    {
-      h2: 'News Release',
-    },
-    {
-      p: 'Learn More',
-    },
-    {
-      h2: 'Notice',
-    },
-    {
-      p: 'Learn More',
-    },
-    {
-      h3: 'Stories',
-    },
-    {
-      p: "Introducing Fuji Electric's efforts to solve social and environmental issues.",
-    },
-    {
-      h3: 'Group Companies',
-    },
-    {
-      p: 'Find Fuji Electric group companies nearest to you.',
-    },
-    {
-      h3: 'Research & Development',
-    },
-    {
-      p: 'Discover how we innovate energy technjology.',
-    },
-    {
-      h3: 'SDGs',
-    },
-    {
-      p: 'Find out how we are committed to contributing to the realization of a sustainable society.',
-    },
-    {
-      h3: 'ESG',
-    },
-    {
-      p: 'Find out about our ESG initiatives for sustainable growth.',
-    },
-    {
-      h3: 'Business Overview',
-    },
-    {
-      h3: 'Important Notices',
-    },
-    {
-      p: 'Warning regarding suspicious solicitations using our company name',
-    },
-  ],
-};
-
+export const parsedJson1 = [
+  { h3: 'What is a fish?' },
+  {
+    p: 'A fish is any of approximately 34,000 species of vertebrate animals. The term fish is applied to a variety of vertebrates of several evolutionary lines. It describes a life-form rather than a taxonomic group.',
+  },
+  { p: 'What is a fish?' },
+  { h3: 'How do fish sleep?' },
+  {
+    p: 'When a fish sleeps, it exists in a seemingly listless state in which the fish maintains its balance but moves slowly. If attacked or disturbed, most fish can dart away. A few kinds of fish lie on the bottom to sleep. Most fish do not have eyelids, so they cannot close their eyes to sleep.',
+  },
+  { h3: 'How do fish hear?' },
+  {
+    p: 'The organs of hearing in fish are entirely internal, located within the skull, on each side of the brain, and somewhat behind the eyes. Sound waves, especially those of low frequencies, travel readily through water and impinge directly upon the bones and fluids of the head and body to be transmitted to the hearing organs. fish, any of approximately 34,000 species of vertebrate animals (phylum Chordata ) found in the fresh and salt waters of the world. Living species range from the primitive jawless lampreys and hagfishes through the cartilaginous sharks, skates, and rays to the abundant and diverse bony fishes. Most fish species are cold-blooded ; however, one species, the opah ( Lampris guttatus ), is warm-blooded. The term fish is applied to a variety of vertebrates of several evolutionary lines. It describes a life-form rather than a taxonomic group. As members of the phylum Chordata, fish share certain features with other vertebrates. These features are gill slits at some point in the life cycle, a notochord, or skeletal supporting rod, a dorsal hollow nerve cord, and a tail. Living fishes represent some five classes, which are as distinct from one another as are the four classes of familiar air-breathing animals— amphibians, reptiles, birds, and mammals. For example, the jawless fishes (Agnatha) have gills in pouches and lack limb girdles. Extant agnathans are the lampreys and the hagfishes. As the name implies, the skeletons of fishes of the class Chondrichthyes (from chondr, “cartilage,” and ichthyes, “fish”) are made entirely of cartilage. Modern fish of this class lack a swim bladder, and their scales and teeth are made up of the same placoid material. Sharks, skates, and rays are examples of cartilaginous fishes. The bony fishes are by far the largest class. Examples range from the tiny seahorse to the 450-kg (1,000-pound) blue marlin, from the flattened soles and flounders to the boxy puffers and ocean sunfishes. Unlike the scales of the cartilaginous fishes, those of bony fishes, when present, grow throughout life and are made up of thin overlapping plates of bone. Bony fishes also have an operculum that covers the gill slits. The study of fishes, the science of ichthyology, is of broad importance. Fishes are of interest to humans for many reasons, the most important being their relationship with and dependence on the environment. A more obvious reason for interest in fishes is their role as a moderate but important part of the world’s food supply. This resource, once thought unlimited, is now realized to be finite and in delicate balance with the biological, chemical, and physical factors of the aquatic environment. Overfishing, pollution, and alteration of the environment are the chief enemies of proper fisheries management, both in fresh waters and in the ocean. (For a detailed discussion of the technology and economics of fisheries, see commercial fishing.) Another practical reason for studying fishes is their use in disease control. As predators on mosquito larvae, they help curb malaria and other mosquito-borne diseases. Fishes are valuable laboratory animals in many aspects of medical and biological research. For example, the readiness of many fishes to acclimate to captivity has allowed biologists to study behaviour, physiology, and even ecology under relatively natural conditions. Fishes have been especially important in the study of animal behaviour, where research on fishes has provided a broad base for the understanding of the more flexible behaviour of the higher vertebrates. The zebra fish is used as a model in studies of gene expression. There are aesthetic and recreational reasons for an interest in fishes. Millions of people keep live fishes in home aquariums for the simple pleasure of observing the beauty and behaviour of animals otherwise unfamiliar to them. Aquarium fishes provide a personal challenge to many aquarists, allowing them to test their ability to keep a small section of the natural environment in their homes. Sportfishing is another way of enjoying the natural environment, also indulged in by millions of people every year. Interest in aquarium fishes and sportfishing supports multimillion-dollar industries throughout the world.',
+  },
+  { p: 'Britannica Quiz Deadliest Animals Quiz' },
+  { h2: 'Structural diversity' },
+  {
+    p: 'Fishes have been in existence for more than 450 million years, during which time they have evolved repeatedly to fit into almost every conceivable type of aquatic habitat. In a sense, land vertebrates are simply highly modified fishes: when fishes colonized the land habitat, they became tetrapod (four-legged) land vertebrates. The popular conception of a fish as a slippery, streamlined aquatic animal that possesses fins and breathes by gills applies to many fishes, but far more fishes deviate from that conception than conform to it. For example, the body is elongate in many forms and greatly shortened in others; the body is flattened in some (principally in bottom-dwelling fishes) and laterally compressed in many others; the fins may be elaborately extended, forming intricate shapes, or they may be reduced or even lost; and the positions of the mouth, eyes, nostrils, and gill openings vary widely. Air breathers have appeared in several evolutionary lines. Get a Britannica Premium subscription and gain access to exclusive content. Many fishes are cryptically coloured and shaped, closely matching their respective environments; others are among the most brilliantly coloured of all organisms, with a wide range of hues, often of striking intensity, on a single individual. The brilliance of pigments may be enhanced by the surface structure of the fish, so that it almost seems to glow. A number of unrelated fishes have actual light -producing organs. Many fishes are able to alter their coloration —some for the purpose of camouflage, others for the enhancement of behavioral signals. Fishes range in adult length from less than 10 mm (0.4 inch) to more than 20 metres (60 feet) and in weight from about 1.5 grams (less than 0.06 ounce) to many thousands of kilograms. Some live in shallow thermal springs at temperatures slightly above 42 °C (100 °F), others in cold Arctic seas a few degrees below 0 °C (32 °F) or in cold deep waters more than 4,000 metres (13,100 feet) beneath the ocean surface. The structural and, especially, the physiological adaptations for life at such extremes are relatively poorly known and provide the scientifically curious with great incentive for study.',
+  },
+];
+export const parsedJson2 = [
+  { h3: 'What is a fish?' },
+  {
+    p: 'A fish is any of approximately 34,000 species of vertebrate animals. The term fish is applied to a variety of vertebrates of several evolutionary lines. It describes a life-form rather than a taxonomic group.',
+  },
+  { p: 'What is a fish?' },
+  { h3: 'How do fish sleep?' },
+  {
+    p: 'When a fish sleeps, it exists in a seemingly listless state in which the fish maintains its balance but moves slowly. If attacked or disturbed, most fish can dart away. A few kinds of fish lie on the bottom to sleep. Most fish do not have eyelids, so they cannot close their eyes to sleep.',
+  },
+  { h3: 'How do fish hear?' },
+  {
+    p: 'The organs of hearing in fish are entirely internal, located within the skull, on each side of the brain, and somewhat behind the eyes. Sound waves, especially those of low frequencies, travel readily through water and impinge directly upon the bones and fluids of the head and body to be transmitted to the hearing organs. fish, any of approximately 34,000 species of vertebrate animals (phylum Chordata ) found in the fresh and salt waters of the world. Living species range from the primitive jawless lampreys and hagfishes through the cartilaginous sharks, skates, and rays to the abundant and diverse bony fishes. Most fish species are cold-blooded ; however, one species, the opah ( Lampris guttatus ), is warm-blooded. The term fish is applied to a variety of vertebrates of several evolutionary lines. It describes a life-form rather than a taxonomic group. As members of the phylum Chordata, fish share certain features with other vertebrates. These features are gill slits at some point in the life cycle, a notochord, or skeletal supporting rod, a dorsal hollow nerve cord, and a tail. Living fishes represent some five classes, which are as distinct from one another as are the four classes of familiar air-breathing animals— amphibians, reptiles, birds, and mammals. For example, the jawless fishes (Agnatha) have gills in pouches and lack limb girdles. Extant agnathans are the lampreys and the hagfishes. As the name implies, the skeletons of fishes of the class Chondrichthyes (from chondr, “cartilage,” and ichthyes, “fish”) are made entirely of cartilage. Modern fish of this class lack a swim bladder, and their scales and teeth are made up of the same placoid material. Sharks, skates, and rays are examples of cartilaginous fishes. The bony fishes are by far the largest class. Examples range from the tiny seahorse to the 450-kg (1,000-pound) blue marlin, from the flattened soles and flounders to the boxy puffers and ocean sunfishes. Unlike the scales of the cartilaginous fishes, those of bony fishes, when present, grow throughout life and are made up of thin overlapping plates of bone. Bony fishes also have an operculum that covers the gill slits. The study of fishes, the science of ichthyology, is of broad importance. Fishes are of interest to humans for many reasons, the most important being their relationship with and dependence on the environment. A more obvious reason for interest in fishes is their role as a moderate but important part of the world’s food supply. This resource, once thought unlimited, is now realized to be finite and in delicate balance with the biological, chemical, and physical factors of the aquatic environment. Overfishing, pollution, and alteration of the environment are the chief enemies of proper fisheries management, both in fresh waters and in the ocean. (For a detailed discussion of the technology and economics of fisheries, see commercial fishing.) Another practical reason for studying fishes is their use in disease control. As predators on mosquito larvae, they help curb malaria and other mosquito-borne diseases. Fishes are valuable laboratory animals in many aspects of medical and biological research. For example, the readiness of many fishes to acclimate to captivity has allowed biologists to study behaviour, physiology, and even ecology under relatively natural conditions. Fishes have been especially important in the study of animal behaviour, where research on fishes has provided a broad base for the understanding of the more flexible behaviour of the higher vertebrates. The zebra fish is used as a model in studies of gene expression. There are aesthetic and recreational reasons for an interest in fishes. Millions of people keep live fishes in home aquariums for the simple pleasure of observing the beauty and behaviour of animals otherwise unfamiliar to them. Aquarium fishes provide a personal challenge to many aquarists, allowing them to test their ability to keep a small section of the natural environment in their homes. Sportfishing is another way of enjoying the natural environment, also indulged in by millions of people every year. Interest in aquarium fishes and sportfishing supports multimillion-dollar industries throughout the world.',
+  },
+  {
+    p: 'Britannica Quiz 36 Questions from Britannica’s Most Popular Science Quizzes',
+  },
+  { h2: 'Structural diversity' },
+  {
+    p: 'Fishes have been in existence for more than 450 million years, during which time they have evolved repeatedly to fit into almost every conceivable type of aquatic habitat. In a sense, land vertebrates are simply highly modified fishes: when fishes colonized the land habitat, they became tetrapod (four-legged) land vertebrates. The popular conception of a fish as a slippery, streamlined aquatic animal that possesses fins and breathes by gills applies to many fishes, but far more fishes deviate from that conception than conform to it. For example, the body is elongate in many forms and greatly shortened in others; the body is flattened in some (principally in bottom-dwelling fishes) and laterally compressed in many others; the fins may be elaborately extended, forming intricate shapes, or they may be reduced or even lost; and the positions of the mouth, eyes, nostrils, and gill openings vary widely. Air breathers have appeared in several evolutionary lines. Get a Britannica Premium subscription and gain access to exclusive content. Many fishes are cryptically coloured and shaped, closely matching their respective environments; others are among the most brilliantly coloured of all organisms, with a wide range of hues, often of striking intensity, on a single individual. The brilliance of pigments may be enhanced by the surface structure of the fish, so that it almost seems to glow. A number of unrelated fishes have actual light -producing organs. Many fishes are able to alter their coloration —some for the purpose of camouflage, others for the enhancement of behavioral signals. Fishes range in adult length from less than 10 mm (0.4 inch) to more than 20 metres (60 feet) and in weight from about 1.5 grams (less than 0.06 ounce) to many thousands of kilograms. Some live in shallow thermal springs at temperatures slightly above 42 °C (100 °F), others in cold Arctic seas a few degrees below 0 °C (32 °F) or in cold deep waters more than 4,000 metres (13,100 feet) beneath the ocean surface. The structural and, especially, the physiological adaptations for life at such extremes are relatively poorly known and provide the scientifically curious with great incentive for study.',
+  },
+];
 export const parsedChanges1 = [
   [
     '+',

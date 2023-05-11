@@ -32,7 +32,7 @@ const Step2 = (props: Props) => {
     []
   );
   const handleSelectCompetitor = (competitorKey: number) => {
-    console.log('trying to udpate selected competitors')
+    // console.log('trying to udpate selected competitors')
     setSelectedCompetitors((prevSelectedCompetitors: any) =>
       prevSelectedCompetitors.includes(competitorKey)
         ? prevSelectedCompetitors.filter((key: number) => key !== competitorKey)
@@ -41,7 +41,7 @@ const Step2 = (props: Props) => {
 
   };
 
- 
+ console.log(queryResult, 'queryResult')
 
   const handleSave = async () => {
     const filteredQuery = queryResult.filter((item: queryResult) => {
@@ -77,7 +77,7 @@ const Step2 = (props: Props) => {
         customCompetitors: filteredCustomCompetitors,
       }),
     });
-console.log(response)
+// console.log(queryResult, 'queryResult')
     setPage(PageView.DASHBOARD);
   };
   return (

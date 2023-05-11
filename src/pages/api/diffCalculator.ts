@@ -49,7 +49,7 @@ export default async function handler(
           q: query.query_name,
           max_page: maxPage,
           google_domain: query.google_domain?.toLocaleLowerCase(),
-          gl: query.country?.toLocaleLowerCase,
+          gl: query.country?.toLocaleLowerCase(),
           device: query.is_pc === true ? 'desktop' : 'mobile',
         };
 
@@ -59,23 +59,28 @@ export default async function handler(
             params,
           });
         } catch (error) {
+          // console.log(error)
           return [null];
         }
         // print the JSON response from VALUE SERP
         const topResults = response?.data.organic_results.slice(0, maxResults);
-        // console.log('heelo')
-        // console.log('heelo');
         competitors.map(async (competitor, index) => {
           if (competitor.query_id === query.id) {
+            let isChanged = false;
+            // console.log("found matching query")
             competitor.last_position = competitor.current_position;
-            //check if competitor.link in  top results
+            console.log(competitor.last_position, 'last position');
             topResults.forEach((result: any) => {
               if (result.link === competitor.link) {
-                // console.log(competitor.domain);
-                // console.log(result.position_overall, 'overall ppoopy');
                 competitor.current_position = result.position_overall;
+                isChanged = true;
+                return;
               }
             });
+            if (isChanged === false) {
+              competitor.current_position = 10;
+            }
+            
           }
         });
 
@@ -83,7 +88,6 @@ export default async function handler(
       })
     );
 
-    // console.log(competitors.length, 'length');
     const changedContentArray = await Promise.all(
       competitors.map(async (competitor) => {
         const post_array = [];
@@ -112,18 +116,7 @@ export default async function handler(
         }
       })
     );
-    // console.log('first tutti');
-    changedContentArray.forEach((item, index) => {
-      //   console.log(index, item?.[0]?.data.url);
-    });
 
-    // console.log('later tutti');
-    competitors.forEach((competitor, index) => {
-      //   console.log(index, competitor.link);
-    });
-
-    // console.log('eh')
-    // console.log(changedContentArray, 'changedContentArray')
     const currentContentArray: Prisma.NullableJsonNullValueInput[] = [];
 
     const filteredContentArray = changedContentArray.map((item, index) => {
@@ -131,11 +124,6 @@ export default async function handler(
         item?.[0]?.result?.[0]?.items?.[0]?.page_content?.main_topic
       );
       if (parsedContent === null) {
-        // console.log(index, 'index')
-        // console.log(changedContentArray[index]?.[0]?.data.url)
-        // console.log(item?.[0]?.result?.[0]?.items?.[0]?.page_content?.main_topic)
-        // console.log('oh no ');
-        // console.log(parsedContent);
         return [];
       }
 
@@ -143,12 +131,7 @@ export default async function handler(
       return filterResponse(parsedContent);
     });
     // console.log('hello')
-    // console.log(filteredContentArray, 'meri maa idhr dekhu')
-    // console.log(filteredContentArray[0], 'meri maa idhr dekhu')
-    // console.log(competitors[0]?.current_content, 'teri maa idhr dekhu')
-    // console.log(filteredContentArray.length, 'filteredContentArray');
 
-    //do a diff on the content and return the diff
     const diffArray: Prisma.NullableJsonNullValueInput[] = [];
     const changesCountArray: number[] = [];
     const percentageChangedContentArray: number[] = [];
@@ -156,54 +139,34 @@ export default async function handler(
     let poop2;
     let poop3;
     for (let i = 0; i < filteredContentArray.length; i++) {
-      if (competitors[i]?.link === 'https://www.britannica.com/animal/fish') {
-        console.log(filteredContentArray[i], 'filteredContentArray[i]');
-        poopy = filteredContentArray[i];
-        poop2 = competitors[i]?.current_content;
-        console.log(
-          competitors[i]?.current_content,
-          'competitors[i]?.current_content'
-        );
-      }
       const diffObject = filterResponse(
         diff(filteredContentArray[i], competitors[i]?.current_content)
       );
 
       diffArray.push(diffObject);
-      // console.log('peechay')
       if (diffObject !== undefined && diffObject !== null) {
         const changesCount = Object.keys(diffObject).length;
         changesCountArray.push(changesCount);
 
-        //   console.log('hey')
-        if (
-          competitors[i]?.current_content !== null &&
-          Array.isArray(competitors?.[i]?.changed_content)
-        ) {
-          //   const percentageChangedContent =
-          //     (diffArray[i].length / competitors[i].current_content.length) * 100;
-          const percentageChangedContent = 0;
-          percentageChangedContentArray.push(
-            Math.round(percentageChangedContent)
-          );
-          //   console.log('teri amma');
-        } else {
-          const percentageChangedContent = 0;
-          percentageChangedContentArray.push(percentageChangedContent);
-        }
+        const diffLength = diffArray[i]?.length ?? 0;
+        const currentContentLength =
+          competitors[i]?.current_content?.length ?? 0;
+
+        const percentageChangedContent =
+          (diffLength / currentContentLength) * 100;
+
+        // const percentageChangedContent = 0;
+        percentageChangedContentArray.push(
+          Math.round(percentageChangedContent)
+        );
       } else {
         changesCountArray.push(0);
         percentageChangedContentArray.push(0);
       }
     }
 
-    // console.log('this is the diff array', diffArray, 'diffArray[0]')
-    // console.log(diffArray.length, 'diffArray');
-    //update the changed content in the database using promise.all
     const content_response = await Promise.all(
       competitors.map(async (competitor, index) => {
-        // console.log(competitor.current_content, 'competitor.current_content');
-        // console.log(currentContentArray[index], 'currentContentArray[index]');
         const updatedCompetitor = await prisma.competitor.update({
           where: {
             id: competitor.id,
@@ -213,7 +176,11 @@ export default async function handler(
               diffArray[index] === undefined || null ? [] : diffArray[index],
             current_content: currentContentArray[index],
             changes_detected: changesCountArray[index],
-            // content_changed: percentageChangedContentArray[index],
+            content_changed: Number.isInteger(
+              percentageChangedContentArray[index]
+            )
+              ? percentageChangedContentArray[index]
+              : 0,
             current_position: competitor.current_position,
             last_position: competitor.last_position,
           },
@@ -238,13 +205,7 @@ export default async function handler(
     );
 
     res.status(200).json({
-      // response: response[0].result[0].items[0].page_content.secondary_topic,
-      //   tasks_ready: tasks_ready,
-      //   content_response: content_response,
-      //   content_response,
-      poopy,
-      poop2,
-      poop3,
+      content_response,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {

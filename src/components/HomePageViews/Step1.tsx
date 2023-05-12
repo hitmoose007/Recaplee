@@ -30,7 +30,7 @@ const Step1 = (props: Props) => {
         />
       </div>
 
-      <div className="rounded-[30px]  bg-[#EEF6FF] md:mt-4 md:px-10 md:py-4">
+      <div className="rounded-[30px]  bg-[#EEF6FF] mt-4 px-10 py-4">
         {isLoading && (
           <div className="mb-8 grid grid-cols-2 space-y-8">
             {[...Array(8)].map((__, index) => (

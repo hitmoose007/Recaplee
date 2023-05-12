@@ -7,7 +7,7 @@ type Props = {
 //hardcoded query name
 const QueryHeader = ({ isCompetitor , highlightedText }: Props) => {
   return (
-    <div className="flex ">
+    <div className="flex flex-col md:flex-row">
       {!isCompetitor ? (
         <Header
           svgPath="/headerIcons/cameraIcon.svg"

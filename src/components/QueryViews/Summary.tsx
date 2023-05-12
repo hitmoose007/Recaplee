@@ -42,14 +42,14 @@ const Summary = ({ setCompetitorAnalysed, querySummary, competitorArray }: Props
         <ChangesBanner querySummary={querySummary} />
       </div>
 
-      <div className="md:mt-8">
+      <div className="mt-8">
         <Header
           svgPath="/headerIcons/pieIcon.svg"
           description="Query Competitor Analysis"
         />
       </div>
       <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
-      <div className="mt-4 flex flex-col rounded-[30px] bg-customBlue md:space-y-3 md:px-8 md:py-4">
+      <div className="mt-4 flex flex-col rounded-[30px] bg-customBlue space-y-3 px-8 py-4">
         {competitorArray.map((competitor) => {
           if (querySummary) {
             return (

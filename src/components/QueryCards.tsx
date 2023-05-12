@@ -16,7 +16,7 @@ const QueryCards = ({
   lastUpdate,
 }: Props) => {
   return (
-      <div className="flex flex-col items-center  justify-between rounded-[30px] bg-white hover:cursor-pointer hover:brightness-95 md:h-[160px] md:w-[180px] md:p-3">
+      <div className="flex flex-col items-center  my-6 mx-auto md:mx-none justify-between rounded-[30px] bg-white hover:cursor-pointer hover:brightness-95    h-[160px] w-[180px] p-3">
         <ReactCountryFlag
           countryCode={countryCode}
           svg

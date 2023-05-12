@@ -17,7 +17,7 @@ console.log(domain, ' this is domain');
   const onChange = (code: string) => setDomain(code);
   return (
     <Listbox value={domain} onChange={onChange}>
-      <div className={`relative w-[192px] ${page ===PageView.STEP2VIEW && "text-customPurple font-bold "}`}>
+      <div className={`relative  ${page ===PageView.STEP2VIEW && "text-customPurple font-bold "}`}>
         <Listbox.Button className=" relative w-full cursor-default rounded-full bg-white px-4  py-[6px] ">
           <div className="flex space-x-2">
             <Image
@@ -40,7 +40,7 @@ console.log(domain, ' this is domain');
               <Listbox.Option
                 key={key}
                 className={({ active }) =>
-                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                  `relative cursor-default  select-none py-2 pl-10 pr-4 ${
                     active ? 'bg-customBlue' : 'text-gray-900'
                   }`
                 }

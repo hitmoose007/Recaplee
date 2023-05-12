@@ -60,7 +60,6 @@ const Step2 = (props: Props) => {
       }
     );
 
-    console.log(filteredCustomCompetitors);
     // console.log(filteredCustomCompetitors);
    const response =  await fetch('/api/saveQuery', {
       method: 'POST',
@@ -101,7 +100,7 @@ const Step2 = (props: Props) => {
           description={`Click the box to select or deselect a competitor that you want to monitor: we will inform you of any change in the content and SERP position!`}
         />
       </div>
-      <div className="rounded-[30px] bg-[#EEF6FF] text-[#4B5563] md:mt-4 md:px-10 md:py-4">
+      <div className="rounded-[30px] bg-[#EEF6FF] text-[#4B5563]  mt-4 px-10 py-4">
         <div className="flex justify-between">
           <div>
             <span className="font-bold  ">
@@ -109,12 +108,12 @@ const Step2 = (props: Props) => {
             </span>
             competitors selected
           </div>
-          <div>
+          <div className="md:block hidden">
             <SaveButton handleSave={handleSave} />
           </div>
         </div>
 
-        <div className="grid md:mt-10 md:grid-cols-2 md:gap-x-14 md:gap-y-6">
+        <div className="md:grid  flex-col space-y-4 md:space-y-0 md:flex-none  mt-10 md:grid-cols-2 md:gap-x-14 md:gap-y-6">
           {queryResult?.map((competitor: queryResult) => {
             return (
               <CompetitorCard

@@ -12,7 +12,7 @@ type Props = {
 const QueryBanner = ({ querySummary, competitorAnalysed }: Props) => {
   const { page } = useContext(PageContext);
   return (
-    <div className="flex rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">
+    <div className="lg:flex hidden rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">
       {page === PageView.SUMMARYVIEW && (
         <>
           <ChangeCard

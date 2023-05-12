@@ -87,13 +87,13 @@ const CompetitorCard = ({
           : 'border-[3px] border-transparent'
       }`}
     >
-      <div className="flex  md:space-x-10 md:px-6 md:py-3 ">
+      <div className="flex  space-x-10 px-6 py-3 ">
         <p className="text-[20px] font-bold text-[#705CF6]">
           {customCompetitor ? '#' : position}
         </p>
         <div className="flex w-full flex-col">
           <div className="flex justify-between ">
-            <p className="text-[20px] font-bold text-[#705CF6]">{domain}</p>
+            <p className="text-[20px] font-bold text-[#705CF6] truncate">{domain}</p>
             {customCompetitor && (
               <Image
                 onClick={() => {
@@ -119,7 +119,7 @@ const CompetitorCard = ({
               href={link}
               className=" cursor-pointer text-clip text-sm hover:underline "
             >
-              <span className=" md:mr-2  "> {link}</span>
+              <span className=" mr-2  "> {link}</span>
             </a>
             <a
               href={link}

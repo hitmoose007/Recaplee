@@ -14,12 +14,12 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   //   const [parsedChanges, setParsedChanges] = useState<string[][]>([]);
   return (
     <>
-      <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue text-sm md:px-4 md:py-20">
+      <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue text-sm px-4 py-16">
         {competitorAnalysed.changed_content?.map((change, index) => {
           if (change[0] === '-') {
             const removedChange = printTagIfExists(change);
             return (
-              <div key={index} className="flex space-x-20">
+              <div key={index} className="flex space-x-8 md:space-x-20">
                 <div
                   className={`pointer-events-none w-full rounded-[30px] bg-white  p-2    text-sm font-bold text-customRed md:space-x-4  md:space-y-4 `}
                 >
@@ -39,7 +39,7 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
           if (change[0] === '+') {
             const removedChange = printTagIfExists(change);
             return (
-              <div key={index} className="flex space-x-20">
+              <div key={index} className="flex space-x-8 md:space-x-20">
                 <div
                   className={` pointer-events-none  w-full rounded-[30px] bg-[#E0E8F0]  p-2    text-sm font-bold  md:space-x-4  md:space-y-4 `}
                 >
@@ -70,7 +70,7 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
 
             dmp.diff_cleanupSemantic(response);
             return (
-              <div key={index} className="flex space-x-20">
+              <div key={index} className="flex  space-x-8 md:space-x-20">
                 <div
                   className={` pointer-events-none w-1/2 rounded-[30px] bg-white  p-2    text-sm font-bold   `}
                 >

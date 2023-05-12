@@ -53,7 +53,7 @@ const CompetitorAnalysis = ({ querySummary, competitorAnalysed }: Props) => {
       </div>
 
       {showExpandedView &&  (
-        <div className="flex md:mt-8  md:space-x-12 ">
+        <div className="flex mt-8  space-x-12 ">
           <ExpandedView querySummary={querySummary}  competitorAnalysed={competitorAnalysed}/>
           {/* <ExpandedCard isRemoved={true} />
         <ExpandedCard isRemoved={false} /> */}

@@ -73,25 +73,25 @@ const NewQueryForm = ({setIsLoading}: Props) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex items-center justify-between rounded-[30px] bg-[#EEF6FF]  md:mt-4 md:h-[125px] md:px-10 md:pt-4">
-        <div className="flex md:space-x-10">
-          <div className=" flex-col  md:space-y-2">
+      <div className="flex flex-col space-y-8 md:space-y-0  md:flex-row items-center  md: justify-between rounded-[30px] bg-[#EEF6FF]  mt-4 md:h-[125px] md:px-10 pt-4">
+        <div className="flex md:flex-row flex-col  lg:space-x-6 xl:space-x-10">
+          <div className=" flex-col min-w-[140px] space-y-2">
             <p>Type the query:</p>
             <input
               onChange={(e) =>
                 setFormState({ ...formState, query: e.target.value })
               }
               type="text"
-              className="rounded-full md:h-[34px] md:w-[245px] md:pl-4 focus:outline-none "
+              className="rounded-full h-[34px]   w-full pl-4 focus:outline-none "
             />
           </div>
 
-          <div className="md:space-y-2 ">
-            <p>Select Search Engine:</p>
+          <div className="space-y-2 z-50 md:z-auto  ">
+            <p className="truncate ">Select Search Engine:</p>
           
             <DomainSelect domain={formState.countryDomain} setDomain={handleDomainChange}/>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 ">
             <p>Select Country:</p>
             <CountrySelect
               country={formState.country}
@@ -106,7 +106,7 @@ const NewQueryForm = ({setIsLoading}: Props) => {
                 onClick={() => setFormState({ ...formState, isPC: true })}
                 className={` ${
                   formState.isPC ? 'border-[3px] border-[#705CF6]' : 'border-[3px] border-transparent'
-                } flex cursor-pointer items-center space-x-2 rounded-l-full bg-white hover:brightness-95 md:px-3 md:py-1`}
+                } flex cursor-pointer items-center space-x-2 rounded-l-full bg-white hover:brightness-95 px-3 py-1`}
               >
                 <Image
                   src="landscapeIcons/pcIcon.svg"
@@ -114,7 +114,7 @@ const NewQueryForm = ({setIsLoading}: Props) => {
                   height={25}
                   alt="mobileIcon"
                 />
-                <span>PC</span>
+                <span className="truncate">PC</span>
               </div>
               <div
                 onClick={() => setFormState({ ...formState, isPC: false })}
@@ -128,26 +128,26 @@ const NewQueryForm = ({setIsLoading}: Props) => {
                   height={25}
                   alt="mobileIcon"
                 />
-                <p>Mobile</p>
+                <p className='truncate'>Mobile</p>
               </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col items-center">
-          <div className="text-[#4B5563] md:-mt-8 md:mb-3">
-            <span className="font-semibold ">5/20</span> monthly query
+          <div className="text-[#4B5563] -mt-8 mb-3 md:hidden lg:block lg:truncate  ">
+            <span className="font-semibold  ">5/20</span> monthly query
             researches used
           </div>
           <button
             type="submit"
-            className="flex cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] font-bold text-white hover:brightness-90  md:px-12 md:py-2"
+            className="flex cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] font-bold text-white hover:brightness-90  px-12 py-2"
           >
             <Image
               src="/landscapeIcons/simpleGlass.svg"
               width={20}
               height={29}
               alt=""
-              className="mt-[2px] md:-ml-8"
+              className="mt-[2px] -ml-8"
             />
             <p>Analyse</p>
           </button>

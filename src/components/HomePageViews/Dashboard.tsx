@@ -62,10 +62,11 @@ const Home = (props: Props) => {
         description={`These are the queries that are currently monitored. We will analyze and report to you the changes that have been made on your competitors’ website.`}
       />
 
-      <div className="flex-wrap rounded-[30px] bg-[#EEF6FF] md:mt-4  md:flex  md:space-x-8 md:space-y-5 md:py-4">
+      <div className="md:flex-wrap flex-col   md:flex-row rounded-[30px] bg-[#EEF6FF] mt-4 md:px-0   md:flex md:w-auto md:space-x-8 md:space-y-5 py-4">
+        
         <Image
           onClick={() => setPage(PageView.STEP1VIEW)}
-          className="cursor-pointer hover:brightness-50 md:ml-8 md:mt-5"
+          className="cursor-pointer hover:brightness-50 md:mx-0 mx-auto md:ml-8 md:mt-5"
           width={180}
           height={160}
           src="/landscapeIcons/addNewBigIcon.svg"
@@ -73,9 +74,11 @@ const Home = (props: Props) => {
         />
 
         {Array.isArray(queryArray) &&
-          queryArray.map((query: Query) => {
+          queryArray.map((query: Query,index) => {
             return (
-              <Link href={`/querySummary/${query.id}`}>
+              <Link
+              key={index}
+               href={`/querySummary/${query.id}`}>
                 <QueryCards
                   key={query.id}
                   queryTitle={query.query_name || ''}
@@ -91,7 +94,7 @@ const Home = (props: Props) => {
             );
           })}
       </div>
-      <div className="flex justify-between  md:mt-6">
+      <div className="flex md:flex-row  flex-col justify-between  mt-6">
         <div>
           <Header
             svgPath="headerIcons/bookIcon.svg"
@@ -100,8 +103,8 @@ const Home = (props: Props) => {
           <div className="mt-1">
             <HelperHeader description="In this page you will be able to add new queries or check for any update!" />
           </div>
-          <div className="flex  flex-col rounded-[30px] bg-[#EEF6FF] text-customGray md:mt-8 md:w-[61vw] md:p-4 md:py-8">
-            <div className="flex items-start space-x-4 md:mb-6 ">
+          <div className="flex  flex-col rounded-[30px] bg-[#EEF6FF] text-customGray mt-8 md:w-[61vw] p-4 py-8">
+            <div className="flex items-start space-x-4 mb-6  ">
               <Image
                 width={12}
                 height={25}
@@ -143,7 +146,7 @@ const Home = (props: Props) => {
               </div>
             </div>
 
-            <div className="flex items-start space-x-4 md:mb-6">
+            <div className="flex items-start space-x-4 mb-6">
               <Image
                 width={17}
                 height={25}
@@ -195,16 +198,16 @@ const Home = (props: Props) => {
             </div>
           </div>
         </div>
-        <div className="">
+        <div className="mt-4 md:mt-0 ">
           <Header
             svgPath="headerIcons/bookIcon.svg"
             description="Contact & Notifications"
           />
-          <div className="mt-1">
+          <div className="md:mt-1">
             <HelperHeader description="Set your notification preferences or contact us" />
           </div>
-          <div className="flex  w-[30vw]   flex-col text-customGray ">
-            <div className="rounded-[30px] bg-[#EEF6FF] md:mt-8 md:p-6">
+          <div className="flex md:mt-0 md:w-[30vw]   flex-col text-customGray ">
+            <div className="rounded-[30px] bg-[#EEF6FF] mt-8 p-6">
               <p>
                 If you do not want to receive any email notification about the
                 new updates found for your queries, you can disable it from
@@ -226,7 +229,7 @@ const Home = (props: Props) => {
                 />
               </div>
             </div>
-            <div className="rounded-[30px] bg-[#EEF6FF] text-center md:mt-8 md:p-8">
+            <div className="rounded-[30px] bg-[#EEF6FF] text-center mt-8 p-8">
               <p>
                 Do you need help or you found a bug?
                 <br /> Contact us by writing to:

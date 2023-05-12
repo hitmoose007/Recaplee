@@ -40,7 +40,7 @@ const CustomCompetitorInput = ({
   
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="md:flex md:flex-col items-center justify-center hidden ">
       <Image
         src="/competitorBorder.svg"
         width={1000}

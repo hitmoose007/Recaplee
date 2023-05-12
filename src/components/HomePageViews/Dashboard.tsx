@@ -6,7 +6,7 @@ import { useState, useEffect, useContext } from 'react';
 import QueryCards from '../QueryCards';
 import Image from 'next/image';
 import Toggle from 'react-toggle';
-
+import { useRouter } from 'next/router';
 import 'react-toggle/style.css';
 
 import { PageView } from '@/utils/enums';
@@ -14,7 +14,7 @@ import { PageContext } from '@/context/PageContext';
 import Link from 'next/link';
 type Props = {};
 interface Query {
-    id: string;
+  id: string;
   query_name?: string;
   country?: string;
   last_update?: Date;
@@ -26,6 +26,7 @@ const Home = (props: Props) => {
   const [queryArray, setQueryArray] = useState<Query[]>([]);
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
 
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const { page, setPage } = useContext(PageContext);
 
@@ -40,12 +41,12 @@ const Home = (props: Props) => {
         console.error(error);
       }
     };
-
-    if(queryArray.length === 0)
-    {
-        setIsLoading(false);
+    setPage(PageView.DASHBOARD);
+    if (queryArray.length === 0) {
+      setIsLoading(false);
     }
     fetchQuery();
+    console.log('inside use effect');
   }, []);
 
   if (isLoading) {
@@ -71,24 +72,24 @@ const Home = (props: Props) => {
           alt="add new query big icon"
         />
 
-        {Array.isArray(queryArray) && queryArray.map((query: Query) => {
-          return (
-            <Link href={`/querySummary/${query.id}`}>
-            <QueryCards
-                key={query.id}
-               
-              queryTitle={query.query_name || ''}
-              countryCode={query.country || ''}
-              competitorsTracked={query.competitors_tracked || 0}
-              lastUpdate={
-                query.last_update
-                  ? new Date(query.last_update).toLocaleDateString()
-                  : ''
-              }
-            />
-            </Link>
-          );
-        })}
+        {Array.isArray(queryArray) &&
+          queryArray.map((query: Query) => {
+            return (
+              <Link href={`/querySummary/${query.id}`}>
+                <QueryCards
+                  key={query.id}
+                  queryTitle={query.query_name || ''}
+                  countryCode={query.country || ''}
+                  competitorsTracked={query.competitors_tracked || 0}
+                  lastUpdate={
+                    query.last_update
+                      ? new Date(query.last_update).toLocaleDateString()
+                      : ''
+                  }
+                />
+              </Link>
+            );
+          })}
       </div>
       <div className="flex justify-between  md:mt-6">
         <div>

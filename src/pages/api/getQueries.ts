@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   try {
 
-    console.log('heasllo')
+    // console.log('heasllo')
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
         id: true,

@@ -3,11 +3,14 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
+import { useRouter } from 'next/router';
+import PageTitle from './PageTitle';
+
 type Props = {};
 
-const Banner = (props: Props) => {
-  const { page } = useContext(PageContext);
-
+const DesktopBanner = (props: Props) => {
+  const { page, setPage } = useContext(PageContext);
+  const router = useRouter();
   return (
     <div
       className="flex h-24 w-full justify-between  rounded-b-2xl text-white"
@@ -17,16 +20,18 @@ const Banner = (props: Props) => {
     >
       <div className="flex items-center">
         <Image
+          onClick={() => {
+            setPage(PageView.DASHBOARD);
+            router.push('/');
+          }}
           quality={100}
           src="/logo.svg"
           alt="logo"
           width={201}
           height={48}
-          className="ml-20 "
+          className="ml-20 hover:cursor-pointer"
         />
-        <div className="text-xl font-bold  text-white md:pl-12">
-          {page === PageView.DASHBOARD ? 'Dashboard' : 'Add New Query'}
-        </div>
+        <PageTitle />
       </div>
 
       <div className="mr-8 flex  items-center justify-between space-x-12 text-sm ">
@@ -72,4 +77,4 @@ const Banner = (props: Props) => {
   );
 };
 
-export default Banner;
+export default DesktopBanner;

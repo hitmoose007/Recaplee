@@ -19,7 +19,7 @@ const Login = () => {
         />
 
       <div className="" style={{ padding: '50px 0 100px 0' }}>
-        {session ? (
+        {!session ? (
           <Auth
             providers={['google']}
             onlyThirdPartyProviders={true}

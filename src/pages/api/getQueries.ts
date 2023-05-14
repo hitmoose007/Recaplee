@@ -1,12 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import {prisma} from "@/lib/db"
+import { prisma } from '@/lib/supabase';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-
     // console.log('heasllo')
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
@@ -15,12 +14,12 @@ export default async function handler(
         country: true,
         recent_update: true,
         competitors_tracked: true,
-        new_changes: true
+        new_changes: true,
       },
       orderBy: {
-        created_at: 'desc'
+        created_at: 'desc',
       },
-      take: 15
+      take: 15,
     });
 
     res.status(200).json(previousQueries);
@@ -32,5 +31,5 @@ export default async function handler(
       // handle error of unknown type
       res.status(500).json({ error: 'Unknown error occurred' });
     }
-  } 
+  }
 }

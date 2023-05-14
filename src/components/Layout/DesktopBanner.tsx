@@ -5,10 +5,14 @@ import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import { useRouter } from 'next/router';
 import PageTitle from './PageTitle';
+import { signOut } from '@/utils/auth';
+import { supabase } from '@/lib/supabase';
+import { useSession } from '@supabase/auth-helpers-react';
 
 type Props = {};
 
 const DesktopBanner = (props: Props) => {
+  const session = useSession();
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
   return (
@@ -60,7 +64,12 @@ const DesktopBanner = (props: Props) => {
             Renewal on <span className="font-bold">12-05-23</span>
           </div>
         </div>
-        <div className="flex justify-center space-x-4">
+        <div
+          onClick={() => {
+            signOut();
+          }}
+          className="flex justify-center space-x-4 hover:cursor-pointer"
+        >
           <p className="text-xl">Logout</p>
 
           <Image

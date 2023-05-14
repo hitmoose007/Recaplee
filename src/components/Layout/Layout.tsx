@@ -20,7 +20,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   const [page, setPage] = useState<PageView>(PageView.DASHBOARD);
 
-  if (session) {
+  if (!session) {
     return <Login />;
   }
   return (

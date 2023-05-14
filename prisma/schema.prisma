@@ -39,3 +39,6 @@ model TargetQuery {
   recent_update       DateTime?    @default(now()) @db.Date
   Competitor          Competitor[]
 }
+
+
+

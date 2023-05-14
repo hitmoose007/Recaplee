@@ -6,6 +6,7 @@ import DesktopBanner from '@/components/Layout/DesktopBanner';
 import MobileBanner from '@/components/Layout/MobileBanner';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
+import {useRouter} from 'next/router'
 const nunito = Nunito({
   subsets: ['cyrillic'],
   variable: '--font-nunito',

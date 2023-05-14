@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Layout from '@/components/Layout/Layout';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
+
 export default function App({ Component, pageProps }: AppProps) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
 

@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase';
-import { SupabaseClient } from '@supabase/supabase-js';
-export async function signIn(supabaseClient: SupabaseClient): Promise<void> {
-  const { error } = await supabaseClient.auth.signInWithOAuth({
+
+export async function signIn(): Promise<void> {
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
   });
   if (error) {
@@ -10,6 +10,6 @@ export async function signIn(supabaseClient: SupabaseClient): Promise<void> {
   }
 }
 export async function signOut(): Promise<void> {
-    console.log('heal')
+  console.log('heal');
   const signOut = await supabase.auth.signOut();
 }

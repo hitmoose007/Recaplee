@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import PageTitle from './PageTitle';
 import { signOut } from '@/utils/auth';
 import { supabase } from '@/lib/supabase';
-import { useSession } from '@supabase/auth-helpers-react';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
 type Props = {};
 
@@ -15,6 +15,8 @@ const DesktopBanner = (props: Props) => {
   const session = useSession();
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
+  const supabase = useSupabaseClient();
+
   return (
     <div
       className="flex h-24 w-full justify-between  rounded-b-2xl text-white"
@@ -65,9 +67,7 @@ const DesktopBanner = (props: Props) => {
           </div>
         </div>
         <div
-          onClick={() => {
-            signOut();
-          }}
+          onClick={() => supabase.auth.signOut()}
           className="flex justify-center space-x-4 hover:cursor-pointer"
         >
           <p className="text-xl">Logout</p>

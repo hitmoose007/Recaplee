@@ -1,9 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from '@/lib/prisma';
 import axios from 'axios';
 import extractDomain from 'extract-domain';
 // import { prisma } from '../../lib/db';
 
-import { PrismaClient } from '@prisma/client';
 const maxPage = 2;
 const maxResults = 10;
 
@@ -12,7 +12,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const prisma = new PrismaClient();
     console.log(req.body);
     // console.log(prisma)
     const filteredQuery = req.body['competitors'];

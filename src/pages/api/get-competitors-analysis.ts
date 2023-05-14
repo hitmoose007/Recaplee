@@ -1,15 +1,11 @@
-
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
         id: true,
@@ -17,12 +13,12 @@ export default async function handler(
         country: true,
         recent_update: true,
         competitors_tracked: true,
-        new_changes: true
+        new_changes: true,
       },
       orderBy: {
-        created_at: 'desc'
+        created_at: 'desc',
       },
-      take: 15
+      take: 15,
     });
 
     res.status(200).json(previousQueries);
@@ -34,5 +30,5 @@ export default async function handler(
       // handle error of unknown type
       res.status(500).json({ error: 'Unknown error occurred' });
     }
-  } 
+  }
 }

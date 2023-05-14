@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import { useRouter } from 'next/router';
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import PageTitle from './PageTitle';
 
 type Props = {};
@@ -11,6 +12,8 @@ type Props = {};
 const DesktopBanner = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
+  const supabase = useSupabaseClient();
+
   return (
     <div
       className="flex h-40 w-full justify-between  rounded-b-2xl text-white"
@@ -45,17 +48,20 @@ const DesktopBanner = (props: Props) => {
         {/* <PageTitle /> */}
       </div>
 
-      <div className="flex-col mt-4 mr-8  flex items-end ">
-          {/* <p className="text-xl">Logout</p> */}
+      <div
+        onClick={()=>supabase.auth.signOut()}
+        className="mr-8 mt-4 flex hover:cursor-pointer flex-col items-end "
+      >
+        {/* <p className="text-xl">Logout</p> */}
 
-          <Image
-            quality={100}
-            src="/logoutIcon.svg"
-            alt="logout icon"
-            width={20}
-            height={20}
-            className=""
-          />
+        <Image
+          quality={100}
+          src="/logoutIcon.svg"
+          alt="logout icon"
+          width={20}
+          height={20}
+          className=""
+        />
         <p className="mr-3 font-bold">Monthly Limits:</p>
         <p>
           <span className="text-[#30A3E4]">10/15 </span> query monitored

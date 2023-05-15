@@ -307,8 +307,9 @@ model users {
 model profiles {
   id                  String        @id @db.Uuid
   email               String        @unique(map: "email_unique")
-  query_monitored     Int?          @db.SmallInt
-  competitors_tracked Int?          @db.SmallInt
+  query_monitored     Int           @default(0) @db.SmallInt
+  competitors_tracked Int           @default(0) @db.SmallInt
+  query_research      Int           @default(0) @db.SmallInt
   TargetQuery         TargetQuery[]
   users               users         @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 

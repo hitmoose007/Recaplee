@@ -1,5 +1,7 @@
 export const maxPage = 3;
 export const maxResults = 10;
+export const maxQueryResearch=30;
+export const maxCompetitors=150;
 
 export function filterResponse(response: any) {
   if (response === undefined || response === null) {

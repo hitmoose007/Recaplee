@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient,Prisma } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -11,12 +11,21 @@ export default async function handler(
     // const id = '02dfe7ac-2708-4312-86bf-2510a710c03b';
     //extract id from req
     //how to extract parameters from req
-     const { id } = req.query;
+    const { id } = req.query;
 
-    const queryResult = await prisma.targetQuery.findFirst({ where: {
+    const queryResult = await prisma.targetQuery.findFirst({
+      where: {
         id: id as Prisma.UuidFilter,
       },
     });
+
+    //check if query match user id
+    if (queryResult?.user_id !== req.cookies.userId) {
+      res.status(403).json({
+        error: `You don't have permission to access this query.`,
+      });
+      return;
+    }
 
     const competitorsResult = await prisma.competitor.findMany({
       where: {
@@ -25,13 +34,13 @@ export default async function handler(
     });
     console.log(competitorsResult);
 
-
-    res.status(200)
+    res
+      .status(200)
       .json({ querySummary: queryResult, competitors: competitorsResult });
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error
-      console.log(error.message)
+      console.log(error.message);
       res.status(500).json({ error: error.message });
     } else {
       // handle error of unknown type

@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+
 import { prisma } from '@/lib/prisma';
 
 export default async function handler(
@@ -7,7 +8,7 @@ export default async function handler(
 ) {
   try {
 
-    console.log('tuhadi pehn di')
+  const userId = req.cookies.userId;
     // console.log('heasllo')
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
@@ -18,6 +19,10 @@ export default async function handler(
         competitors_tracked: true,
         new_changes: true,
       },
+
+      where: {
+        user_id: userId,
+      },
       orderBy: {
         created_at: 'desc',
       },
@@ -25,7 +30,7 @@ export default async function handler(
     });
 
     //  console.log('healo')
-    console.log(previousQueries)
+    // console.log(previousQueries);
     res.status(200).json(previousQueries);
   } catch (error: unknown) {
     if (error instanceof Error) {

@@ -44,6 +44,11 @@ const Step2 = (props: Props) => {
   };
 
   const handleSave = async () => {
+    if (selectedCompetitors.length === 0 && totalCustomCompetitors === 0) {
+      alert('Please select at least one competitor');
+      return;
+    }
+
     const filteredQuery = queryResult.filter((item: queryResult) => {
       return selectedCompetitors.includes(item.position_overall);
     });
@@ -78,6 +83,12 @@ const Step2 = (props: Props) => {
         userId: userId,
       }),
     });
+    const data = await response.json();
+    //check if error then throw alert
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
     // console.log(queryResult, 'queryResult')
     setPage(PageView.DASHBOARD);
   };

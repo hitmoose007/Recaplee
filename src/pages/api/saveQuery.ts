@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import axios from 'axios';
 import extractDomain from 'extract-domain';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { maxCompetitors } from '@/utils/apiHelper';
 // import { prisma } from '../../lib/db';
 
 const maxPage = 2;
@@ -13,35 +14,32 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    console.log(req.body);
-    console.log('teri amma');
+    const userId = req.cookies.userId;
 
-    const supabase = createServerSupabaseClient({ req, res });
-    // Check if we have a session
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    //get competitors number tracked from database
+    const competitorsTracked = await prisma.profiles.findFirst({
+      where: { id: userId },
+      select: { competitors_tracked: true },
+    });
 
-    if (session?.user.id !== req.body['userId']) {
-      // console.log(prisma)
-      res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    console.log(session?.user.id, req.body['userId']);
-    console.log('the idssss baby')
     const filteredQuery = req.body['competitors'];
     const customCompetitors = req.body['customCompetitors'];
-    // query: formState.query,
-    // country: formState.country,
-    // countryDomain: formState.countryDomain,
-    // isPC: formState.isPC,
-    // competitors: filteredQuery,
-    // competitors_tracked: filteredQuery.lengthkey={competitor.position_overall}
 
+    const totalCompetitors = filteredQuery.length + customCompetitors.length;
+
+    if (
+      totalCompetitors + competitorsTracked?.competitors_tracked >=
+      maxCompetitors
+    ) {
+      res.status(403).json({
+        error: `You have reached your competitors limit.`,
+      });
+      return;
+    }
     const query = await prisma.targetQuery.create({
       data: {
         // user_id: req.body['userId'],
-        user_id: req.body['userId'],
+        user_id: userId,
         query_name: req.body['query'],
         country: req.body['country'],
         google_domain: req.body['countryDomain'],
@@ -60,8 +58,6 @@ export default async function handler(
       },
     });
 
-    console.log('query', query);
-
     const customCompetitorsQuery = await prisma.competitor.createMany({
       //map over the data
       data: customCompetitors.map((competitor: any) => {
@@ -75,8 +71,22 @@ export default async function handler(
         };
       }),
     });
+    //get filtered query length and custom query length
 
-    console.log('added', customCompetitorsQuery);
+    //increment the number of queries
+    await prisma.profiles.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        query_monitored: {
+          increment: 1,
+        },
+        competitors_tracked: {
+          increment: totalCompetitors,
+        },
+      },
+    });
 
     res.status(200).json({ customCompetitorsQuery });
   } catch (error: unknown) {

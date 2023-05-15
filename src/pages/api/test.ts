@@ -16,6 +16,7 @@ export default async function handler(
     parsedJson2 
     );
 
+    
     console.log(filterResponse(response));
 
     

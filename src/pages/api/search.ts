@@ -1,11 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { maxPage, maxResults } from '@/utils/apiHelper';
+import { maxPage, maxResults, maxQueryResearch } from '@/utils/apiHelper';
+import { prisma } from '@/lib/prisma';
 import axios from 'axios';
 
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
+  //   userId: string
 ) {
+  const userId = req.cookies.userId;
   const params = {
     api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
     q: req.body['query'],
@@ -16,15 +20,35 @@ export default async function handler(
   };
 
   try {
+    const data = await prisma.profiles.findFirst({
+      where: { id: userId },
+      select: { query_research: true },
+    });
+
+    if (
+      data?.query_research !== null &&
+      data?.query_research !== undefined &&
+      data?.query_research >= maxQueryResearch
+    ) {
+      res
+        .status(403)
+        .json({ error: 'You have reached your query searches limit' });
+      return;
+    }
+
     const response = await axios.get('https://api.valueserp.com/search', {
       params,
     });
 
-    console.log(response.status)
     // console.log('teri maa ki chut')
     // print the JSON response from VALUE SERP
 
     const topResults = response.data.organic_results.slice(0, maxResults);
+
+    await prisma.profiles.update({
+      where: { id: userId },
+      data: { query_research: { increment: 1 } },
+    });
 
     res.status(200).json(topResults);
   } catch (error: unknown) {

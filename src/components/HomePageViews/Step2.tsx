@@ -64,7 +64,17 @@ const Step2 = (props: Props) => {
         return selectedCustomCompetitors.includes(index * -1);
       }
     );
-
+    const tutti = JSON.stringify({
+      query: formState.query,
+      country: formState.country,
+      countryDomain: formState.countryDomain,
+      isPC: formState.isPC,
+      competitors: filteredQuery,
+      competitors_tracked: filteredQuery.length + customCompetitorArray.length,
+      customCompetitors: filteredCustomCompetitors,
+      userId: userId,
+    });
+    console.log('yeh hay tutti', tutti);
     // console.log(filteredCustomCompetitors);
     const response = await fetch('/api/saveQuery', {
       method: 'POST',

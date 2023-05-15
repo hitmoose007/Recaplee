@@ -12,12 +12,15 @@ export default async function handler(
     //extract id from req
     //how to extract parameters from req
     const { id } = req.query;
-
+    console.log(req.query, 'the real mvp')
+// console.log(id, 'the real mvp')
     const queryResult = await prisma.targetQuery.findFirst({
       where: {
         id: id as Prisma.UuidFilter,
       },
     });
+
+    
 
     //check if query match user id
     if (queryResult?.user_id !== req.cookies.userId) {

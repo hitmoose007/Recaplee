@@ -7,9 +7,21 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    const userId = req.cookies.userId;
 
-  const userId = req.cookies.userId;
+    //get user id from req.body
+    const userIdBody = req.body['userId'];
     // console.log('heasllo')
+    console.log(userIdBody, 'userIdBody');
+    console.log(userId, 'userId');
+    if (userIdBody !== userId) {
+      res.status(409).json({
+        error: `conflict in session please send again`,
+      });
+    }
+    
+
+
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
         id: true,
@@ -21,13 +33,15 @@ export default async function handler(
       },
 
       where: {
-        user_id: userId,
+        user_id: userIdBody,
       },
       orderBy: {
         created_at: 'desc',
       },
       take: 15,
     });
+
+    console.log(previousQueries, 'previousQueries');
 
     //  console.log('healo')
     // console.log(previousQueries);

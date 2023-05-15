@@ -21,7 +21,7 @@ export default async function handler(
     const filteredQueries = allQueries.filter((query) => {
       const queryTime = query.recent_update?.getTime();
 
-      if (queryTime !== undefined) {
+      if (queryTime !== undefined && queryTime !== null) {
         const diffDays = Math.floor(
           (currentDate.getTime() - queryTime) / (1000 * 60 * 60 * 24)
         );
@@ -30,6 +30,9 @@ export default async function handler(
           return query;
         }
       }
+
+      //needs to be tested
+      return query;
     });
 
     // use promise .all
@@ -80,7 +83,6 @@ export default async function handler(
             if (isChanged === false) {
               competitor.current_position = 10;
             }
-            
           }
         });
 

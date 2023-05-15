@@ -49,8 +49,11 @@ const DesktopBanner = (props: Props) => {
       </div>
 
       <div
-        onClick={()=>supabase.auth.signOut()}
-        className="mr-8 mt-4 flex hover:cursor-pointer flex-col items-end "
+        onClick={() => {
+          supabase.auth.signOut();
+          router.push('/login');
+        }}
+        className="mr-8 mt-4 flex flex-col items-end hover:cursor-pointer "
       >
         {/* <p className="text-xl">Logout</p> */}
 

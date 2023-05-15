@@ -9,7 +9,6 @@ import { signOut } from '@/utils/auth';
 import { supabase } from '@/lib/supabase';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
-
 type Props = {};
 
 const DesktopBanner = (props: Props) => {
@@ -17,7 +16,6 @@ const DesktopBanner = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
   const supabase = useSupabaseClient();
-  
 
   return (
     <div
@@ -69,7 +67,9 @@ const DesktopBanner = (props: Props) => {
           </div>
         </div>
         <div
-          onClick={() => supabase.auth.signOut()}
+          onClick={() => {
+            supabase.auth.signOut();
+          }}
           className="flex justify-center space-x-4 hover:cursor-pointer"
         >
           <p className="text-xl">Logout</p>

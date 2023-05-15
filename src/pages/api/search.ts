@@ -10,6 +10,7 @@ export default async function handler(
   //   userId: string
 ) {
   const userId = req.cookies.userId;
+  console.log(userId)
   const params = {
     api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
     q: req.body['query'],
@@ -45,11 +46,12 @@ export default async function handler(
 
     const topResults = response.data.organic_results.slice(0, maxResults);
 
-    await prisma.profiles.update({
+    const update = await prisma.profiles.update({
       where: { id: userId },
       data: { query_research: { increment: 1 } },
     });
-
+// console.log(update)
+    
     res.status(200).json(topResults);
   } catch (error: unknown) {
     if (error instanceof Error) {

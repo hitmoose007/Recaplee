@@ -23,15 +23,17 @@ const querySummary = (props: Props) => {
   const [competitorAnalysed, setCompetitorAnalysed] = useState<Competitor>();
   const { page, setPage } = React.useContext(PageContext);
   const router = useRouter();
-  console.log(router.query.id);
   useEffect(() => {
-    async function fetchQuerySummary() {
-      const res = await fetch(`/api/getQuerySummary/${router.query['id']}`);
-      const json = await res.json();
-      setQuerySummary(json.querySummary);
-      setCompetitorArray(json.competitors);
+    const { id } = router.query;
+    if (id !== undefined) {
+      async function fetchQuerySummary() {
+        const res = await fetch(`/api/getQuerySummary/${id}`);
+        const json = await res.json();
+        setQuerySummary(json.querySummary);
+        setCompetitorArray(json.competitors);
+      }
+      fetchQuerySummary();
     }
-    fetchQuerySummary();
   }, [router]);
 
   useEffect(() => {
@@ -47,13 +49,11 @@ const querySummary = (props: Props) => {
   if (page === PageView.SUMMARYVIEW && querySummary)
     return (
       <>
-        
         <Summary
           setCompetitorAnalysed={setCompetitorAnalysed}
           querySummary={querySummary}
           competitorArray={competitorArray}
         />
-        
       </>
     );
 

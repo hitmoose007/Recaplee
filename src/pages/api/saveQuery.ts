@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '@/lib/prisma';
 import axios from 'axios';
 import extractDomain from 'extract-domain';
+import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 // import { prisma } from '../../lib/db';
 
 const maxPage = 2;
@@ -13,7 +14,21 @@ export default async function handler(
 ) {
   try {
     console.log(req.body);
-    // console.log(prisma)
+    console.log('teri amma');
+
+    const supabase = createServerSupabaseClient({ req, res });
+    // Check if we have a session
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session?.user.id !== req.body['userId']) {
+      // console.log(prisma)
+      res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    console.log(session?.user.id, req.body['userId']);
+    console.log('the idssss baby')
     const filteredQuery = req.body['competitors'];
     const customCompetitors = req.body['customCompetitors'];
     // query: formState.query,
@@ -25,6 +40,8 @@ export default async function handler(
 
     const query = await prisma.targetQuery.create({
       data: {
+        // user_id: req.body['userId'],
+        user_id: req.body['userId'],
         query_name: req.body['query'],
         country: req.body['country'],
         google_domain: req.body['countryDomain'],
@@ -43,7 +60,7 @@ export default async function handler(
       },
     });
 
-    console.log('query' , query);
+    console.log('query', query);
 
     const customCompetitorsQuery = await prisma.competitor.createMany({
       //map over the data
@@ -52,13 +69,14 @@ export default async function handler(
           title: extractDomain(competitor),
           link: competitor,
           domain: extractDomain(competitor),
+
           is_custom: true,
           query_id: query.id,
         };
       }),
     });
 
-    console.log('added' , customCompetitorsQuery);
+    console.log('added', customCompetitorsQuery);
 
     res.status(200).json({ customCompetitorsQuery });
   } catch (error: unknown) {

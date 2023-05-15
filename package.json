@@ -22,7 +22,7 @@
     "@next-auth/prisma-adapter": "^1.0.6",
     "@next/font": "^13.3.0",
     "@prisma/client": "^4.14.0",
-    "@supabase/auth-helpers-nextjs": "^0.6.0",
+    "@supabase/auth-helpers-nextjs": "^0.6.1",
     "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/auth-ui-react": "^0.4.2",
     "@supabase/auth-ui-shared": "^0.1.6",

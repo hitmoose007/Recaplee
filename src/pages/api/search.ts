@@ -16,8 +16,6 @@ export default async function handler(
   };
 
   try {
-    console.log(params);
-    console.log('eahlo')
     const response = await axios.get('https://api.valueserp.com/search', {
       params,
     });

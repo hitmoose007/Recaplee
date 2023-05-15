@@ -17,8 +17,12 @@ const NewQueryForm = ({setIsLoading}: Props) => {
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult, setQueryResult } = useContext(QueryResultContext);
   const { setPage } = useContext(PageContext);
+
+
+
   const onSubmit = async (e: any) => {
     e.preventDefault();
+
 
     if (!formState.query) {
       alert('Please add a query');
@@ -27,6 +31,7 @@ const NewQueryForm = ({setIsLoading}: Props) => {
     
     setIsLoading(true);
     //fetch
+
 
     try {
       const response = await fetch('/api/search', {

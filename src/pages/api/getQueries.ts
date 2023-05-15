@@ -6,6 +6,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+
+    console.log('tuhadi pehn di')
     // console.log('heasllo')
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
@@ -22,6 +24,8 @@ export default async function handler(
       take: 15,
     });
 
+    //  console.log('healo')
+    console.log(previousQueries)
     res.status(200).json(previousQueries);
   } catch (error: unknown) {
     if (error instanceof Error) {

@@ -507,24 +507,24 @@
   resolved "https://registry.yarnpkg.com/@stitches/core/-/core-1.2.8.tgz#dce3b8fdc764fbc6dbea30c83b73bfb52cf96173"
   integrity sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==
 
-"@supabase/auth-helpers-nextjs@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-nextjs/-/auth-helpers-nextjs-0.6.0.tgz#bc75a8f021108f3ddbb583f570abd68c0e9e9500"
-  integrity sha512-f1e5blmpt9F/Bnb2hKreWHqf3zEhl29P357d5fnXzQ3Ph7DuW2Wha7uwQVTgE2QH3niqVpJpY0Pg0zBT5NmNWQ==
+"@supabase/auth-helpers-nextjs@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-nextjs/-/auth-helpers-nextjs-0.6.1.tgz#d327099201a55b8225e0f8e642c6a18eccbab9ca"
+  integrity sha512-ffDAR4pW2Cosj/CuuGRAhzOFfHtqzdgax7zqRGGyq334gxxPplsmJFGaLPRJ3Z/4mTSIJHyFd6LYdHMN0a+5Bw==
   dependencies:
-    "@supabase/auth-helpers-shared" "0.3.3"
+    "@supabase/auth-helpers-shared" "0.3.4"
 
 "@supabase/auth-helpers-react@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-react/-/auth-helpers-react-0.3.1.tgz#815493a294662c56b83c7dd51692dacd24329342"
   integrity sha512-g3SFv08Dz9FapNif/ZY1b7qKGlMJDyTLSayHBz3kb3FuYxg7aLWgQtydDhm5AGbc0XtvpIBuhGTIOVevwpdosA==
 
-"@supabase/auth-helpers-shared@0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-shared/-/auth-helpers-shared-0.3.3.tgz#a00d336a631867c199c9634739c225d2303ba00b"
-  integrity sha512-ZwZGffApfyz9MiT3knnZoF1DMWE56H/Q0Mrsn22J9ubhss7/+e7TP3dChxxwlUYqtDmjmLV6OV8W0BANENfUew==
+"@supabase/auth-helpers-shared@0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@supabase/auth-helpers-shared/-/auth-helpers-shared-0.3.4.tgz#dcea97d55d535a720023f081576f3b61e00ad75f"
+  integrity sha512-8I3D0SPHHexkFTSfPg0nZgJSVazWoB3tZDpT6IjRv6w89vDMUzO99Lit4H9anVLF4teW8c/nJJxawDNbDlgbgg==
   dependencies:
-    js-base64 "^3.7.5"
+    jose "^4.14.0"
 
 "@supabase/auth-ui-react@^0.4.2":
   version "0.4.2"
@@ -1476,10 +1476,10 @@ jose@^4.10.0, jose@^4.11.4:
   resolved "https://registry.yarnpkg.com/jose/-/jose-4.14.0.tgz#c8c03579a0ba3598194c92ccca777d96adca8f48"
   integrity sha512-LSA/XenLPwqk6e2L+PSUNuuY9G4NGsvjRWz6sJcUBmzTLEPJqQh46FHSUxnAQ64AWOkRO6bSXpy3yXuEKZkbIA==
 
-js-base64@^3.7.5:
-  version "3.7.5"
-  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.5.tgz#21e24cf6b886f76d6f5f165bfcd69cc55b9e3fca"
-  integrity sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==
+jose@^4.14.0:
+  version "4.14.4"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-4.14.4.tgz#59e09204e2670c3164ee24cbfe7115c6f8bff9ca"
+  integrity sha512-j8GhLiKmUAh+dsFXlX1aJCbt5KMibuKb+d7j1JaOJG6s2UjX1PQlW+OKB/sD4a/5ZYF4RcmYmLSndOoU3Lt/3g==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"

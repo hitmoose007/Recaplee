@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header/Header';
 import HelperHeader from '@/components/Header/HelperHeader';
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { FormContext } from '../../context/FormContext';
 import { useContext } from 'react';
 import CompetitorCard from '../Competitors/CompetitorCard';
@@ -11,7 +11,8 @@ import StaticQueryForm from '../LanscapeBanners/StaticQueryForm/StaticQueryForm'
 import { PageContext } from '../../context/PageContext';
 import { PageView } from '../../utils/enums';
 import CustomCompetitorInput from '../Competitors/CustomCompetitorInput';
-import extractDomain from 'extract-domain'
+import extractDomain from 'extract-domain';
+import useUserId from '../../hooks/useUserId';
 interface queryResult {
   position_overall: number;
   title: string;
@@ -31,6 +32,8 @@ const Step2 = (props: Props) => {
   const [customCompetitorArray, setCustomCompetitorArray] = useState<string[]>(
     []
   );
+  const userId = useUserId();
+
   const handleSelectCompetitor = (competitorKey: number) => {
     // console.log('trying to udpate selected competitors')
     setSelectedCompetitors((prevSelectedCompetitors: any) =>
@@ -38,10 +41,7 @@ const Step2 = (props: Props) => {
         ? prevSelectedCompetitors.filter((key: number) => key !== competitorKey)
         : [...prevSelectedCompetitors, competitorKey]
     );
-
   };
-
- console.log(queryResult, 'queryResult')
 
   const handleSave = async () => {
     const filteredQuery = queryResult.filter((item: queryResult) => {
@@ -61,7 +61,7 @@ const Step2 = (props: Props) => {
     );
 
     // console.log(filteredCustomCompetitors);
-   const response =  await fetch('/api/saveQuery', {
+    const response = await fetch('/api/saveQuery', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,11 +72,13 @@ const Step2 = (props: Props) => {
         countryDomain: formState.countryDomain,
         isPC: formState.isPC,
         competitors: filteredQuery,
-        competitors_tracked: filteredQuery.length + customCompetitorArray.length,
+        competitors_tracked:
+          filteredQuery.length + customCompetitorArray.length,
         customCompetitors: filteredCustomCompetitors,
+        userId: userId,
       }),
     });
-// console.log(queryResult, 'queryResult')
+    // console.log(queryResult, 'queryResult')
     setPage(PageView.DASHBOARD);
   };
   return (
@@ -100,7 +102,7 @@ const Step2 = (props: Props) => {
           description={`Click the box to select or deselect a competitor that you want to monitor: we will inform you of any change in the content and SERP position!`}
         />
       </div>
-      <div className="rounded-[30px] bg-[#EEF6FF] text-[#4B5563]  mt-4 px-10 py-4">
+      <div className="mt-4 rounded-[30px] bg-[#EEF6FF]  px-10 py-4 text-[#4B5563]">
         <div className="flex justify-between">
           <div>
             <span className="font-bold  ">
@@ -108,12 +110,12 @@ const Step2 = (props: Props) => {
             </span>
             competitors selected
           </div>
-          <div className="md:block hidden">
+          <div className="hidden md:block">
             <SaveButton handleSave={handleSave} />
           </div>
         </div>
 
-        <div className="md:grid  flex-col space-y-4 md:space-y-0 md:flex-none  mt-10 md:grid-cols-2 md:gap-x-14 md:gap-y-6">
+        <div className="mt-10  flex-col space-y-4 md:grid md:flex-none  md:grid-cols-2 md:gap-x-14 md:gap-y-6 md:space-y-0">
           {queryResult?.map((competitor: queryResult) => {
             return (
               <CompetitorCard
@@ -129,9 +131,9 @@ const Step2 = (props: Props) => {
           {customCompetitorArray?.map((competitor: string, index: number) => {
             return (
               <CompetitorCard
-              selectedCompetitors={selectedCompetitors}
+                selectedCompetitors={selectedCompetitors}
                 customCompetitor={true}
-                key={index*-1}
+                key={index * -1}
                 position={index * -1}
                 title={competitor}
                 link={competitor}

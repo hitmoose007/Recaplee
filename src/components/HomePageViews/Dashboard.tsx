@@ -49,7 +49,7 @@ const Home = (props: Props) => {
           }),
         });
         // check if res.status 409 and send another request
-        if (res.status === 209) {
+        if (res.status === 209 || res.status === 500) {
           res = await fetch('/api/getQueries', {
             method: 'POST',
             headers: {

@@ -60,6 +60,8 @@ const Home = (props: Props) => {
               userId: session?.user?.id,
             }),
           });
+
+          console.log(res.status, ' this is second res status')
         }
 
         const data = await res.json();

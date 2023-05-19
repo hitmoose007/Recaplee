@@ -17,7 +17,8 @@ export default async function handler(
     if (userIdBody !== userId) {
       res.status(209).json({
         
-        // error: `conflict in session please send again`,
+        id: userId,
+        idBody: userIdBody,
       });
     }
     

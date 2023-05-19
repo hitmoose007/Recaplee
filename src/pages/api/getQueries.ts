@@ -15,7 +15,7 @@ export default async function handler(
     console.log(userIdBody, 'userIdBody');
     console.log(userId, 'userId');
     if (userIdBody !== userId) {
-      res.status(409).json({
+      res.status(209).json({
         error: `conflict in session please send again`,
       });
     }
@@ -49,7 +49,9 @@ export default async function handler(
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message
+     });
+
     } else {
       // handle error of unknown type
       res.status(500).json({ error: 'Unknown error occurred' });

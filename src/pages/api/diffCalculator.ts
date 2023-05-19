@@ -119,7 +119,7 @@ export default async function handler(
       })
     );
 
-    const currentContentArray: Prisma.NullableJsonNullValueInput[] = [];
+    const currentContentArray: any[] = [];
 
     const filteredContentArray = changedContentArray.map((item, index) => {
       const parsedContent = parseObject(
@@ -134,12 +134,10 @@ export default async function handler(
     });
     // console.log('hello')
 
-    const diffArray: Prisma.NullableJsonNullValueInput[] = [];
+    const diffArray: any[] = [];
     const changesCountArray: number[] = [];
     const percentageChangedContentArray: number[] = [];
-    let poopy;
-    let poop2;
-    let poop3;
+
     for (let i = 0; i < filteredContentArray.length; i++) {
       const diffObject = filterResponse(
         diff(filteredContentArray[i], competitors[i]?.current_content)
@@ -151,8 +149,13 @@ export default async function handler(
         changesCountArray.push(changesCount);
 
         const diffLength = diffArray[i]?.length ?? 0;
-        const currentContentLength =
-          competitors[i]?.current_content?.length ?? 0;
+
+        const currentContent = competitors[i]?.current_content;
+
+        // Check if currentContent is an array
+        const currentContentLength = Array.isArray(currentContent)
+          ? currentContent.length
+          : 0;
 
         const percentageChangedContent =
           (diffLength / currentContentLength) * 100;

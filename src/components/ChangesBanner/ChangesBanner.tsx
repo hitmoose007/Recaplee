@@ -4,6 +4,7 @@ import { Competitor, QuerySummary } from '@/types/my-types';
 import { PageView } from '@/utils/enums';
 import { PageContext } from '@/context/PageContext';
 import { useContext } from 'react';
+import { useSerpContext } from '@/context/SerpChangesContext';
 type Props = {
   competitorAnalysed?: Competitor;
   querySummary?: QuerySummary;
@@ -11,12 +12,13 @@ type Props = {
 
 const QueryBanner = ({ querySummary, competitorAnalysed }: Props) => {
   const { page } = useContext(PageContext);
+  const { serpChanges } = useSerpContext();
   return (
     <div className="lg:flex hidden rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">
       {page === PageView.SUMMARYVIEW && (
         <>
           <ChangeCard
-            value={querySummary?.changes_per_website}
+            value={serpChanges}
             topTitle="Detection of"
             bottomTitle="SERP Changes"
           />

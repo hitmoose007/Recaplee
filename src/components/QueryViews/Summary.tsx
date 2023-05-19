@@ -9,6 +9,7 @@ import { Competitor, QuerySummary } from '@/types/my-types';
 import AnalysisCard from '@/components/AnalysisBanner/AnalysisCard';
 import { useRouter } from 'next/router';
 import ChangesBanner from '@/components/ChangesBanner/ChangesBanner';
+import { SerpContext, useSerpContext } from '@/context/SerpChangesContext';
 
 type Props = {
   querySummary: QuerySummary;
@@ -16,17 +17,24 @@ type Props = {
   setCompetitorAnalysed: (competitor: Competitor) => void;
 };
 
-const Summary = ({ setCompetitorAnalysed, querySummary, competitorArray }: Props) => {
+const Summary = ({
+  setCompetitorAnalysed,
+  querySummary,
+  competitorArray,
+}: Props) => {
+
+    const {  serpChanges, setSerpChanges} = useSerpContext();
   return (
     <>
-      <QueryHeader
-        isCompetitor={false}
-        highlightedText={querySummary?.query_name || ''}
-      />
-      <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
-      <div className="md:flex md:justify-between">
-        <StaticQuery querySummary={querySummary} isQuerySummaryPage={true} />
-        {/* <div className="flex rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">
+      <SerpContext.Provider value={{serpChanges, setSerpChanges} } >
+        <QueryHeader
+          isCompetitor={false}
+          highlightedText={querySummary?.query_name || ''}
+        />
+        <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
+        <div className="md:flex md:justify-between">
+          <StaticQuery querySummary={querySummary} isQuerySummaryPage={true} />
+          {/* <div className="flex rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">
           <ChangeCard
             value={querySummary?.serp_chnages || -1}
             topTitle="Detection of"
@@ -39,29 +47,30 @@ const Summary = ({ setCompetitorAnalysed, querySummary, competitorArray }: Props
           />
         </div> */}
 
-        <ChangesBanner querySummary={querySummary} />
-      </div>
+          <ChangesBanner querySummary={querySummary} />
+        </div>
 
-      <div className="mt-8">
-        <Header
-          svgPath="/headerIcons/pieIcon.svg"
-          description="Query Competitor Analysis"
-        />
-      </div>
-      <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
-      <div className="mt-4 flex flex-col rounded-[30px] bg-customBlue space-y-3 px-8 py-4">
-        {competitorArray.map((competitor) => {
-          if (querySummary) {
-            return (
-              <AnalysisCard
-              setCompetitorAnalysed={setCompetitorAnalysed}
-                competitor={competitor}
-                querySummary={querySummary}
-              />
-            );
-          }
-        })}
-      </div>
+        <div className="mt-8">
+          <Header
+            svgPath="/headerIcons/pieIcon.svg"
+            description="Query Competitor Analysis"
+          />
+        </div>
+        <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
+        <div className="mt-4 flex flex-col space-y-3 rounded-[30px] bg-customBlue px-8 py-4">
+          {competitorArray.map((competitor) => {
+            if (querySummary) {
+              return (
+                <AnalysisCard
+                  setCompetitorAnalysed={setCompetitorAnalysed}
+                  competitor={competitor}
+                  querySummary={querySummary}
+                />
+              );
+            }
+          })}
+        </div>
+      </SerpContext.Provider>
     </>
   );
 };

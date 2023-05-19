@@ -37,6 +37,7 @@ const Home = (props: Props) => {
       try {
         // const res = await fetch('/api/getQueries');//change fetch to add user id in req.body
         // const res
+        
         let res;
          res = await fetch('/api/getQueries', {
           method: 'POST',
@@ -48,7 +49,7 @@ const Home = (props: Props) => {
           }),
         });
         // check if res.status 409 and send another request
-        if (res.status === 409) {
+        if (res.status === 209) {
           res = await fetch('/api/getQueries', {
             method: 'POST',
             headers: {

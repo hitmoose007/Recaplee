@@ -6,7 +6,7 @@ import { PageContext } from '@/context/PageContext';
 import { useContext } from 'react';
 import { useSerpContext } from '@/context/SerpChangesContext';
 type Props = {
-  competitors?: Competitor[];
+  competitors: Competitor[];
   competitorAnalysed?: Competitor;
   querySummary?: QuerySummary;
 };
@@ -42,17 +42,20 @@ const QueryBanner = ({
       {page === PageView.COMPETITORVIEW && (
         <>
           <ChangeCard
+          showHashtag={true}
             value={competitorAnalysed?.current_position}
             topTitle="Ranking as"
             bottomTitle="on Search Engine"
           />
           <ChangeCard
+          showPercentage={true}
             value={competitorAnalysed?.content_changed}
             topTitle="A total of"
             bottomTitle="of content changed"
           />
           <ChangeCard
-            value={competitorAnalysed?.content_changed}
+    
+            value={averageChangesPerWebsite.toFixed(1)}
             topTitle="Average of"
             bottomTitle="changes per webiste"
           />

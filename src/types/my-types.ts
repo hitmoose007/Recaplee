@@ -73,3 +73,8 @@ type ChangedContent = [
         };
   }
 ];
+
+export type Change = {
+  tag: string;
+  value: any;
+} | null;

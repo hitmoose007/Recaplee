@@ -60,6 +60,7 @@ const querySummary = (props: Props) => {
   if (page === PageView.COMPETITORVIEW && querySummary && competitorAnalysed)
     return (
       <CompetitorAnalysis
+      competitors={competitorArray}
         competitorAnalysed={competitorAnalysed}
         querySummary={querySummary}
       />

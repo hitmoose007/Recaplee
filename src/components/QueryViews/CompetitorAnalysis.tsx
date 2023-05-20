@@ -7,15 +7,19 @@ import { useState } from 'react';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 import QueryBanner from '@/components/ChangesBanner/ChangesBanner';
-import ExpandedView from '@/components/CompetitorAnalysis/ExpandedView';
+import ExpandedView from '@/components/CompetitorAnalysis/ExpandedView/ExpandedView';
 import { Competitor, QuerySummary } from '@/types/my-types';
 type Props = {
   querySummary: QuerySummary;
-
+  competitors: Competitor[];
   competitorAnalysed: Competitor;
 };
 
-const CompetitorAnalysis = ({ querySummary, competitorAnalysed }: Props) => {
+const CompetitorAnalysis = ({
+  competitors,
+  querySummary,
+  competitorAnalysed,
+}: Props) => {
   const [showExpandedView, setShowExpandedView] = useState(true);
 
   return (
@@ -49,12 +53,18 @@ const CompetitorAnalysis = ({ querySummary, competitorAnalysed }: Props) => {
             />
           </div>
         </div>
-        <QueryBanner competitorAnalysed={competitorAnalysed}/>
+        <QueryBanner
+          competitors={competitors}
+          competitorAnalysed={competitorAnalysed}
+        />
       </div>
 
-      {showExpandedView &&  (
-        <div className="flex mt-8  space-x-12 ">
-          <ExpandedView querySummary={querySummary}  competitorAnalysed={competitorAnalysed}/>
+      {showExpandedView && (
+        <div className="mt-8 flex  space-x-12 ">
+          <ExpandedView
+            querySummary={querySummary}
+            competitorAnalysed={competitorAnalysed}
+          />
           {/* <ExpandedCard isRemoved={true} />
         <ExpandedCard isRemoved={false} /> */}
         </div>

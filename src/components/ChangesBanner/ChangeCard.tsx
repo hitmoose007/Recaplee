@@ -17,6 +17,8 @@ const ChangeCard = ({
   bottomTitle,
   value,
 }: Props) => {
+
+    
   return (
     <div className="flex flex-col items-center justify-center space-y-1 rounded-[30px] bg-white text-sm text-customGray md:w-44 md:px-4 md:py-1">
       <p>{topTitle}</p>

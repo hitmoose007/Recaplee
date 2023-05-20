@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { parsedChanges1 } from '@/utils/test';
-
+import { IoCopyOutline } from 'react-icons/io5';
 import { diff_match_patch } from 'diff-match-patch';
 import HeaderTagView from './HeaderTagView';
 import { Competitor, QuerySummary } from '@/types/my-types';
@@ -12,9 +12,22 @@ type Props = {
 const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   const dmp = new diff_match_patch();
   //   const [parsedChanges, setParsedChanges] = useState<string[][]>([]);
+
   return (
     <>
-      <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue text-sm px-4 py-16">
+      <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue px-4 py-16 text-sm">
+        <div
+          className="flex hover:cursor-pointer space-x-2 text-customGray "
+          onClick={() => {
+            navigator.clipboard.writeText(
+              JSON.stringify(competitorAnalysed.changed_content) || ''
+            );
+          }}
+        >
+          {' '}
+          <span>Click to Copy All</span>
+          <IoCopyOutline size={20} color="gray" />
+        </div>
         {competitorAnalysed.changed_content?.map((change, index) => {
           if (change[0] === '-') {
             const removedChange = printTagIfExists(change);

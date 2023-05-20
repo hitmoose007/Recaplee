@@ -11,19 +11,12 @@ import 'react-toggle/style.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { PageView } from '@/utils/enums';
 import { PageContext } from '@/context/PageContext';
+import { QuerySummary } from '@/types/my-types';
 import Link from 'next/link';
 type Props = {};
-interface Query {
-  id: string;
-  query_name?: string;
-  country?: string;
-  last_update?: Date;
-  competitors_tracked?: number;
-  new_changes?: number;
-}
 
 const Home = (props: Props) => {
-  const [queryArray, setQueryArray] = useState<Query[]>([]);
+  const [queryArray, setQueryArray] = useState<QuerySummary[]>([]);
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
   // const [isEmailEnabled, setIsEmailEnabled] = useState(false);
 
@@ -102,7 +95,7 @@ const Home = (props: Props) => {
         />
 
         {Array.isArray(queryArray) &&
-          queryArray.map((query: Query, index) => {
+          queryArray.map((query: QuerySummary, index) => {
             return (
               <Link key={index} href={`/querySummary/${query.id}`}>
                 <QueryCards
@@ -111,8 +104,8 @@ const Home = (props: Props) => {
                   countryCode={query.country || ''}
                   competitorsTracked={query.competitors_tracked || 0}
                   lastUpdate={
-                    query.last_update
-                      ? new Date(query.last_update).toLocaleDateString()
+                    query.recent_update
+                      ? new Date(query.recent_update).toLocaleDateString()
                       : ''
                   }
                 />

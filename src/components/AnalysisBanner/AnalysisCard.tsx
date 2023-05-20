@@ -20,7 +20,7 @@ const AnalysisCard = ({
   const [changesColor, setChangesColor] = useState('');
   const [positionChange, setPositionChange] = useState<number>();
   const { setPage } = useContext(PageContext);
-  const { serpChanges, setSerpChanges } = useSerpContext();
+//   const { serpChanges, setSerpChanges } = useSerpContext();
   const contentChangedValue = competitor.content_changed || 0;
   const changesValue = competitor.changes_detected || 0;
   const old_update = new Date(querySummary.old_update).toLocaleDateString();
@@ -50,30 +50,22 @@ const AnalysisCard = ({
     if (competitor.last_position && competitor.current_position) {
       setPositionChange(competitor.last_position - competitor.current_position);
     }
-    if (positionChange !== 0) {
-      //fix this
-      setSerpChanges((prevSerpChanges) => {
-        console.log('aaja')
-        console.log(prevSerpChanges, 'this is teri')
-        return prevSerpChanges + 1});
-      console.log(serpChanges,'inside');
-    }
   }, []);
 
   return (
     <div className="flex flex-col items-center  justify-around space-y-2 rounded-full bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:px-4 md:py-4">
-      <div className="flex text-customYellow ">
+      <div className="flex text-customYellow w-3">
         <p className="text-2xl font-bold text-customPurple ">
-          {competitor.current_position || '#'}
+          {competitor.current_position ||   '#'}
         </p>
-        {positionChange && (
+        {positionChange!== undefined && positionChange!== 0 && (
           <p
             className={`text-xs font-extrabold ${
               positionChange < 0 ? 'text-customRed ' : 'text-customGreen'
             }`}
           >
             {positionChange > 0 && '+'}
-            {positionChange}
+            {positionChange !== 0 && positionChange}
           </p>
         )}
       </div>
@@ -84,7 +76,7 @@ const AnalysisCard = ({
         </p>
         <div className="flex  space-x-2">
           <a
-            href=""
+            href={competitor.link}
             className="mx-auto w-40 truncate   text-sm font-bold text-customGray hover:underline md:mx-0 md:w-80 "
           >
             {' '}

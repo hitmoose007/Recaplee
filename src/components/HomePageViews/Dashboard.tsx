@@ -61,7 +61,6 @@ const Home = (props: Props) => {
             }),
           });
 
-          console.log(res.status, ' this is second res status')
         }
 
         const data = await res.json();

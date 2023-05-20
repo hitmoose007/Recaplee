@@ -3,7 +3,7 @@ import React from 'react';
 type Props = {
   topTitle: string;
   bottomTitle: string;
-  value: number | undefined;
+  value: number | undefined | string;
   showColor?: boolean;
   showPercentage?: boolean;
   showHashtag?: boolean;

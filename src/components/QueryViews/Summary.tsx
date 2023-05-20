@@ -22,11 +22,14 @@ const Summary = ({
   querySummary,
   competitorArray,
 }: Props) => {
+  const sortedCompetitors = competitorArray.sort((a, b) => {
+  return  (a.current_position ?? 0) - (b.current_position ?? 0);
+  });
 
-    const {  serpChanges, setSerpChanges} = useSerpContext();
+  const { serpChanges, setSerpChanges } = useSerpContext();
   return (
     <>
-      <SerpContext.Provider value={{serpChanges, setSerpChanges} } >
+      <SerpContext.Provider value={{ serpChanges, setSerpChanges }}>
         <QueryHeader
           isCompetitor={false}
           highlightedText={querySummary?.query_name || ''}
@@ -47,7 +50,10 @@ const Summary = ({
           />
         </div> */}
 
-          <ChangesBanner querySummary={querySummary} />
+          <ChangesBanner
+            competitors={competitorArray}
+            querySummary={querySummary}
+          />
         </div>
 
         <div className="mt-8">
@@ -58,7 +64,7 @@ const Summary = ({
         </div>
         <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
         <div className="mt-4 flex flex-col space-y-3 rounded-[30px] bg-customBlue px-8 py-4">
-          {competitorArray.map((competitor) => {
+          {sortedCompetitors.map((competitor) => {
             if (querySummary) {
               return (
                 <AnalysisCard

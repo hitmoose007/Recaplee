@@ -2527,6 +2527,11 @@ wide-align@^1.1.2:
   dependencies:
     string-width "^1.0.2 || 2 || 3 || 4"
 
+words-count@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/words-count/-/words-count-2.0.2.tgz#e0ef43d507db225821bdadd8cc5075d704aea185"
+  integrity sha512-u0LFfJPhnR0xXu/5WoqWIkgdGJst5GahS4lYy4G5TIX4JAQgeNKD33HpmMoxveVBWNS6W6YZV2OQjVIVLL4K7Q==
+
 wordwrap@>=0.0.2:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"

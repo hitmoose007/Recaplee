@@ -203,6 +203,7 @@ export default async function handler(
           },
           data: {
             recent_update: currentDate,
+            old_update: query.recent_update,
           },
         });
         return updatedQuery;

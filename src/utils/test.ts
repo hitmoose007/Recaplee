@@ -1035,9 +1035,16 @@ export const parsedChanges1 = [
   [
     '+',
     {
+      h4: 'Welcome to the world of gummi bears!. They are very healthy for you and you can do amazing things with them. You can also see how they are made. They are very delicious <i class="fas fa-water-lower    "></i><i class="fa fa-address-book-o" aria-hidden="true"></i>',
+    },
+  ],
+  [
+    '+',
+    {
       h3: 'Solar Pump Inverters for a Rural Area in India\nContributing to Agricultural Development by Utilizing Solar Power Without Waste',
     },
   ],
+
   [
     '-',
     {
@@ -1062,7 +1069,7 @@ export const parsedChanges1 = [
         __old:
           'Contract Awarded for a Geothermal Power Generation Facility for the Republic of Kenya',
         __new:
-          'Announcement Regarding Changes to the Management of Subsidiary as of October 1, 2022',
+          'Contract Awarded for a Geothermal Contract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaPower Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of KenyaContract Awarded for a Geothermal Power Generation Facility for the Republic of Kenya Announcement Regarding Changes to the Management of Subsidiary as of October 1, 2022',
       },
     },
   ],
@@ -1071,7 +1078,7 @@ export const parsedChanges1 = [
     {
       h3: {
         __old:
-          'Launching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer Issues',
+          'Launching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer IssuesLaunching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer IssuesLaunching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer IssuesLaunching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer IssuesLaunching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer Issue sLaunching Automation Monitoring and Control System MICREX-VieW FOCUS Evolution － Flexible System Construction to Fit Customer Issues',
         __new:
           'Work on virtual power plant, a key to the spread of renewable energy',
       },
@@ -1084,7 +1091,7 @@ export const parsedChanges1 = [
         __old:
           'Onshore Power Supply Systems Contributing to Carbon Neutrality at Ports',
         __new:
-          'Interview about how we contributing to customers seeking to achieve carbon neutrality',
+          'The Onshore Power Supply Systems have made an Announcement Regarding Changes to the Management of Subsidiary as of October 1, 2022',
       },
     },
   ],
@@ -1093,7 +1100,7 @@ export const parsedChanges1 = [
     {
       p: {
         __old:
-          'Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
+          'Drives & Inverters Power Supply Sensors Chickens & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
         __new:
           'Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Food and Beverage Equipment Upgrades Drives & Inverters Power Supply Sensors & Measurements Factory Automation Systems Distribution & Controls Transmission & Distribution Social Infrastructure Energy Management Equipment Upgrades AC Drives (Low voltage) AC Drives (Medium voltage) Servo Systems UPS, Uninterruptible Power System Solar Inverters Data Center Large-Capacity Rectifier, S-Former Radiation Monitoring PLC, Programmable logic controller HMI, Human machine interface Process Control System, MICREX-NX Monitoring and Control System, MICREX-VieW XX Process Data Acquisition and analysis, f(s)NISDAS Steel EMS Solution Steel EMS Package LITE Boiler Combustion solution LV Distribution Motor Control Energy Control Equipment MV Distribution Oil-immersed Transformer, Shunt Reactor Cast Resin Transformer, MOLTRA GIS, Gas Insulated Switchgear MV & LV Switchgear and Control Center DC High-speed Vacuum Circuit Breaker Pure Water Vaporization Cooling Silicon Rectifier Tunnel Ventilation System Marine Environment Protection Electrical Equipment for Railcars Thermal Power Generation Geothermal Power Generation Nuclear Power Fuel Cell Power System Simulator Multipurpose Vending Machine Can & PET Bottle Beverage Vending Machine Coin Mechanism Bill Validator Fuji Electric Solution IoT System Solution Service Solution After Sales Services Medium-Voltage Devices in the Panel Low-Voltage Electric Distribution Devices AC Drives (Medium voltage) UPS, Uninterruptible Power System Monitoring and Control Systems AC Drives (Low voltage)',
       },

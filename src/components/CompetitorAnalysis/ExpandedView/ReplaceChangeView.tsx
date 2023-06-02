@@ -4,6 +4,7 @@ import CopyButton from './CopyButton';
 import { diff_match_patch } from 'diff-match-patch';
 import { Change } from '@/types/my-types';
 import wordsCount from 'words-count';
+import AdditionalUtilitiesGroup from './AdditionalUtilitiesGroup';
 type Props = {
   tag: Change;
   index: number;
@@ -36,7 +37,7 @@ const ReplaceChangeView = ({ tag, index }: Props) => {
   return (
     <div key={index} className="flex  space-x-8 md:space-x-20">
       <div
-        className={`  flex space-x-2 w-1/2 justify-between  rounded-[30px]  bg-white p-2   text-sm font-bold  `}
+        className={`  flex w-1/2 justify-between space-x-2 px-4  rounded-[30px]  bg-white py-2   text-sm font-bold  `}
       >
         <div>
           <HeaderTagView tag={tag?.tag || ''} />
@@ -51,24 +52,12 @@ const ReplaceChangeView = ({ tag, index }: Props) => {
             }
           })}
         </div>
-          <div className="flex flex-col justify-between text-[9px] font-normal">
-            <span className="flex justify-end">#{index + 1}</span>
-            <div className="flex-col flex justify-end">
-                
-            <span className="flex justify-end">  <CopyButton text={toBeCopiedRemovedString} /></span>
-              <span className='whitespace-nowrap flex justify-end' > {wordsCount(toBeCopiedRemovedString)} words</span>
-            </div>
-        </div>
+        <AdditionalUtilitiesGroup  index={index} toBeCopiedText={toBeCopiedRemovedString} />
       </div>
       <div
-        className={`w-1/2 rounded-[30px] bg-white  p-2   pb-5 text-sm  font-bold `}
+        className={`w-1/2 rounded-[30px] bg-white flex justify-between  py-2  px-4  text-sm  font-bold `}
       >
-        <div className=" flex justify-end text-customGray">
-          {/* <div className=""> */}
-          <CopyButton text={toBeCopiedAddedString} />
-          <span className="text-customGray ">{index + 1}</span>
-          {/* </div> */}
-        </div>
+        <div>
         <HeaderTagView tag={tag?.tag || ''} />
         {response?.map((item, index) => {
           if (item[0] === 0) {
@@ -79,7 +68,9 @@ const ReplaceChangeView = ({ tag, index }: Props) => {
           if (item[0] == 1) {
             return <>{<span className="text-green-500 "> {item[1]}</span>}</>;
           }
-        })}
+        })}</div>
+        
+        <AdditionalUtilitiesGroup  index={index} toBeCopiedText={toBeCopiedAddedString} />
       </div>
     </div>
   );

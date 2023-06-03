@@ -2,10 +2,13 @@ import { parsedChanges1 } from '@/utils/test';
 import { IoCopyOutline } from 'react-icons/io5';
 import { diff_match_patch } from 'diff-match-patch';
 import HeaderTagView from '../HeaderTagView';
+import { useState } from 'react';
 import { Competitor, QuerySummary } from '@/types/my-types';
 import AddedChangeView from './AddedChangeView';
 import RemovedChangeView from './RemovedChangeView';
 import ReplaceChangeView from './ReplaceChangeView';
+import ExpandedBanner from './ExpandedBanner';
+import wordsCount from 'words-count';
 type Props = {
   competitorAnalysed: Competitor;
   querySummary: QuerySummary;
@@ -13,32 +16,33 @@ type Props = {
 
 const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   //   const [parsedChanges, setParsedChanges] = useState<string[][]>([]);
+  const [oldContentWordsState, setOldContentWords] = useState<number>(0);
+  const [newContentWordsState, setNewContentWords] = useState<number>(0);
+
+  let oldContentWords = oldContentWordsState;
+  let newContentWords = newContentWordsState;
+
+  //function for incrementing and decrementing words count
 
   return (
     <>
-      <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue px-4 py-16 text-sm ">
-        <div
-          className="flex space-x-2 text-customGray hover:cursor-pointer "
-          onClick={() => {
-            navigator.clipboard.writeText(
-              JSON.stringify(competitorAnalysed.changed_content) || ''
-            );
-          }}
-        >
-          {' '}
-          <span>Click to Copy All</span>
-          <IoCopyOutline size={20} color="gray" />
-        </div>
+      <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue px-4 py-4 text-sm ">
+        <ExpandedBanner
+          querySummary={querySummary}
+          competitorAnalysed={competitorAnalysed}
+        />
+
         {competitorAnalysed.changed_content?.map((change, index) => {
           if (change[0] === '-') {
             const removedChange = printTagIfExists(change);
+            // oldContentWords += wordsCount(removedChange?.value);
             return (
               <RemovedChangeView index={index} removedChange={removedChange} />
             );
           }
           if (change[0] === '+') {
             const addedChange = printTagIfExists(change);
-
+            // newContentWords += wordsCount(addedChange?.value);
             return <AddedChangeView index={index} AddedChange={addedChange} />;
           }
 

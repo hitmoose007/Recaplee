@@ -24,6 +24,8 @@ export type Competitor = {
   is_custom?: boolean;
   content_changed?: number;
   changes_detected?: number;
+  current_content?: CurrentContent[];
+  old_content?: CurrentContent[];
   changed_content?: ChangedContent[];
 };
 type ChangedContent = [
@@ -73,6 +75,16 @@ type ChangedContent = [
         };
   }
 ];
+
+export type CurrentContent = [{
+  h2?: string;
+  p?: string;
+  h1?: string;
+  h3?: string;
+  h4?: string;
+  h5?: string;
+  h6?: string;
+}];
 
 export type Change = {
   tag: string;

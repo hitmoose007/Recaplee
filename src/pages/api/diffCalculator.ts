@@ -180,6 +180,7 @@ export default async function handler(
             changed_content:
               diffArray[index] === undefined || null ? [] : diffArray[index],
             current_content: currentContentArray[index],
+            old_content: competitor.current_content || {},
             changes_detected: changesCountArray[index],
             content_changed: Number.isInteger(
               percentageChangedContentArray[index]

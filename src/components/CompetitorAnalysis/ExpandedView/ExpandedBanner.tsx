@@ -26,7 +26,7 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
         <div className="flex w-1/2 justify-between text-customGray">
           <p>Analysis page date: <span className='font-bold'>{recent_update}</span></p>
           <p>
-            The content had  {' '}
+            The content had  {' '} 
             <span className="font-bold">
             {competitorAnalysed.current_content ?
               JSON.stringify(competitorAnalysed.current_content).split(' ').length: 0}{' '} </span>words

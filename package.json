@@ -13,8 +13,9 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@chakra-ui/react": "^2.7.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
     "@mobiscroll/react-lite": "^4.10.9",
@@ -47,6 +48,7 @@
     "diff": "^5.1.0",
     "diff-match-patch": "^1.0.5",
     "extract-domain": "^2.4.8",
+    "framer-motion": "^10.12.16",
     "json-diff": "^1.0.3",
     "json-diff-kit": "^1.0.14",
     "json-difference": "^1.9.1",

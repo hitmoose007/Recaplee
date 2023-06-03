@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import DashboardView from '../components/HomePageViews/Dashboard';
+import { useEffect } from 'react';
 type Props = {};
 
 const home = (props: Props) => {
@@ -18,8 +19,12 @@ const home = (props: Props) => {
     isPC: true,
   });
 
-  const { page } = useContext(PageContext);
+  const { page,setPage } = useContext(PageContext);
 
+  useEffect(() => {
+    setPage(PageView.DASHBOARD);
+  }
+    , []);
   const [queryResult, setQueryResult] = useState([]);
 
   return (

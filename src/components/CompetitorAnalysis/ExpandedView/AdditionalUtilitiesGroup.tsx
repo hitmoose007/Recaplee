@@ -17,7 +17,7 @@ const AdditionalUtilitiesGroup = ({ index, toBeCopiedText }: Props) => {
         </span>
         <span className="flex justify-end whitespace-nowrap">
           {' '}
-          {wordsCount(toBeCopiedText)} words
+          {(toBeCopiedText.split(' ').length)} words
         </span>
       </div>
     </div>

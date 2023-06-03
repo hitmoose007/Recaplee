@@ -20,7 +20,7 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
             The content had  {' '}
             <span className="font-bold">
             {competitorAnalysed.old_content ?
-              countContentWords(competitorAnalysed.old_content): 0 }{' '}</span>words
+              (JSON.stringify(competitorAnalysed.old_content).split(' ').length): 0 }{' '}</span>words
           </p>
         </div>
         <div className="flex w-1/2 justify-between text-customGray">
@@ -29,7 +29,7 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
             The content had  {' '}
             <span className="font-bold">
             {competitorAnalysed.current_content ?
-              countContentWords(competitorAnalysed.current_content): 0}{' '} </span>words
+              JSON.stringify(competitorAnalysed.current_content).split(' ').length: 0}{' '} </span>words
           </p>
         </div>
       </div>

@@ -15,6 +15,7 @@ export default async function handler(
 ) {
   try {
     const userId = req.cookies.userId;
+    
 
     //get competitors number tracked from database
     const competitorsTracked = await prisma.profiles.findFirst({

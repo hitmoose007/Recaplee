@@ -2,9 +2,47 @@ import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 import { SiHive, SiMarketo, SiMicrosoft } from 'react-icons/si';
 import ActionButton from '@/components/StripeComponents/ActionButton';
 import PricingCard from '@/components/StripeComponents/PricingCard';
-import { ChakraProvider } from '@chakra-ui/react'
-const Subscribe = () => (
-  <ChakraProvider>
+import { ChakraProvider } from '@chakra-ui/react';
+import {useSession} from ''
+
+import { Stripe } from '@stripe/stripe-js';
+import getStripe from '@/utils/getStripe';
+const Subscribe = () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    // Create a Checkout Session.
+    console.log(window.location.origin);
+    const data = await fetch('/api/checkout_sessions', {
+      //set req.body['userId'] = userId
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: '' }),
+    });
+
+    const checkoutSession = await data.json();
+    if ((checkoutSession as any).statusCode === 500) {
+      console.error((checkoutSession as any).message);
+      return;
+    }
+
+    // Redirect to Checkout.
+    const stripe = await getStripe();
+    const { error } = await stripe!.redirectToCheckout({
+      // Make the id field from the Checkout Session creation API response
+      // available to this file, so you can provide it as parameter here
+      // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+      sessionId: checkoutSession.id,
+    });
+    // If `redirectToCheckout` fails due to a browser or network
+    // error, display the localized error message to your customer
+    // using `error.message`.
+    console.warn(error.message);
+  };
+
+  return (
+    <ChakraProvider>
       <Box
         as="section"
         bg={useColorModeValue('gray.50', 'gray.800')}
@@ -68,14 +106,19 @@ const Subscribe = () => (
             }}
             icon={SiMarketo}
             button={
-              <ActionButton variant="outline" borderWidth="2px">
+              <ActionButton
+                onClick={(e) => handleSubmit(e)}
+                variant="outline"
+                borderWidth="2px"
+              >
                 Buy now
               </ActionButton>
             }
           />
         </SimpleGrid>
       </Box>
-</ChakraProvider>
-);
+    </ChakraProvider>
+  );
+};
 
 export default Subscribe;

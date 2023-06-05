@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesBrowserClient} from '@supabase/auth-helpers-nextjs';
 import {
   SessionContextProvider,
   useSession,
@@ -11,7 +11,7 @@ import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import Router from 'next/router';
 export default function App({ Component, pageProps }: AppProps) {
-  const [supabase] = useState(() => createBrowserSupabaseClient());
+  const [supabase] = useState(() => createPagesBrowserClient());
 
   const [page, setPage] = useState(PageView.DASHBOARD);
 //   const session = useSession();

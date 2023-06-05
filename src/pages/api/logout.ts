@@ -8,6 +8,9 @@ export default async function handler(
 ) {
   try {
     // console.log(previousQueries);
+//create supabase client
+
+
     res.status(200).json('logout');
   } catch (error: unknown) {
     if (error instanceof Error) {

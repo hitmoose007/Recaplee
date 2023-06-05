@@ -10,7 +10,6 @@ export default async function handler(
   //   userId: string
 ) {
   const userId = req.cookies.userId;
-  console.log(userId)
   const params = {
     api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
     q: req.body['query'],

@@ -31,6 +31,7 @@ const Home = (props: Props) => {
         // const res = await fetch('/api/getQueries');//change fetch to add user id in req.body
         // const res
         
+        
         let res;
          res = await fetch('/api/getQueries', {
           method: 'POST',
@@ -42,19 +43,19 @@ const Home = (props: Props) => {
           }),
         });
         // check if res.status 409 and send another request
-        if (res.status === 209 || res.status === 500) {
-            console.log('inside forbidden area')
-          res = await fetch('/api/getQueries', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              userId: session?.user?.id,
-            }),
-          });
+        // if (res.status === 209 || res.status === 500) {
+        //     console.log('inside forbidden area')
+        //   res = await fetch('/api/getQueries', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //       userId: session?.user?.id,
+        //     }),
+        //   });
 
-        }
+        // }
 
         const data = await res.json();
 

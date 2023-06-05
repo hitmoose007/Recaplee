@@ -8,12 +8,16 @@ export default async function handler(
 ) {
   try {
     const userId = req.cookies.userId;
-
+    //get req headers
+    // const userIdd = req.headers;
+    // console.log('userIddddddddddddddddddddddd', userIdd)
     //get user id from req.body
     const userIdBody = req.body['userId'];
-    // console.log('heasllo')
-    console.log(userIdBody, 'userIdBody');
+    console.log(userIdBody, 'userIdBody')
     console.log(userId, 'userId');
+    // // console.log('heasllo')
+    // console.log(userIdBody, 'userIdBody');
+    // console.log(userId, 'userId');
     if (userIdBody !== userId) {
       res.status(209).json({
         
@@ -23,7 +27,7 @@ export default async function handler(
       });
     }
     
-
+console.log('inside querrrrrrrrrrrrrrries')
 
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
@@ -44,7 +48,6 @@ export default async function handler(
       take: 15,
     });
 
-    console.log(previousQueries, 'previousQueries');
 
     //  console.log('healo')
     // console.log(previousQueries);

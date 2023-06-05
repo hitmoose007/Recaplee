@@ -8,6 +8,8 @@ import PageTitle from './PageTitle';
 import { signOut } from '@/utils/auth';
 import { supabase } from '@/lib/supabase';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useCookies } from 'react-cookie';
+import { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/SupabaseAuthClient';
 
 type Props = {};
 
@@ -17,6 +19,13 @@ const DesktopBanner = (props: Props) => {
   const router = useRouter();
   const supabase = useSupabaseClient();
 
+  const [cookies, setCookies, removeCookie] = useCookies();
+
+  const handleRemoveCookie = () => {
+    Object.keys(cookies).forEach((cookieName) => {
+      removeCookie(cookieName); // Remove each cookie individually
+    });
+  };
   return (
     <div
       className="flex h-24 w-full justify-between  rounded-b-2xl text-white"
@@ -68,6 +77,8 @@ const DesktopBanner = (props: Props) => {
         </div>
         <div
           onClick={() => {
+
+            // handleRemoveCookie();
             supabase.auth.signOut();
           }}
           className="flex justify-center space-x-4 hover:cursor-pointer"

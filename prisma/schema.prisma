@@ -311,6 +311,7 @@ model profiles {
   query_monitored     Int           @default(0) @db.SmallInt
   competitors_tracked Int           @default(0) @db.SmallInt
   query_research      Int           @default(0) @db.SmallInt
+  stripe_id           String?       @unique
   TargetQuery         TargetQuery[]
   users               users         @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 

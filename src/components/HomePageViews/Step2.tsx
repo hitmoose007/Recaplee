@@ -74,7 +74,6 @@ const Step2 = (props: Props) => {
       customCompetitors: filteredCustomCompetitors,
       userId: userId,
     });
-    console.log('yeh hay tutti', tutti);
     // console.log(filteredCustomCompetitors);
     const response = await fetch('/api/saveQuery', {
       method: 'POST',

@@ -150,7 +150,7 @@ const NewQueryForm = ({ setIsLoading }: Props) => {
           </div>
           <button
             type="submit"
-            className="flex cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] px-12 py-2 font-bold  text-white hover:brightness-90"
+            className="mb-8 md:mb-0 flex cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] px-12 py-2 font-bold  text-white hover:brightness-90"
           >
             <Image
               src="/landscapeIcons/simpleGlass.svg"

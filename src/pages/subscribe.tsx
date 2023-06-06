@@ -11,7 +11,7 @@ import getStripe from '@/utils/getStripe';
 import { stripe } from '@/lib/stripe';
 const Subscribe = () => {
   const session = useSession();
-  const fetchTestPlan = async (e: any) => {
+  const onSubmit = async (e: any, priceId:string) => {
     e.preventDefault();
     // Create a Checkout Session.
     console.log(window.location.origin);
@@ -23,7 +23,7 @@ const Subscribe = () => {
       },
       body: JSON.stringify({
         userId: session?.user.id,
-        priceId: 'price_1N96wGEwJCgTqEWBOtlRv6gQ',
+        priceId: priceId,
       }),
     });
 
@@ -74,7 +74,7 @@ const Subscribe = () => {
             }}
             icon={SiMicrosoft}
             button={
-              <ActionButton variant="outline" borderWidth="2px">
+              <ActionButton onClick={(e)=> onSubmit(e,'price_1N96v9EwJCgTqEWBTMwMEV7F')} variant="outline" borderWidth="2px">
                 Buy now
               </ActionButton>
             }
@@ -92,7 +92,7 @@ const Subscribe = () => {
             icon={SiMarketo}
             button={
               <ActionButton
-                onClick={(e) => fetchTestPlan(e)}
+                onClick={(e) => onSubmit(e,'price_1N96v9EwJCgTqEWBTMwMEV7F' )}
                 variant="outline"
                 borderWidth="2px"
               >

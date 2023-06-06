@@ -16,7 +16,7 @@ const Header = ({ svgPath, description, isBookIcon }: Props) => {
         height={25}
         className=""
       />
-      <div className="text-[32px] font-bold">{description}</div>
+      <div className=" text-2xl md:text-[32px] font-bold">{description}</div>
     </div>
   );
 };

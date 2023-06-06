@@ -14,7 +14,6 @@ export default isLoggedIn(async (req, res, user) => {
       });
     }
 
-    console.log('inside querrrrrrrrrrrrrrries');
 
     const previousQueries = await prisma.targetQuery.findMany({
       select: {

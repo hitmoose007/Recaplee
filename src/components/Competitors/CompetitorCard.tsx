@@ -93,7 +93,7 @@ const CompetitorCard = ({
         </p>
         <div className="flex w-full flex-col">
           <div className="flex justify-between ">
-            <p className="text-[20px] font-bold text-[#705CF6] truncate">{domain}</p>
+            <p className="text-[17px] md:text-[20px] font-bold text-[#705CF6] w-10/12 truncate">{domain}</p>
             {customCompetitor && (
               <Image
                 onClick={() => {
@@ -114,7 +114,7 @@ const CompetitorCard = ({
 
           <p className="font-bold truncate w-8/12 ">{title}</p>
 
-          <div className="flex w-11/12 truncate ">
+          <div className="flex w-9/12 truncate ">
             <a
               href={link}
               className=" cursor-pointer text-clip text-sm hover:underline "

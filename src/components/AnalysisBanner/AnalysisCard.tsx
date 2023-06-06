@@ -53,7 +53,7 @@ const AnalysisCard = ({
   }, []);
 
   return (
-    <div className="flex flex-col items-center  justify-around space-y-2 rounded-full bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:px-4 md:py-4">
+    <div className="flex flex-col items-center rounded-[50px] justify-around space-y-2 md:rounded-full bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:px-4 md:py-4">
       <div className="flex text-customYellow w-3">
         <p className="text-2xl font-bold text-customPurple ">
           {competitor.current_position ||   '#'}

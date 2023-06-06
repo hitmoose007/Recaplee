@@ -19,7 +19,7 @@ const QueryHeader = ({ isCompetitor , highlightedText }: Props) => {
           description="Competitor Analysis: "
         />
       )}
-      <span className="text-[32px] font-bold text-customPurple md:pl-3 ">
+      <span className=" text-2xl md:text-[32px] font-bold text-customPurple md:pl-3 ">
         {highlightedText}
       </span>
     </div>

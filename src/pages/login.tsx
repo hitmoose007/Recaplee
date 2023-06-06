@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import {
-  useSession,
-  useSupabaseClient,
-  useSessionContext,
-  useUser,
-} from '@supabase/auth-helpers-react';
+import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
+
 const Login = () => {
   const { isLoading, supabaseClient, session } = useSessionContext();
   const router = useRouter();
+
   useEffect(() => {
     if (session) {
       router.push('/');
     }
   }, [session, isLoading]);
+
   if (isLoading) return <></>;
 
   if (!session)

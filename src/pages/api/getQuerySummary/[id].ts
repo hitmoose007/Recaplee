@@ -1,26 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
+import isLoggedIn from '@/lib/isLoggedIn';
 
-const prisma = new PrismaClient();
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default isLoggedIn(async (req, res, user) => {
   try {
-    // const id = '02dfe7ac-2708-4312-86bf-2510a710c03b';
-    //extract id from req
-    //how to extract parameters from req
     const { id } = req.query;
-    console.log(req.query, 'the real mvp')
-// console.log(id, 'the real mvp')
+    console.log(req.query, 'the real mvp');
+    // console.log(id, 'the real mvp')
     const queryResult = await prisma.targetQuery.findFirst({
       where: {
         id: id as Prisma.UuidFilter,
       },
     });
-
-    
 
     //check if query match user id
     if (queryResult?.user_id !== req.cookies.userId) {
@@ -50,4 +42,4 @@ export default async function handler(
       res.status(500).json({ error: 'Unknown error occurred' });
     }
   }
-}
+});

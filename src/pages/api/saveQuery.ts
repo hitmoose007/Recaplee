@@ -5,17 +5,14 @@ import extractDomain from 'extract-domain';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { maxCompetitors } from '@/utils/apiHelper';
 // import { prisma } from '../../lib/db';
+import isLoggedIn from '@/lib/isLoggedIn';
 
 const maxPage = 2;
 const maxResults = 10;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default isLoggedIn(async (req, res, user) => {
   try {
-    const userId = req.cookies.userId;
-    
+    const userId = user.id;
 
     //get competitors number tracked from database
     const competitorsTracked = await prisma.profiles.findFirst({
@@ -25,7 +22,6 @@ export default async function handler(
 
     const filteredQuery = req.body['competitors'];
     const customCompetitors = req.body['customCompetitors'];
-
     const totalCompetitors = filteredQuery.length + customCompetitors.length;
 
     if (
@@ -100,4 +96,4 @@ export default async function handler(
       res.status(500).json({ error: 'Unknown error occurred' });
     }
   }
-}
+});

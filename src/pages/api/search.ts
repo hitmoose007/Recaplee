@@ -2,14 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { maxPage, maxResults, maxQueryResearch } from '@/utils/apiHelper';
 import { prisma } from '@/lib/prisma';
 import axios from 'axios';
-
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-  //   userId: string
-) {
-  const userId = req.cookies.userId;
+import isLoggedIn from '@/lib/isLoggedIn';
+
+export default isLoggedIn(async (req, res, user) => {
+  const userId = user.id;
+
   const params = {
     api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
     q: req.body['query'],
@@ -40,17 +38,14 @@ export default async function handler(
       params,
     });
 
-    // console.log('teri maa ki chut')
-    // print the JSON response from VALUE SERP
-
     const topResults = response.data.organic_results.slice(0, maxResults);
 
     const update = await prisma.profiles.update({
       where: { id: userId },
       data: { query_research: { increment: 1 } },
     });
-// console.log(update)
-    
+    // console.log(update)
+
     res.status(200).json(topResults);
   } catch (error: unknown) {
     if (error instanceof Error) {
@@ -61,4 +56,4 @@ export default async function handler(
       res.status(500).json({ error: 'Unknown error occurred' });
     }
   }
-}
+});

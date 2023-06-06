@@ -18,23 +18,18 @@ type Props = {};
 const Home = (props: Props) => {
   const [queryArray, setQueryArray] = useState<QuerySummary[]>([]);
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
-  // const [isEmailEnabled, setIsEmailEnabled] = useState(false);
 
   
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const { page, setPage } = useContext(PageContext);
   const session = useSession();
+
   useEffect(() => {
-    console.log('the body', session?.user?.id);
     const fetchQuery = async () => {
       try {
-        // const res = await fetch('/api/getQueries');//change fetch to add user id in req.body
-        // const res
-        
-        
         let res;
-         res = await fetch('/api/getQueries', {
+        res = await fetch('/api/getQueries', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -43,20 +38,6 @@ const Home = (props: Props) => {
             userId: session?.user?.id,
           }),
         });
-        // check if res.status 409 and send another request
-        // if (res.status === 209 || res.status === 500) {
-        //     console.log('inside forbidden area')
-        //   res = await fetch('/api/getQueries', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //       userId: session?.user?.id,
-        //     }),
-        //   });
-
-        // }
 
         const data = await res.json();
 
@@ -65,12 +46,14 @@ const Home = (props: Props) => {
         console.error(error);
       }
     };
+
     setPage(PageView.DASHBOARD);
+
     if (queryArray.length === 0) {
       setIsLoading(false);
     }
+
     fetchQuery();
-    console.log('inside use effect');
   }, []);
 
   if (isLoading) {

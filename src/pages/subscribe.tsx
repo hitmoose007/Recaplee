@@ -3,12 +3,15 @@ import { SiHive, SiMarketo, SiMicrosoft } from 'react-icons/si';
 import ActionButton from '@/components/StripeComponents/ActionButton';
 import PricingCard from '@/components/StripeComponents/PricingCard';
 import { ChakraProvider } from '@chakra-ui/react';
-import {useSession} from ''
+
+import { useSession } from '@supabase/auth-helpers-react';
 
 import { Stripe } from '@stripe/stripe-js';
 import getStripe from '@/utils/getStripe';
+import { stripe } from '@/lib/stripe';
 const Subscribe = () => {
-  const handleSubmit = async (e: any) => {
+  const session = useSession();
+  const fetchTestPlan = async (e: any) => {
     e.preventDefault();
     // Create a Checkout Session.
     console.log(window.location.origin);
@@ -18,7 +21,10 @@ const Subscribe = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ userId: '' }),
+      body: JSON.stringify({
+        userId: session?.user.id,
+        priceId: 'price_1N96wGEwJCgTqEWBOtlRv6gQ',
+      }),
     });
 
     const checkoutSession = await data.json();
@@ -95,19 +101,17 @@ const Subscribe = () => {
           />
           <PricingCard
             data={{
-              price: '$29',
-              name: 'Marketing UI',
+              price: '$5',
+              name: 'Test',
               features: [
-                'All application UI components',
-                'Lifetime access',
-                'Use on unlimited projects',
-                'Free Updates',
+                'Test plan',
+                
               ],
             }}
             icon={SiMarketo}
             button={
               <ActionButton
-                onClick={(e) => handleSubmit(e)}
+                onClick={(e) => fetchTestPlan(e)}
                 variant="outline"
                 borderWidth="2px"
               >

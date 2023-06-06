@@ -20,6 +20,7 @@ const Home = (props: Props) => {
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
   // const [isEmailEnabled, setIsEmailEnabled] = useState(false);
 
+  
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const { page, setPage } = useContext(PageContext);

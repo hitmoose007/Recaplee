@@ -1,11 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Stripe from 'stripe';
 import { prisma } from '../../../lib/prisma';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2022-11-15', // You can use a specific API version if needed
-});
-
-// ...
+import { stripe } from '@/lib/stripe';
+import Stripe from 'stripe';
+// ...i
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,9 +11,11 @@ export default async function handler(
   // Create Checkout Sessions from body params.
   try {
     // const userId = req.cookies.userId;
+    const priceId = req.body['priceId'];
     const userId = req.body['userId'];
-    const origin = req.headers.origin || 'http://localhost:3000';
+    // const origin = req.headers.origin || 'http://localhost:3000';
 
+    console.log('the real mvp', userId);
     //find from prisma user id and see if he has stripe id
 
     const user = await prisma.profiles.findFirst({
@@ -28,16 +27,22 @@ export default async function handler(
       },
     });
 
-
     const params: Stripe.Checkout.SessionCreateParams = {
+      customer: user?.stripe_id ?? undefined,
       payment_method_types: ['card'],
       mode: 'subscription',
       line_items: [
         {
-          price: 'price_1N96wGEwJCgTqEWBOtlRv6gQ',
+          price: priceId,
           quantity: 1,
         },
       ],
+      subscription_data: {
+        metadata: {
+          userId: userId,
+          priceId: priceId,
+        },
+      },
       success_url: `http://localhost:3000/subscribe`,
       cancel_url: `http://localhost:3000/subscribe`,
     };
@@ -45,7 +50,7 @@ export default async function handler(
     const checkoutSession: Stripe.Checkout.Session =
       await stripe.checkout.sessions.create(params);
 
-      console.log(checkoutSession, 'checkoutSession')
+    // console.log(checkoutSession, 'checkoutSession');
     res.status(200).json(checkoutSession);
   } catch (error: any) {
     console.error(error.message);

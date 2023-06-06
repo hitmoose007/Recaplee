@@ -22,6 +22,9 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
+  if(req.nextUrl.pathname.startsWith('/api/checkout_sessions/webhook')){
+    return res;
+  }
 //   if (req.nextUrl.pathname.startsWith('/api/logout')) {
 //     console.log('logout');
 //     const res = await supabase.auth.signOut();

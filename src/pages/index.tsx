@@ -19,12 +19,11 @@ const home = (props: Props) => {
     isPC: true,
   });
 
-  const { page,setPage } = useContext(PageContext);
+  const { page, setPage } = useContext(PageContext);
 
   useEffect(() => {
     setPage(PageView.DASHBOARD);
-  }
-    , []);
+  }, []);
   const [queryResult, setQueryResult] = useState([]);
 
   return (

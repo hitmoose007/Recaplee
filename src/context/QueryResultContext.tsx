@@ -1,6 +1,6 @@
-import {createContext } from 'react'
+import { createContext } from 'react';
 
 export const QueryResultContext = createContext({
-    queryResult: [],
-    setQueryResult: (queryResult: any) => {}
+  queryResult: [],
+  setQueryResult: (queryResult: any) => {},
 });

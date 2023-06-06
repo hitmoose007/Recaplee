@@ -1,17 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 import { prisma } from '../../../lib/prisma';
+import isLoggedIn from '@/lib/isLoggedIn';
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
   apiVersion: '2022-11-15', // You can use a specific API version if needed
 });
 
 // ...
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  // Create Checkout Sessions from body params.
+export default isLoggedIn(async (req, res, user) => {
   try {
     // const userId = req.cookies.userId;
     const userId = req.body['userId'];
@@ -27,7 +24,6 @@ export default async function handler(
         stripe_id: true,
       },
     });
-
 
     const params: Stripe.Checkout.SessionCreateParams = {
       payment_method_types: ['card'],
@@ -45,7 +41,7 @@ export default async function handler(
     const checkoutSession: Stripe.Checkout.Session =
       await stripe.checkout.sessions.create(params);
 
-      console.log(checkoutSession, 'checkoutSession')
+    console.log(checkoutSession, 'checkoutSession');
     res.status(200).json(checkoutSession);
   } catch (error: any) {
     console.error(error.message);
@@ -53,4 +49,4 @@ export default async function handler(
       error: 'An error occurred while creating the checkout session.',
     });
   }
-}
+});

@@ -1,33 +1,20 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import isLoggedIn from '@/lib/isLoggedIn';
 
 import { prisma } from '@/lib/prisma';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default isLoggedIn(async (req, res, user) => {
   try {
-    const userId = req.cookies.userId;
-    //get req headers
-    // const userIdd = req.headers;
-    // console.log('userIddddddddddddddddddddddd', userIdd)
-    //get user id from req.body
+    const userId = user.id;
     const userIdBody = req.body['userId'];
-    console.log(userIdBody, 'userIdBody')
-    console.log(userId, 'userId');
-    // // console.log('heasllo')
-    // console.log(userIdBody, 'userIdBody');
-    // console.log(userId, 'userId');
+
     if (userIdBody !== userId) {
       res.status(209).json({
-        
         id: userId,
         idBody: userIdBody,
-        
       });
     }
-    
-console.log('inside querrrrrrrrrrrrrrries')
+
+    console.log('inside querrrrrrrrrrrrrrries');
 
     const previousQueries = await prisma.targetQuery.findMany({
       select: {
@@ -48,19 +35,16 @@ console.log('inside querrrrrrrrrrrrrrries')
       take: 15,
     });
 
-
     //  console.log('healo')
     // console.log(previousQueries);
     res.status(200).json(previousQueries);
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error
-      res.status(500).json({ error: error.message
-     });
-
+      res.status(500).json({ error: error.message });
     } else {
       // handle error of unknown type
       res.status(500).json({ error: 'Unknown error occurred' });
     }
   }
-}
+});

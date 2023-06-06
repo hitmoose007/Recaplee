@@ -6,9 +6,10 @@ import {
   maxResults,
   filterResponse,
 } from '@/utils/apiHelper';
-import { PrismaClient, Prisma } from '@prisma/client';
 import { diff } from 'json-diff';
-const prisma = new PrismaClient();
+
+import { prisma } from '@/lib/prisma';
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

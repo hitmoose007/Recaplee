@@ -30,9 +30,10 @@ function Layout({ children }: { children: React.ReactNode }) {
       if (!session && router.pathname !== '/login') {
         router.push('/login');
       }
-      if(session && user.stripe_id === null){
-        router.push('/subscribe')
-      }
+    //   if(session && user.stripe_id === null && router.pathname !== '/subscribe'){
+    //     console.log('no stripe id')
+    //     router.push('/subscribe')
+    //   }
     }
     console.log('eah');
   }, [isLoading, session]);
@@ -80,7 +81,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   //     return <></>;
   //   }
   //   console.log(session)
-  if (session) {
+  if (session ) {
     return (
       <>
         <div className={`${nunito.variable} font-sans `}>

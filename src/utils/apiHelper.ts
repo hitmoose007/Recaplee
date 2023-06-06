@@ -100,3 +100,12 @@ export function parseObject(jsonObject: any) {
 
   return outputArray;
 }
+
+export const validSubscription = (renewalDate: Date) => {
+    const today = new Date();
+    if (today > renewalDate) {
+      return false;
+    }
+    return true;
+    };
+    

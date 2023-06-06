@@ -8,12 +8,14 @@ import { FormContext } from '@/context/FormContext';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import DomainSelect from './DomainSelect';
+import {useUserContext} from '@/context/user'
 import { QueryResultContext } from '../../context/QueryResultContext';
 type Props = {
   setIsLoading: (isLoading: boolean) => void;
 };
 
 const NewQueryForm = ({ setIsLoading }: Props) => {
+    const {user} = useUserContext()
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult, setQueryResult } = useContext(QueryResultContext);
   const { setPage } = useContext(PageContext);
@@ -40,6 +42,7 @@ const NewQueryForm = ({ setIsLoading }: Props) => {
           isPC: formState.isPC,
           countryDomain: formState.countryDomain,
           country: formState.country,
+          userId: user?.id,
         }),
       });
 
@@ -142,7 +145,7 @@ const NewQueryForm = ({ setIsLoading }: Props) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="-mt-8 mb-3 text-[#4B5563] md:hidden lg:block lg:truncate  ">
-            <span className="font-semibold  ">5/20</span> monthly query
+            <span className="font-semibold  ">{user.query_research}/{user.maxMonitoredQuery}</span> monthly query
             researches used
           </div>
           <button

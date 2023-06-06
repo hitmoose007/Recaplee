@@ -1,12 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { maxPage, maxResults, maxQueryResearch } from '@/utils/apiHelper';
+import { maxPage, maxResults } from '@/utils/apiHelper';
 import { prisma } from '@/lib/prisma';
 import axios from 'axios';
+import { validSubscription } from '@/utils/apiHelper';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import isLoggedIn from '@/lib/isLoggedIn';
 
 export default isLoggedIn(async (req, res, user) => {
   const userId = user.id;
+  const userIdBody = req.body['userId'];
+
+  if (userId !== userIdBody) {
+    res
+      .status(403)
+      .json({ error: 'You are not authorized to perform this action' });
+    return;
+  }
 
   const params = {
     api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
@@ -18,15 +27,29 @@ export default isLoggedIn(async (req, res, user) => {
   };
 
   try {
-    const data = await prisma.profiles.findFirst({
+    const profile = await prisma.profiles.findFirst({
       where: { id: userId },
-      select: { query_research: true },
     });
 
     if (
-      data?.query_research !== null &&
-      data?.query_research !== undefined &&
-      data?.query_research >= maxQueryResearch
+      profile?.stripe_id !== null &&
+      profile?.stripe_id !== undefined &&
+      profile?.renewal_date !== null &&
+      profile?.renewal_date !== undefined
+    ) {
+      const subscription = validSubscription(profile.renewal_date);
+      if (subscription === false) {
+        res.status(403).json({ error: 'You do not have valid subscription' });
+        return;
+      }
+    }
+
+    if (
+      profile?.query_research !== null &&
+      profile?.query_research !== undefined &&
+      profile.maxResearchQuery !== null &&
+      profile.maxResearchQuery !== undefined &&
+      profile?.query_research >= profile.maxResearchQuery
     ) {
       res
         .status(403)

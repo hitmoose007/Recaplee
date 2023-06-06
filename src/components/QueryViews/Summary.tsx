@@ -10,6 +10,8 @@ import AnalysisCard from '@/components/AnalysisBanner/AnalysisCard';
 import { useRouter } from 'next/router';
 import ChangesBanner from '@/components/ChangesBanner/ChangesBanner';
 import { SerpContext, useSerpContext } from '@/context/SerpChangesContext';
+import Image from 'next/image';
+import DeleteButton from './DeleteButton';
 
 type Props = {
   querySummary: QuerySummary;
@@ -23,17 +25,20 @@ const Summary = ({
   competitorArray,
 }: Props) => {
   const sortedCompetitors = competitorArray.sort((a, b) => {
-  return  (a.current_position ?? 0) - (b.current_position ?? 0);
+    return (a.current_position ?? 0) - (b.current_position ?? 0);
   });
 
   const { serpChanges, setSerpChanges } = useSerpContext();
   return (
     <>
       <SerpContext.Provider value={{ serpChanges, setSerpChanges }}>
-        <QueryHeader
-          isCompetitor={false}
-          highlightedText={querySummary?.query_name || ''}
-        />
+        <div className="flex justify-between">
+          <QueryHeader
+            isCompetitor={false}
+            highlightedText={querySummary?.query_name || ''}
+          />
+          <DeleteButton queryId={querySummary?.id} />
+        </div>
         <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
         <div className="md:flex md:justify-between">
           <StaticQuery querySummary={querySummary} isQuerySummaryPage={true} />

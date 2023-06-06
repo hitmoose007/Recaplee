@@ -4,29 +4,58 @@ import axios from 'axios';
 import extractDomain from 'extract-domain';
 import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { maxCompetitors } from '@/utils/apiHelper';
+import { validSubscription } from '@/utils/apiHelper';
 // import { prisma } from '../../lib/db';
 import isLoggedIn from '@/lib/isLoggedIn';
-
-const maxPage = 2;
-const maxResults = 10;
 
 export default isLoggedIn(async (req, res, user) => {
   try {
     const userId = user.id;
+    const userIdBody = req.body['userId'];
+
+    if (userId !== userIdBody) {
+      res
+        .status(403)
+        .json({ error: 'You are not authorized to perform this action' });
+      return;
+    }
 
     //get competitors number tracked from database
-    const competitorsTracked = await prisma.profiles.findFirst({
+    const profile = await prisma.profiles.findFirst({
       where: { id: userId },
-      select: { competitors_tracked: true },
     });
+
+    if (
+      profile?.stripe_id !== null &&
+      profile?.stripe_id !== undefined &&
+      profile?.renewal_date !== null &&
+      profile?.renewal_date !== undefined
+    ) {
+      const subscription = validSubscription(profile.renewal_date);
+      if (subscription === false) {
+        res.status(403).json({ error: 'You do not have valid subscription' });
+        return;
+      }
+    }
 
     const filteredQuery = req.body['competitors'];
     const customCompetitors = req.body['customCompetitors'];
     const totalCompetitors = filteredQuery.length + customCompetitors.length;
 
     if (
-      totalCompetitors + competitorsTracked?.competitors_tracked >=
-      maxCompetitors
+      profile?.maxScrape !== null &&
+      profile?.maxScrape !== undefined &&
+      totalCompetitors + profile?.competitors_tracked >= profile?.maxScrape
+    ) {
+      res.status(403).json({
+        error: `You have reached your competitors limit.`,
+      });
+      return;
+    }
+    if (
+      profile?.maxMonitoredQuery!== null &&
+      profile?.maxMonitoredQuery !== undefined &&
+      profile?.query_monitored>profile?.maxMonitoredQuery
     ) {
       res.status(403).json({
         error: `You have reached your competitors limit.`,

@@ -13,7 +13,7 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
     const recent_update = new Date(querySummary.recent_update).toLocaleDateString();
   return (
     <>
-      <div className="flex space-x-20">
+      <div className="md:flex space-x-20 hidden">
         <div className="flex w-1/2 justify-between text-customGray">
           <p>Analysis page date: <span className='font-bold'>{old_update}</span></p>
           <p>

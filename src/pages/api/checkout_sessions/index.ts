@@ -43,6 +43,7 @@ export default isLoggedIn(async (req, res, user) => {
           priceId: priceId,
         },
       },
+      allow_promotion_codes: true,
       success_url: `http://localhost:3000/subscribe`,
       cancel_url: `http://localhost:3000/subscribe`,
     };

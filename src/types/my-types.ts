@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 export interface QuerySummary {
   id: string;
   competitors_tracked: number;
@@ -12,6 +13,19 @@ export interface QuerySummary {
   serp_chnages: number;
   changes_per_website: number;
 }
+
+export type User = {
+  id?: string;
+  email?: string;
+  query_monitored?: number;
+  competitors_tracked?: number;
+  query_research?: number;
+  stripe_id?: string;
+  renewal_date?: Date;
+  maxResearchQuery?: number;
+  maxMonitoredQuery?: number;
+  maxScrape?: number;
+};
 
 export type Competitor = {
   current_position?: number;
@@ -76,15 +90,17 @@ type ChangedContent = [
   }
 ];
 
-export type CurrentContent = [{
-  h2?: string;
-  p?: string;
-  h1?: string;
-  h3?: string;
-  h4?: string;
-  h5?: string;
-  h6?: string;
-}];
+export type CurrentContent = [
+  {
+    h2?: string;
+    p?: string;
+    h1?: string;
+    h3?: string;
+    h4?: string;
+    h5?: string;
+    h6?: string;
+  }
+];
 
 export type Change = {
   tag: string;

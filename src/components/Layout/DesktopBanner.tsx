@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import PageTitle from './PageTitle';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
+import {useUserContext} from '@/context/user';
 type Props = {};
 
 const DesktopBanner = (props: Props) => {
@@ -13,6 +14,8 @@ const DesktopBanner = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
   const supabase = useSupabaseClient();
+  const {user, setUser} = useUserContext();
+  const renewalDate = new Date(user.renewal_date || '');
 
   return (
     <div
@@ -42,13 +45,13 @@ const DesktopBanner = (props: Props) => {
           <p className="mr-3 font-bold">Monthly Limits:</p>
           <div className="flex flex-col ">
             <p>
-              <span className="text-[#30A3E4]">10/15 </span> query monitored
+              <span className="text-[#30A3E4]">{ user.query_monitored}/{user.maxMonitoredQuery} </span> query monitored
             </p>
             <p>
-              <span className="text-[#6864F3]">15/30</span> query research
+              <span className="text-[#6864F3]">{user.query_research}/{user.maxResearchQuery}</span> query research
             </p>
             <p>
-              <span className="text-[#993ED0]">123/150</span> scrape
+              <span className="text-[#993ED0]">{user.competitors_tracked}/{user.maxScrape}</span> scrape
             </p>
           </div>
         </div>
@@ -60,7 +63,7 @@ const DesktopBanner = (props: Props) => {
             Your Subscription
           </button>
           <div className="text-center">
-            Renewal on <span className="font-bold">12-05-23</span>
+            Renewal on <span className="font-bold">{renewalDate.toLocaleDateString()}</span>
           </div>
         </div>
         <div

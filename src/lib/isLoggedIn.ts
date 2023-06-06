@@ -1,5 +1,5 @@
 import {
-  createServerSupabaseClient,
+    createPagesServerClient,
   SupabaseClient,
   User,
 } from '@supabase/auth-helpers-nextjs';
@@ -14,7 +14,7 @@ type LoggedInHandler<T> = (
 
 export default function isLoggedIn<T>(handler: LoggedInHandler<T>) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
-    const supabaseServerClient = createServerSupabaseClient({
+    const supabaseServerClient = createPagesServerClient({
       req,
       res,
     });

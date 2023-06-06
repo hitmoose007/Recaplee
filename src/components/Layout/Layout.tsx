@@ -7,6 +7,7 @@ import MobileBanner from '@/components/Layout/MobileBanner';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import { useRouter } from 'next/router';
+import { useUserContext } from '@/context/user';
 import {
   useSession,
   useSupabaseClient,
@@ -22,10 +23,15 @@ function Layout({ children }: { children: React.ReactNode }) {
   const { session, isLoading } = useSessionContext();
   const router = useRouter();
   const [page, setPage] = useState<PageView>(PageView.DASHBOARD);
+  const { user, setUser } = useUserContext();
+  
   useEffect(() => {
     if (!isLoading) {
       if (!session && router.pathname !== '/login') {
         router.push('/login');
+      }
+      if(session && user.stripe_id === null){
+        router.push('/subscribe')
       }
     }
     console.log('eah');
@@ -35,6 +41,31 @@ function Layout({ children }: { children: React.ReactNode }) {
   //     //cause page refresh anyways
   //     router.push('/');
   //   }, [router]);
+  //fetch user
+
+  useEffect(() => {
+    if (session) {
+      const fetchUser = async () => {
+        try {
+          const res = await fetch('/api/getUser', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: session?.user?.id,
+            }),
+          });
+          const data = await res.json();
+          setUser(data);
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchUser();
+    }
+  }, [session]);
   if (router.pathname === '/login') {
     return (
       <>
@@ -49,7 +80,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   //     return <></>;
   //   }
   //   console.log(session)
-  if (session)
+  if (session) {
     return (
       <>
         <div className={`${nunito.variable} font-sans `}>
@@ -64,7 +95,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </>
     );
-
+  }
   return <></>;
 }
 

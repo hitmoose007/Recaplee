@@ -6,10 +6,12 @@ import { useState } from 'react';
 import Layout from '@/components/Layout/Layout';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
+import { UserContext, useUserContext } from '@/context/user';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabase] = useState(() => createBrowserSupabaseClient());
   const [page, setPage] = useState(PageView.DASHBOARD);
+  const [user, setUser] = useState({});
 
   return (
     <SessionContextProvider
@@ -17,9 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
       initialSession={pageProps.initialSession}
     >
       <PageContext.Provider value={{ page, setPage }}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <UserContext.Provider value={{ user, setUser }}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </UserContext.Provider>
       </PageContext.Provider>
     </SessionContextProvider>
   );

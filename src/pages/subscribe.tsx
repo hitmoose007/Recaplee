@@ -56,7 +56,7 @@ const Subscribe = () => {
         px={{ base: '4', md: '8' }}
       >
         <SimpleGrid
-          columns={{ base: 1, lg: 3 }}
+          columns={{ base: 1, lg: 2 }}
           spacing={{ base: '8', lg: '0' }}
           maxW="7xl"
           mx="auto"
@@ -65,13 +65,11 @@ const Subscribe = () => {
         >
           <PricingCard
             data={{
-              price: '$29',
-              name: 'Application UI',
+              price: '$10',
+              name: 'Bronze',
               features: [
-                'All application UI components',
-                'Lifetime access',
-                'Use on unlimited projects',
-                'Free Updates',
+                'Bronze plan',
+                
               ],
             }}
             icon={SiMicrosoft}
@@ -81,24 +79,7 @@ const Subscribe = () => {
               </ActionButton>
             }
           />
-          <PricingCard
-            zIndex={1}
-            isPopular
-            transform={{ lg: 'scale(1.05)' }}
-            data={{
-              price: '$10',
-              name: 'Bundle',
-              features: [
-                'All application UI components',
-                'Lifetime access',
-                'Use on unlimited projects',
-                'Use on unlimited projects',
-                'Free Updates',
-              ],
-            }}
-            icon={SiHive}
-            button={<ActionButton>Buy now</ActionButton>}
-          />
+         
           <PricingCard
             data={{
               price: '$5',

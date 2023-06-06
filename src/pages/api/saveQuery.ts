@@ -26,6 +26,13 @@ export default isLoggedIn(async (req, res, user) => {
     });
 
     if (
+      profile?.stripe_id === null ||
+      profile?.stripe_id === undefined ||
+      (profile?.renewal_date === null && profile?.renewal_date === undefined)
+    ) {
+      res.status(403).json({ error: 'You do not have valid subscription' });
+      return;
+    } else if (
       profile?.stripe_id !== null &&
       profile?.stripe_id !== undefined &&
       profile?.renewal_date !== null &&
@@ -53,12 +60,12 @@ export default isLoggedIn(async (req, res, user) => {
       return;
     }
     if (
-      profile?.maxMonitoredQuery!== null &&
+      profile?.maxMonitoredQuery !== null &&
       profile?.maxMonitoredQuery !== undefined &&
-      profile?.query_monitored>profile?.maxMonitoredQuery
+      profile?.query_monitored > profile?.maxMonitoredQuery
     ) {
       res.status(403).json({
-        error: `You have reached your competitors limit.`,
+        error: `You have reached your query monitor limits.`,
       });
       return;
     }

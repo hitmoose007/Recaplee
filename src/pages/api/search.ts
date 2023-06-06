@@ -32,6 +32,14 @@ export default isLoggedIn(async (req, res, user) => {
     });
 
     if (
+      profile?.stripe_id === null ||
+      profile?.stripe_id === undefined ||
+      profile?.renewal_date === null ||
+      profile?.renewal_date === undefined
+    ) {
+      res.status(403).json({ error: 'You do not have valid subscription' });
+      return;
+    } else if (
       profile?.stripe_id !== null &&
       profile?.stripe_id !== undefined &&
       profile?.renewal_date !== null &&
@@ -39,7 +47,7 @@ export default isLoggedIn(async (req, res, user) => {
     ) {
       const subscription = validSubscription(profile.renewal_date);
       if (subscription === false) {
-        res.status(403).json({ error: 'You do not have valid subscription' });
+        res.status(403).json({ error: 'Your subscription has expired' });
         return;
       }
     }

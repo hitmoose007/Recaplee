@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import { useRouter } from 'next/router';
-import {useUserContext} from '@/context/user';
+import { useUserContext } from '@/context/user';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import PageTitle from './PageTitle';
 
@@ -14,8 +14,8 @@ const DesktopBanner = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
   const supabase = useSupabaseClient();
-    const {user} = useUserContext();
-
+  const { user } = useUserContext();
+  const date = new Date(user.renewal_date || '');
 
   return (
     <div
@@ -38,14 +38,14 @@ const DesktopBanner = (props: Props) => {
           className="hover:cursor-pointer"
         />
         <div className="mt-3 flex-col justify-center space-y-2 ">
-          <div className="text-center">
-            Renewal on <span className="font-bold">12-05-23</span>
-          </div>
+         { user.renewal_date && <div className="text-center">
+            Renewal on <span className="font-bold">{date.toLocaleDateString()}</span>
+          </div>}
           <button
             className="h-8 w-40 rounded-full bg-[#705CF6] font-bold hover:brightness-90"
             onClick={() => console.log('subscription clicked!')}
           >
-            Your Subscription
+            {user.renewal_date ? ' Your Subscription' : 'Subscribe Now'}
           </button>
         </div>
         {/* <PageTitle /> */}
@@ -68,16 +68,26 @@ const DesktopBanner = (props: Props) => {
           height={20}
           className=""
         />
+        {user.renewal_date && <>
         <p className="mr-3 font-bold">Monthly Limits:</p>
         <p>
-          <span className="text-[#30A3E4]">{user.query_monitored}/{user.maxMonitoredQuery}</span> query monitored
+          <span className="text-[#30A3E4]">
+            {user.query_monitored}/{user.maxMonitoredQuery}
+          </span>{' '}
+          query monitored
         </p>
         <p>
-          <span className="text-[#6864F3]">{user.query_research}/{user.maxResearchQuery}</span> query research
+          <span className="text-[#6864F3]">
+            {user.query_research}/{user.maxResearchQuery}
+          </span>{' '}
+          query research
         </p>
         <p>
-          <span className="text-[#993ED0]">{user.competitors_tracked}/{user.maxScrape}</span> scrape
-        </p>
+          <span className="text-[#993ED0]">
+            {user.competitors_tracked}/{user.maxScrape}
+          </span>{' '}
+          scrape
+        </p></>}
       </div>
     </div>
   );

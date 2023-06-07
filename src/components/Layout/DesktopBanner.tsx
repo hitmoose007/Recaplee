@@ -41,7 +41,9 @@ const DesktopBanner = (props: Props) => {
       </div>
 
       <div className="mr-8 flex  items-center justify-between space-x-12 text-sm ">
+        {user.renewal_date &&
         <div className="flex ">
+            
           <p className="mr-3 font-bold">Monthly Limits:</p>
           <div className="flex flex-col ">
             <p>
@@ -54,17 +56,18 @@ const DesktopBanner = (props: Props) => {
               <span className="text-[#993ED0]">{user.competitors_tracked}/{user.maxScrape}</span> scrape
             </p>
           </div>
-        </div>
+        </div>}
         <div className="mt-3 flex-col justify-center space-y-2 ">
           <button
             className="h-[35px] w-[150px] rounded-full bg-[#705CF6] font-bold hover:brightness-90"
-            onClick={() => console.log('subscription clicked!')}
+            onClick={() => {setPage(PageView.SUBSCRIPTION); router.push('/subscribe')}}
           >
-            Your Subscription
+           {user.renewal_date ? 'Your Subscription': 'Subscribe Now'}
           </button>
+          {user.renewal_date&&
           <div className="text-center">
             Renewal on <span className="font-bold">{renewalDate.toLocaleDateString()}</span>
-          </div>
+          </div>}
         </div>
         <div
           onClick={() => {

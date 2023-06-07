@@ -5,4 +5,5 @@ export enum PageView {
   STEP2VIEW= 'step2',
   SUMMARYVIEW = 'summary',
     COMPETITORVIEW = 'competitor',
+    SUBSCRIPTION = 'subscription',
 }

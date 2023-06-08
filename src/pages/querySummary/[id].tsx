@@ -16,7 +16,7 @@ import CompetitorAnalysis from '@/components/QueryViews/CompetitorAnalysis';
 import { useUserContext } from '@/context/user';
 type Props = {};
 
-const querySummary = (props: Props) => {
+const QuerySummary = (props: Props) => {
   const [querySummary, setQuerySummary] = useState<QuerySummary>();
   const [loading, setLoading] = useState(true);
   const [competitorArray, setCompetitorArray] = useState<Competitor[]>([]);
@@ -52,14 +52,14 @@ const querySummary = (props: Props) => {
       }
       fetchQuerySummary();
     }
-  }, [router]);
+  }, [router, user]);
 
   useEffect(() => {
     if (querySummary) {
       setLoading(false);
     }
     setPage(PageView.SUMMARYVIEW);
-  }, [querySummary]);
+  }, [querySummary, setPage]);
 
   if (loading) {
     return <></>;
@@ -85,4 +85,4 @@ const querySummary = (props: Props) => {
     );
 };
 
-export default querySummary;
+export default QuerySummary;

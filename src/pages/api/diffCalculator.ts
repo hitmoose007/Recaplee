@@ -1,9 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
 import axios from 'axios';
 import {
   parseObject,
-  maxPage,
-  maxResults,
   filterResponse,
 } from '@/utils/apiHelper';
 import { diff } from 'json-diff';
@@ -11,7 +9,6 @@ import { diff } from 'json-diff';
 import { prisma } from '@/lib/prisma';
 
 export default async function handler(
-  req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
@@ -46,50 +43,6 @@ export default async function handler(
       },
     });
 
-    const topResultsArray = await Promise.all(
-      filteredQueries.map(async (query, index) => {
-        const params = {
-          api_key: process.env.NEXT_PUBLIC_VALUESERP_KEY,
-          q: query.query_name,
-          max_page: maxPage,
-          google_domain: query.google_domain?.toLocaleLowerCase(),
-          gl: query.country?.toLocaleLowerCase(),
-          device: query.is_pc === true ? 'desktop' : 'mobile',
-        };
-
-        let response;
-        try {
-          response = await axios.get('https://api.valueserp.com/search', {
-            params,
-          });
-        } catch (error) {
-          // console.log(error)
-          return [null];
-        }
-        // print the JSON response from VALUE SERP
-        const topResults = response?.data.organic_results.slice(0, maxResults);
-        competitors.map(async (competitor, index) => {
-          if (competitor.query_id === query.id) {
-            let isChanged = false;
-            // console.log("found matching query")
-            competitor.last_position = competitor.current_position;
-            console.log(competitor.last_position, 'last position');
-            topResults.forEach((result: any) => {
-              if (result.link === competitor.link) {
-                competitor.current_position = result.position_overall;
-                isChanged = true;
-                return;
-              }
-            });
-            if (isChanged === false) {
-              competitor.current_position = 10;
-            }
-          }
-        });
-
-        return topResults;
-      })
-    );
 
     const changedContentArray = await Promise.all(
       competitors.map(async (competitor) => {
@@ -122,7 +75,7 @@ export default async function handler(
 
     const currentContentArray: any[] = [];
 
-    const filteredContentArray = changedContentArray.map((item, index) => {
+    const filteredContentArray = changedContentArray.map((item) => {
       const parsedContent = parseObject(
         item?.[0]?.result?.[0]?.items?.[0]?.page_content?.main_topic
       );
@@ -197,20 +150,6 @@ export default async function handler(
     );
 
     //update the filtered queries time stamp
-    const tasks_ready = await Promise.all(
-      filteredQueries.map(async (query) => {
-        const updatedQuery = await prisma.targetQuery.update({
-          where: {
-            id: query.id,
-          },
-          data: {
-            recent_update: currentDate,
-            old_update: query.recent_update,
-          },
-        });
-        return updatedQuery;
-      })
-    );
 
     res.status(200).json({
       content_response,

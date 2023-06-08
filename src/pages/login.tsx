@@ -12,7 +12,7 @@ const Login = () => {
     if (session) {
       router.push('/');
     }
-  }, [session, isLoading]);
+  }, [session, isLoading,router]);
 
   if (isLoading) return <></>;
 

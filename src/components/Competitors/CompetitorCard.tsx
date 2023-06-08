@@ -29,29 +29,7 @@ const CompetitorCard = ({
 }: Props) => {
   const [isSelected, setIsSelected] = useState(false);
   const onDelete = () => {
-    // if (isSelected) {
-    //   handleSelectCompetitor(position);
-
-    //   if (selectedCompetitors) {
-    //     //extracted negative values
-    //     const negativeValues = selectedCompetitors.filter((item) => {
-    //       return item <= 0;
-    //     });
-
-    //     //loop over negative values and fine if any of them are greater than position
-    //     if (negativeValues.length > 0) {
-    //       return;
-    //     }
-    //     for (let i = 0; i < negativeValues.length; i++) {
-    //       if (negativeValues[i] !== undefined) {
-    //         if (negativeValues[i] > position) {
-    //           handleSelectCompetitor(position + 1);
-    //           break;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+  
 
     setIsSelected(false);
 

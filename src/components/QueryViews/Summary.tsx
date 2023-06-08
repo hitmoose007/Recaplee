@@ -73,6 +73,7 @@ const Summary = ({
             if (querySummary) {
               return (
                 <AnalysisCard
+                key={competitor.id}
                   setCompetitorAnalysed={setCompetitorAnalysed}
                   competitor={competitor}
                   querySummary={querySummary}

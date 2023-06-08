@@ -11,7 +11,7 @@ import DashboardView from '../components/HomePageViews/Dashboard';
 import { useEffect } from 'react';
 type Props = {};
 
-const home = (props: Props) => {
+const Home = (props: Props) => {
   const [formState, setFormState] = useState({
     query: '',
     country: 'SE',
@@ -37,4 +37,4 @@ const home = (props: Props) => {
   );
 };
 
-export default home;
+export default Home;

@@ -45,7 +45,7 @@ const ReplaceChangeView = ({ tag, index }: Props) => {
           {response?.map((item, index) => {
             if (item[0] === 0) {
               //span affecting padding how?
-              return <span>{item[0] === 0 && <> {item[1]}</>}</span>;
+              return <span key={index}>{item[0] === 0 && <> {item[1]}</>}</span>;
             }
             if (item[0] == -1) {
               return <>{<span className="text-customRed"> {item[1]}</span>}</>;
@@ -62,7 +62,7 @@ const ReplaceChangeView = ({ tag, index }: Props) => {
         {response?.map((item, index) => {
           if (item[0] === 0) {
             //span affecting padding how?
-            return <span>{item[0] === 0 && <> {item[1]}</>}</span>;
+            return <span key={index}>{item[0] === 0 && <> {item[1]}</>}</span>;
           }
 
           if (item[0] == 1) {

@@ -51,7 +51,7 @@ const CustomCompetitorInput = ({
       <div className="relative bottom-24 mt-2 flex h-16 w-full flex-col justify-between  space-y-4 px-8 ">
         <div className="flex justify-between font-bold ">
           <span className="text-customPurple">
-            Insert a link to a competitor's page:
+            Insert a link to a competitor &apos;s page:
           </span>
           <span className="text-customGray">{totalCustomCompetitors}/3</span>
         </div>

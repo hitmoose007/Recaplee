@@ -37,13 +37,13 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
             const removedChange = printTagIfExists(change);
             // oldContentWords += wordsCount(removedChange?.value);
             return (
-              <RemovedChangeView index={index} removedChange={removedChange} />
+              <RemovedChangeView key={index} index={index} removedChange={removedChange} />
             );
           }
           if (change[0] === '+') {
             const addedChange = printTagIfExists(change);
             // newContentWords += wordsCount(addedChange?.value);
-            return <AddedChangeView index={index} AddedChange={addedChange} />;
+            return <AddedChangeView key={index} index={index} AddedChange={addedChange} />;
           }
 
           if (change[0] === '~') {
@@ -54,7 +54,7 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
             if (!tag) {
               return null;
             }
-            return <ReplaceChangeView index={index} tag={tag} />;
+            return <ReplaceChangeView key={index}index={index} tag={tag} />;
           }
         })}
       </div>

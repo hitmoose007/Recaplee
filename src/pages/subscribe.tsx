@@ -51,7 +51,7 @@ const Subscribe = () => {
     <ChakraProvider>
       <Box
         as="section"
-        bg={useColorModeValue('gray.50', 'gray.800')}
+        // bg={useColorModeValue('gray.50', 'gray.800')}
         py="14"
         px={{ base: '4', md: '8' }}
       >

@@ -38,12 +38,18 @@ const DesktopBanner = (props: Props) => {
           className="hover:cursor-pointer"
         />
         <div className="mt-3 flex-col justify-center space-y-2 ">
-         { user.renewal_date && <div className="text-center">
-            Renewal on <span className="font-bold">{date.toLocaleDateString()}</span>
-          </div>}
+          {user.renewal_date && (
+            <div className="text-center">
+              Renewal on{' '}
+              <span className="font-bold">{date.toLocaleDateString()}</span>
+            </div>
+          )}
           <button
             className="h-8 w-40 rounded-full bg-[#705CF6] font-bold hover:brightness-90"
-            onClick={() => console.log('subscription clicked!')}
+            onClick={() => {
+              setPage(PageView.SUBSCRIPTION);
+              router.push('/subscribe');
+            }}
           >
             {user.renewal_date ? ' Your Subscription' : 'Subscribe Now'}
           </button>
@@ -68,26 +74,29 @@ const DesktopBanner = (props: Props) => {
           height={20}
           className=""
         />
-        {user.renewal_date && <>
-        <p className="mr-3 font-bold">Monthly Limits:</p>
-        <p>
-          <span className="text-[#30A3E4]">
-            {user.query_monitored}/{user.maxMonitoredQuery}
-          </span>{' '}
-          query monitored
-        </p>
-        <p>
-          <span className="text-[#6864F3]">
-            {user.query_research}/{user.maxResearchQuery}
-          </span>{' '}
-          query research
-        </p>
-        <p>
-          <span className="text-[#993ED0]">
-            {user.competitors_tracked}/{user.maxScrape}
-          </span>{' '}
-          scrape
-        </p></>}
+        {user.renewal_date && (
+          <>
+            <p className="mr-3 font-bold">Monthly Limits:</p>
+            <p>
+              <span className="text-[#30A3E4]">
+                {user.query_monitored}/{user.maxMonitoredQuery}
+              </span>{' '}
+              query monitored
+            </p>
+            <p>
+              <span className="text-[#6864F3]">
+                {user.query_research}/{user.maxResearchQuery}
+              </span>{' '}
+              query research
+            </p>
+            <p>
+              <span className="text-[#993ED0]">
+                {user.competitors_tracked}/{user.maxScrape}
+              </span>{' '}
+              scrape
+            </p>
+          </>
+        )}
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import Summary from '@/components/QueryViews/Summary';
 import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import CompetitorAnalysis from '@/components/QueryViews/CompetitorAnalysis';
+import { useUserContext } from '@/context/user';
 type Props = {};
 
 const querySummary = (props: Props) => {
@@ -22,6 +23,7 @@ const querySummary = (props: Props) => {
 
   const [competitorAnalysed, setCompetitorAnalysed] = useState<Competitor>();
   const { page, setPage } = React.useContext(PageContext);
+  const { user } = useUserContext();
   const router = useRouter();
 
   useEffect(() => {
@@ -29,10 +31,24 @@ const querySummary = (props: Props) => {
 
     if (id !== undefined) {
       async function fetchQuerySummary() {
-        const res = await fetch(`/api/getQuerySummary/${id}`);
-        const json = await res.json();
-        setQuerySummary(json.querySummary);
-        setCompetitorArray(json.competitors);
+        try {
+          const res = await fetch(`/api/getQuerySummary/${id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+
+            body: JSON.stringify({
+              userId: user?.id,
+            }),
+          });
+
+          const json = await res.json();
+          setQuerySummary(json.querySummary);
+          setCompetitorArray(json.competitors);
+        } catch (error: unknown) {
+          if (error instanceof Error) alert(error.message);
+        }
       }
       fetchQuerySummary();
     }

@@ -6,9 +6,12 @@ import countWords from 'words-count';
 type Props = {
   competitorAnalysed: Competitor;
   querySummary: QuerySummary;
+  removedCopyAllText: string;
+    addedCopyAllText: string;
 };
 
-const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
+const ExpandedBanner = ({ competitorAnalysed, querySummary,addedCopyAllText,removedCopyAllText }: Props) => {
+
     const old_update = new Date(querySummary.old_update).toLocaleDateString();
     const recent_update = new Date(querySummary.recent_update).toLocaleDateString();
   return (
@@ -33,11 +36,12 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
           </p>
         </div>
       </div>
+      <div className="flex space-x-20">
       <div
-        className="flex space-x-2 text-customGray hover:cursor-pointer "
+        className="flex w-1/2 space-x-2 text-customGray hover:cursor-pointer "
         onClick={() => {
           navigator.clipboard.writeText(
-            JSON.stringify(competitorAnalysed.changed_content) || ''
+            removedCopyAllText || ''
           );
         }}
       >
@@ -45,14 +49,22 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary }: Props) => {
         <span>Click to Copy All</span>
         <IoCopyOutline size={20} color="gray" />
       </div>
+      <div
+        className="flex w-1/2  space-x-2 text-customGray hover:cursor-pointer "
+        onClick={() => {
+          navigator.clipboard.writeText(
+            addedCopyAllText || ''
+          );
+        }}
+      >
+        {' '}
+        <span>Click to Copy All</span>
+        <IoCopyOutline size={20} color="gray" />
+      </div>
+      </div>
     </>
   );
 };
 
-const countContentWords = (content: CurrentContent[]) => {
-  //iterate over keys and count words in string and add all of them up
 
-  const wordsCount = countWords(JSON.stringify(content));
-  return wordsCount;
-};
 export default ExpandedBanner;

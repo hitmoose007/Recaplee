@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 
 import { Change } from '@/types/my-types';
 import HeaderTagView from '../HeaderTagView';
@@ -6,8 +6,18 @@ import AdditionalUtilitiesGroup from './AdditionalUtilitiesGroup';
 type Props = {
   index: number;
   removedChange: Change;
+  setRemovedCopyAllTextHandler: (text: string) => void;
+  hasRenderedRef: React.MutableRefObject<boolean>;
 };
-const RemovedChangeView = ({ removedChange, index }: Props) => {
+const RemovedChangeView = ({ hasRenderedRef, removedChange, index,setRemovedCopyAllTextHandler }: Props) => {
+    
+    useEffect(() => {
+    if (hasRenderedRef.current) {
+      setRemovedCopyAllTextHandler(removedChange?.value);
+    }
+    }, [removedChange?.value,]);
+    
+    
   return (
     <div key={index} className="flex space-x-8 md:space-x-20">
       <div

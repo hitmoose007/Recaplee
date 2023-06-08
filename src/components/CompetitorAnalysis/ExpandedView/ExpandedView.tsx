@@ -1,14 +1,11 @@
-import { parsedChanges1 } from '@/utils/test';
-import { IoCopyOutline } from 'react-icons/io5';
-import { diff_match_patch } from 'diff-match-patch';
-import HeaderTagView from '../HeaderTagView';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Competitor, QuerySummary } from '@/types/my-types';
 import AddedChangeView from './AddedChangeView';
 import RemovedChangeView from './RemovedChangeView';
 import ReplaceChangeView from './ReplaceChangeView';
 import ExpandedBanner from './ExpandedBanner';
 import wordsCount from 'words-count';
+import { useEffect } from 'react';
 type Props = {
   competitorAnalysed: Competitor;
   querySummary: QuerySummary;
@@ -16,13 +13,22 @@ type Props = {
 
 const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   //   const [parsedChanges, setParsedChanges] = useState<string[][]>([]);
-  const [oldContentWordsState, setOldContentWords] = useState<number>(0);
-  const [newContentWordsState, setNewContentWords] = useState<number>(0);
+  const hasRenderedRef = useRef(false);
+  const [removedCopyAllText, setRemovedCopyAllText] = useState<string>('');
+  const [addedCopyAllText, setAddedCopyAllText] = useState<string>('');
 
-  let oldContentWords = oldContentWordsState;
-  let newContentWords = newContentWordsState;
+  const setRemovedCopyAllTextHandler = (text: string) => {
+    //add it incrementally
+    setRemovedCopyAllText((prev) => prev + text);
+  };
+  const setAddedCopyAllTextHandler = (text: string) => {
+    setAddedCopyAllText((prev) => prev + text);
+  };
 
-  //function for incrementing and decrementing words count
+  useEffect(() => {
+    
+    hasRenderedRef.current = true;
+  }, []);
 
   return (
     <>
@@ -30,20 +36,38 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
         <ExpandedBanner
           querySummary={querySummary}
           competitorAnalysed={competitorAnalysed}
+          removedCopyAllText={removedCopyAllText}
+          addedCopyAllText={addedCopyAllText}
         />
 
         {competitorAnalysed.changed_content?.map((change, index) => {
           if (change[0] === '-') {
             const removedChange = printTagIfExists(change);
+            // setRemovedCopyAllTextHandler(removedChange?.value);
             // oldContentWords += wordsCount(removedChange?.value);
             return (
-              <RemovedChangeView key={index} index={index} removedChange={removedChange} />
+              <RemovedChangeView
+              hasRenderedRef={hasRenderedRef}
+                setRemovedCopyAllTextHandler={setRemovedCopyAllTextHandler}
+                key={index}
+                index={index}
+                removedChange={removedChange}
+              />
             );
           }
           if (change[0] === '+') {
             const addedChange = printTagIfExists(change);
             // newContentWords += wordsCount(addedChange?.value);
-            return <AddedChangeView key={index} index={index} AddedChange={addedChange} />;
+            // setAddedCopyAllTextHandler(addedChange?.value);
+            return (
+              <AddedChangeView
+                setAddedCopyAllTextHandler={setAddedCopyAllTextHandler}
+                hasRenderedRef={hasRenderedRef}
+                key={index}
+                index={index}
+                AddedChange={addedChange}
+              />
+            );
           }
 
           if (change[0] === '~') {
@@ -54,7 +78,16 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
             if (!tag) {
               return null;
             }
-            return <ReplaceChangeView key={index}index={index} tag={tag} />;
+            return (
+              <ReplaceChangeView
+                hasRenderedRef={hasRenderedRef}
+                setRemovedCopyAllTextHandler={setRemovedCopyAllTextHandler}
+                setAddedCopyAllTextHandler={setAddedCopyAllTextHandler}
+                key={index}
+                index={index}
+                tag={tag}
+              />
+            );
           }
         })}
       </div>

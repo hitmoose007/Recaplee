@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Change } from '@/types/my-types';
 import HeaderTagView from '../HeaderTagView';
 import AdditionalUtilitiesGroup from './AdditionalUtilitiesGroup';
 type Props = {
   index: number;
   AddedChange: Change;
+  setAddedCopyAllTextHandler: (text: string) => void;
+  hasRenderedRef: React.MutableRefObject<boolean>;
 };
 
-const AddedChangeView = ({ index, AddedChange }: Props) => {
+const AddedChangeView = ({
+  index,
+  AddedChange,
+  hasRenderedRef,
+  setAddedCopyAllTextHandler,
+}: Props) => {
+  useEffect(() => {
+    if (hasRenderedRef.current) {
+      setAddedCopyAllTextHandler(AddedChange?.value);
+    }
+  }, [AddedChange?.value,]);
+
   return (
     <div key={index} className="flex space-x-8 md:space-x-20">
       <div
         className={`flex w-1/2 justify-between rounded-[30px] bg-[#E0E8F0]  px-4 py-2   text-sm font-bold  md:space-x-4  `}
       >
         <p className={'invisible'}>{AddedChange?.value}</p>
-        <span className="text-[9px] text-customGray">#{index+1}</span>
+        <span className="text-[9px] text-customGray">#{index + 1}</span>
       </div>
       <div
-        className={` flex w-1/2 justify-between rounded-[30px] text-customGreen bg-white  px-4 py-2   text-sm font-bold  md:space-x-4  `}
+        className={` flex w-1/2 justify-between rounded-[30px] bg-white px-4  py-2 text-sm   font-bold text-customGreen  md:space-x-4  `}
       >
         <p>
           <HeaderTagView tag={AddedChange?.tag || ''} />

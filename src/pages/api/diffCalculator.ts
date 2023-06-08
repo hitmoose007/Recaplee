@@ -1,4 +1,4 @@
-import type { NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 import {
   parseObject,
@@ -9,6 +9,7 @@ import { diff } from 'json-diff';
 import { prisma } from '@/lib/prisma';
 
 export default async function handler(
+    req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {

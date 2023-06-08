@@ -58,7 +58,10 @@ const QuerySummary = (props: Props) => {
     if (querySummary) {
       setLoading(false);
     }
+    if (page === PageView.COMPETITORVIEW)
+    return
     setPage(PageView.SUMMARYVIEW);
+    
   }, [querySummary, setPage]);
 
   if (loading) {

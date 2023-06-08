@@ -16,49 +16,54 @@ const AnalysisCard = ({
   competitor,
   querySummary,
 }: Props) => {
-  const [contentColor, setContentColor] = useState('');
-  const [changesColor, setChangesColor] = useState('');
+  let contentColorValue = '';
+  let changesColorValue = '';
   const [positionChange, setPositionChange] = useState<number>();
   const { setPage } = useContext(PageContext);
-  const { serpChanges, setSerpChanges } = useSerpContext();
-  const contentChangedValue = competitor.content_changed || 0;
-  const changesValue = competitor.changes_detected || 0;
   const old_update = new Date(querySummary.old_update).toLocaleDateString();
   const recent_update = new Date(
     querySummary.recent_update
   ).toLocaleDateString();
 
-  useEffect(() => {
-    if (contentChangedValue > 25) {
-      setContentColor('customRed');
-    } else if (contentChangedValue > 10 && contentChangedValue < 25) {
-      setContentColor('customYellow');
+  if (competitor.content_changed !== undefined) {
+    if (competitor.content_changed > 25) {
+      contentColorValue = 'customRed';
+    } else if (
+      competitor.content_changed > 10 &&
+      competitor.content_changed < 25
+    ) {
+      contentColorValue = 'customYellow';
     } else {
-      setContentColor('customGreen');
+      contentColorValue = 'customGreen';
     }
+  }
 
-    if (changesValue > 25) {
-      setChangesColor('customRed');
-    } else if (changesValue > 10 && changesValue < 25) {
-      setChangesColor('customYellow');
+  if (competitor.changes_detected !== undefined) {
+    if (competitor.changes_detected > 25) {
+      changesColorValue = 'customRed';
+    } else if (
+      competitor.changes_detected > 10 &&
+      competitor.changes_detected < 25
+    ) {
+      changesColorValue = 'customYellow';
     } else {
-      setChangesColor('customGreen');
+      changesColorValue = 'customGreen';
     }
-  }, []);
+  }
 
   useEffect(() => {
     if (competitor.last_position && competitor.current_position) {
       setPositionChange(competitor.last_position - competitor.current_position);
     }
-  }, []);
+  }, [competitor]);
 
   return (
-    <div className="flex flex-col items-center rounded-[50px] justify-around space-y-2 md:rounded-full bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:px-4 md:py-4">
-      <div className="flex text-customYellow w-3">
+    <div className="flex flex-col items-center justify-around space-y-2 rounded-[50px] bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:rounded-full md:px-4 md:py-4">
+      <div className="flex w-3 text-customYellow">
         <p className="text-2xl font-bold text-customPurple ">
-          {competitor.current_position ||   '#'}
+          {competitor.current_position || '#'}
         </p>
-        {positionChange!== undefined && positionChange!== 0 && (
+        {positionChange !== undefined && positionChange !== 0 && (
           <p
             className={`text-xs font-extrabold ${
               positionChange < 0 ? 'text-customRed ' : 'text-customGreen'
@@ -94,13 +99,13 @@ const AnalysisCard = ({
         <p className="text-sm md:mt-1">Most recent update</p>
       </div>
       <div className="hidden text-center md:flex md:flex-col">
-        <p className={`font-bold   text-${contentColor} `}>
-          {competitor.content_changed}%
+        <p className={`font-bold   text-${contentColorValue} `}>
+          {competitor.content_changed || 0}%
         </p>
         <p className="text-sm md:mt-1">of content changed</p>
       </div>
       <div className="flex flex-col text-center">
-        <p className={`font-bold    text-${changesColor} `}>{changesValue}</p>
+        <p className={`font-bold    text-${changesColorValue} `}>{competitor.changes_detected || 0}</p>
         <p className="text-sm md:mt-1">Changes detected</p>
       </div>
 

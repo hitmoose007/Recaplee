@@ -66,7 +66,7 @@ const CompetitorCard = ({
         <p className="text-[20px] font-bold text-[#705CF6]">
           {customCompetitor ? '#' : position}
         </p>
-        <div className="flex w-11/12 flex-col">
+        <div className="flex w-9/12 md:w-11/12 flex-col">
           <div className="flex justify-between ">
             <p className="w-10/12 truncate text-[17px] font-bold text-[#705CF6] md:text-[20px]">
               {domain}

@@ -85,7 +85,6 @@ export default async function handler(
               null,
             maxScrape:
               (price.metadata.maxScrape && +price.metadata.maxScrape) || null,
-            query_monitored: 0,
             query_research: 0,
             competitors_tracked: 0,
           },

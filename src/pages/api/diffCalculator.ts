@@ -13,6 +13,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+
+
+    //check for secret key for cron job in headers
+    const secretKey = req.headers['secret-key'];
+    if (secretKey !== process.env.SECRET_KEY) {
+        res.status(403).json({ error: 'You are not authorized to perform this action' });
+        return;
+    }
+    
+
     const currentDate = new Date();
 
     const allQueries = await prisma.targetQuery.findMany({});

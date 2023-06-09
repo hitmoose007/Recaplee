@@ -72,6 +72,9 @@ function getSerpChanges(competitors: Competitor[]) {
     if (
       competitor.current_position === undefined ||
       competitor.last_position === undefined
+      || competitor.current_position === null ||
+        competitor.last_position === null
+        
     )
       return;
     if (competitor.current_position - competitor.last_position !== 0) {

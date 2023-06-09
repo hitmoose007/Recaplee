@@ -11,16 +11,15 @@ import 'react-toggle/style.css';
 import { useSession } from '@supabase/auth-helpers-react';
 import { PageView } from '@/utils/enums';
 import { PageContext } from '@/context/PageContext';
-import { QuerySummary } from '@/types/my-types';
+import { Competitor, QuerySummary } from '@/types/my-types';
 import Link from 'next/link';
 type Props = {};
 
 const Home = (props: Props) => {
   const [queryArray, setQueryArray] = useState<QuerySummary[]>([]);
   const [isEmailEnabled, setIsEmailEnabled] = useState(false);
-
+  const [competitorArray, setCompetitorArray] = useState<Competitor[]>([]);
   
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const { page, setPage } = useContext(PageContext);
   const session = useSession();
@@ -69,7 +68,7 @@ const Home = (props: Props) => {
         description={`These are the queries that are currently monitored. We will analyze and report to you the changes that have been made on your competitors’ website.`}
       />
 
-      <div className="mt-4 flex-col   rounded-[30px] bg-[#EEF6FF] py-4 md:flex md:w-auto   md:flex-row md:flex-wrap md:space-x-8 md:space-y-5 md:px-0">
+      <div className="mt-4 flex-col min-h-[260px]  rounded-[30px] bg-[#EEF6FF] py-4 md:flex md:w-auto   md:flex-row md:flex-wrap md:space-x-8 md:space-y-5 md:px-0">
         <Image
           onClick={() => setPage(PageView.STEP1VIEW)}
           className="mx-auto cursor-pointer hover:brightness-50 md:mx-0 md:ml-8 md:mt-5"
@@ -85,6 +84,7 @@ const Home = (props: Props) => {
               <Link key={index} href={`/querySummary/${query.id}`}>
                 <QueryCards
                   key={query.id}
+                  id={query.id}
                   queryTitle={query.query_name || ''}
                   countryCode={query.country || ''}
                   competitorsTracked={query.competitors_tracked || 0}

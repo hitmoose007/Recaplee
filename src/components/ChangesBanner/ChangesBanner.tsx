@@ -4,7 +4,7 @@ import { Competitor, QuerySummary } from '@/types/my-types';
 import { PageView } from '@/utils/enums';
 import { PageContext } from '@/context/PageContext';
 import { useContext } from 'react';
-import { useSerpContext } from '@/context/SerpChangesContext';
+import {getAverageChangesPerWebsite } from '@/utils/helper'
 type Props = {
   competitors: Competitor[];
   competitorAnalysed?: Competitor;
@@ -81,16 +81,3 @@ function getSerpChanges(competitors: Competitor[]) {
   return serpChanges;
 }
 
-function getAverageChangesPerWebsite(competitors: Competitor[]) {
-   let averageChangesPerWebsite = 0;
-    competitors.forEach((competitor) => {
-
-        if (competitor.changes_detected === undefined) return;
-        averageChangesPerWebsite += competitor.changes_detected;
-    });
-
-    console.log(averageChangesPerWebsite)
-    console.log(competitors.length)
-    return averageChangesPerWebsite / competitors.length;
-
-    }

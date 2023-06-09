@@ -145,7 +145,7 @@ const NewQueryForm = ({ setIsLoading }: Props) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="-mt-8 mb-3 text-[#4B5563] md:hidden lg:block lg:truncate  ">
-            <span className="font-semibold  ">{user.query_research}/{user.maxMonitoredQuery}</span> monthly query
+            <span className="font-semibold  ">{user.query_research}/{user.maxResearchQuery}</span> monthly query
             researches used
           </div>
           <button

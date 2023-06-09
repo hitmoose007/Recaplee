@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useState, useEffect, useContext } from 'react';
 
 type Props = {
-  selectedCompetitors?: number[];
+  selectedCompetitors?: string[];
   totalCustomCompetitors?: number;
   setTotalCustomCompetitors?: (totalCustomCompetitors: number) => void;
   customCompetitor?: boolean;
@@ -12,7 +12,7 @@ type Props = {
   title: string;
   link: string;
   domain: string;
-  handleSelectCompetitor: (competitorKey: number) => void;
+  handleSelectCompetitor: (competitorKey: string) => void;
 };
 
 const CompetitorCard = ({
@@ -29,8 +29,6 @@ const CompetitorCard = ({
 }: Props) => {
   const [isSelected, setIsSelected] = useState(false);
   const onDelete = () => {
-  
-
     setIsSelected(false);
 
     if (setCustomCompetitorArray) {
@@ -43,19 +41,18 @@ const CompetitorCard = ({
         setTotalCustomCompetitors(totalCustomCompetitors - 1);
     }
   };
-
   useEffect(() => {
     if (selectedCompetitors) {
-        if (selectedCompetitors.includes(position)) {
-            setIsSelected(true);
-        }
+      if (selectedCompetitors.includes(link)) {
+        setIsSelected(true);
+      }
     }
-    }, [selectedCompetitors]);
-    
+  }, [selectedCompetitors]);
+
   return (
     <div
       onClick={() => {
-        handleSelectCompetitor(position);
+        handleSelectCompetitor(link);
 
         setIsSelected(!isSelected);
       }}
@@ -71,13 +68,15 @@ const CompetitorCard = ({
         </p>
         <div className="flex w-full flex-col">
           <div className="flex justify-between ">
-            <p className="text-[17px] md:text-[20px] font-bold text-[#705CF6] w-10/12 truncate">{domain}</p>
+            <p className="w-10/12 truncate text-[17px] font-bold text-[#705CF6] md:text-[20px]">
+              {domain}
+            </p>
             {customCompetitor && (
               <Image
                 onClick={() => {
-                  handleSelectCompetitor(position);
+                  handleSelectCompetitor(link);
                   if (!isSelected) {
-                    handleSelectCompetitor(position);
+                    handleSelectCompetitor(link);
                   }
                   onDelete();
                 }}
@@ -90,7 +89,7 @@ const CompetitorCard = ({
             )}
           </div>
 
-          <p className="font-bold truncate w-8/12 ">{title}</p>
+          <p className="w-8/12 truncate font-bold ">{title}</p>
 
           <div className="flex w-9/12 truncate ">
             <a

@@ -20,7 +20,7 @@ const QueryCards = ({
   lastUpdate,
 }: Props) => {
   const [competitorArray, setCompetitorArray] = useState([]);
-  const [totalChanges, setTotalChanges] = useState(0);
+  const [totalChanges, setTotalChanges] = useState<number>();
   const userSession = useSession();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const QueryCards = ({
     }
   }, [ competitorArray]);
 
-  if(competitorArray.length === 0) return (<></>)
+//   if(competitorArray.length === 0) return (<></>)
   return (
     <div className="md:mx-none mx-auto my-6  flex h-[160px] w-[180px] flex-col items-center justify-between rounded-[30px] bg-white    p-3 hover:cursor-pointer hover:brightness-95">
       <ReactCountryFlag
@@ -66,8 +66,8 @@ const QueryCards = ({
 
       <div className="flex flex-col space-y-1 text-xs text-[#4B5563]">
         <p className="">{competitorsTracked} competitors tracked</p>
-        {totalChanges === 0 && <p> Last update: {lastUpdate} </p>}
-        {totalChanges > 0 && (
+        {totalChanges!== undefined && totalChanges === 0 && <p> Last update: {lastUpdate} </p>}
+        {totalChanges!== undefined && totalChanges > 0 && (
           <p className="-ml-[10px] text-customGreen">
             &#x2022; {totalChanges} changes detected
           </p>

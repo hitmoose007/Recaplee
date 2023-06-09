@@ -2,13 +2,18 @@ import React, { useState, useContext } from 'react';
 import Image from 'next/image';
 import validUrl from 'valid-url';
 import { TotalCustomCompetitorsContext } from '../../context/TotalCustomCompetitorsContext';
+import { Competitor } from '@prisma/client';
 type Props = {
+    customCompetitorArray: string[];
+    queryResult: Competitor[];
   setCustomCompetitorArray: React.Dispatch<React.SetStateAction<string[]>>;
   totalCustomCompetitors: number;
   setTotalCustomCompetitors: (totalCustomCompetitors: number) => void;
 };
 
 const CustomCompetitorInput = ({
+    customCompetitorArray,
+    queryResult,
   setCustomCompetitorArray,
   totalCustomCompetitors,
   setTotalCustomCompetitors,
@@ -18,6 +23,13 @@ const CustomCompetitorInput = ({
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+
+    //check if custom competitor is already in the array
+    if (customCompetitorArray.includes(competitorInput) || queryResult.find((competitor) => competitor.link === competitorInput)) {
+        alert('This competitor is already in the list');
+        return;
+    }
+
     if (!validUrl.isUri(competitorInput)) {
       alert('Please enter a valid URL');
       return;

@@ -13,6 +13,7 @@ import { PageView } from '../../utils/enums';
 import CustomCompetitorInput from '../Competitors/CustomCompetitorInput';
 import extractDomain from 'extract-domain';
 import useUserId from '../../hooks/useUserId';
+import { link } from 'fs';
 interface queryResult {
   position_overall: number;
   title: string;
@@ -26,23 +27,21 @@ const Step2 = (props: Props) => {
   // const prisma = new PrismaClient();
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult } = useContext(QueryResultContext);
-  const [selectedCompetitors, setSelectedCompetitors] = useState<number[]>([]);
-  const { page, setPage } = useContext(PageContext);
+  const [selectedCompetitors, setSelectedCompetitors] = useState<string[]>([]);
+  const { setPage } = useContext(PageContext);
   const [totalCustomCompetitors, setTotalCustomCompetitors] = useState(0);
   const [customCompetitorArray, setCustomCompetitorArray] = useState<string[]>(
     []
   );
   const userId = useUserId();
 
-  const handleSelectCompetitor = (competitorKey: number) => {
-    // console.log('trying to udpate selected competitors')
-    setSelectedCompetitors((prevSelectedCompetitors: any) =>
+  const handleSelectCompetitor = (competitorKey: string) => {
+    setSelectedCompetitors((prevSelectedCompetitors: string[]) =>
       prevSelectedCompetitors.includes(competitorKey)
-        ? prevSelectedCompetitors.filter((key: number) => key !== competitorKey)
+        ? prevSelectedCompetitors.filter((key: string) => key !== competitorKey)
         : [...prevSelectedCompetitors, competitorKey]
     );
   };
-
   const handleSave = async () => {
     if (selectedCompetitors.length === 0 && totalCustomCompetitors === 0) {
       alert('Please select at least one competitor');
@@ -50,31 +49,24 @@ const Step2 = (props: Props) => {
     }
 
     const filteredQuery = queryResult.filter((item: queryResult) => {
-      return selectedCompetitors.includes(item.position_overall);
+      return selectedCompetitors.includes(item.link);
     });
 
+    // const selectedCustomCompetitors = selectedCompetitors.filter(
+    //   (item: string) => {
+    //     return item <= 0;
+    //   }
+    // );
+    //use custom competitor array to filter out selected competetitors
     const selectedCustomCompetitors = selectedCompetitors.filter(
-      (item: number) => {
-        return item <= 0;
+      (item: string) => {
+        if (customCompetitorArray.includes(item)) {
+          return item;
+        }
+        return ;
       }
     );
 
-    const filteredCustomCompetitors = customCompetitorArray.filter(
-      (item: string, index: number) => {
-        return selectedCustomCompetitors.includes(index * -1);
-      }
-    );
-    const tutti = JSON.stringify({
-      query: formState.query,
-      country: formState.country,
-      countryDomain: formState.countryDomain,
-      isPC: formState.isPC,
-      competitors: filteredQuery,
-      competitors_tracked: filteredQuery.length + customCompetitorArray.length,
-      customCompetitors: filteredCustomCompetitors,
-      userId: userId,
-    });
-    // console.log(filteredCustomCompetitors);
     const response = await fetch('/api/saveQuery', {
       method: 'POST',
       headers: {
@@ -87,13 +79,15 @@ const Step2 = (props: Props) => {
         isPC: formState.isPC,
         competitors: filteredQuery,
         competitors_tracked:
-          filteredQuery.length + customCompetitorArray.length,
-        customCompetitors: filteredCustomCompetitors,
+        filteredQuery.length + customCompetitorArray.length,
+        customCompetitors: selectedCustomCompetitors,
         userId: userId,
       }),
     });
+
+    
     const data = await response.json();
-    //check if error then throw alert
+    // //check if error then throw alert
     if (data.error) {
       alert(data.error);
       return;
@@ -153,7 +147,7 @@ const Step2 = (props: Props) => {
               <CompetitorCard
                 selectedCompetitors={selectedCompetitors}
                 customCompetitor={true}
-                key={index * -1}
+                key={competitor}
                 position={index * -1}
                 title={competitor}
                 link={competitor}
@@ -165,7 +159,10 @@ const Step2 = (props: Props) => {
               />
             );
           })}
+
           <CustomCompetitorInput
+            customCompetitorArray={customCompetitorArray}
+            queryResult={queryResult}
             totalCustomCompetitors={totalCustomCompetitors}
             setTotalCustomCompetitors={setTotalCustomCompetitors}
             setCustomCompetitorArray={setCustomCompetitorArray}

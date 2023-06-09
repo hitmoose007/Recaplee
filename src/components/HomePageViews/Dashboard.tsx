@@ -81,7 +81,10 @@ const Home = (props: Props) => {
         {Array.isArray(queryArray) &&
           queryArray.map((query: QuerySummary, index) => {
             return (
-              <Link key={index} href={`/querySummary/${query.id}`}>
+
+                <div key={query.id}>
+              <a  href={`/querySummary/${query.id}`}>
+                
                 <QueryCards
                   key={query.id}
                   id={query.id}
@@ -94,7 +97,7 @@ const Home = (props: Props) => {
                       : ''
                   }
                 />
-              </Link>
+              </a></div>
             );
           })}
       </div>

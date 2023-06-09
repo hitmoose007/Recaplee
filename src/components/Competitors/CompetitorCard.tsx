@@ -56,7 +56,7 @@ const CompetitorCard = ({
 
         setIsSelected(!isSelected);
       }}
-      className={`h-[101px] w-[100%] cursor-pointer  rounded-[30px] bg-white hover:brightness-95 ${
+      className={`h-[101px] w-full cursor-pointer  rounded-[30px] bg-white hover:brightness-95 ${
         isSelected
           ? 'border-[3px] border-[#7E5DEB]'
           : 'border-[3px] border-transparent'
@@ -66,7 +66,7 @@ const CompetitorCard = ({
         <p className="text-[20px] font-bold text-[#705CF6]">
           {customCompetitor ? '#' : position}
         </p>
-        <div className="flex w-full flex-col">
+        <div className="flex w-11/12 flex-col">
           <div className="flex justify-between ">
             <p className="w-10/12 truncate text-[17px] font-bold text-[#705CF6] md:text-[20px]">
               {domain}
@@ -91,12 +91,12 @@ const CompetitorCard = ({
 
           <p className="w-8/12 truncate font-bold ">{title}</p>
 
-          <div className="flex w-9/12 truncate ">
+          <div className="flex w-9/12 truncate max-w-40 ">
             <a
               href={link}
-              className=" cursor-pointer text-clip text-sm hover:underline "
+              className=" cursor-pointer mr-2  text-clip text-sm hover:underline "
             >
-              <span className=" mr-2  "> {link}</span>
+                {link}
             </a>
             <a
               href={link}

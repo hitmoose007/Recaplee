@@ -29,8 +29,6 @@ const ReplaceChangeView = ({
   dmp.diff_cleanupSemantic(response);
 
   //   console.log('response', response);
-  let toBeCopiedRemovedString = '';
-  let toBeCopiedAddedString = '';
 
   useEffect(() => {
     if (hasRenderedRef.current) {
@@ -69,10 +67,7 @@ const ReplaceChangeView = ({
             }
           })}
         </div>
-        <AdditionalUtilitiesGroup
-          index={index}
-          toBeCopiedText={toBeCopiedRemovedString}
-        />
+        <AdditionalUtilitiesGroup index={index} toBeCopiedText={removedText} />
       </div>
       <div
         className={`flex w-1/2 justify-between rounded-[30px] bg-white  px-4  py-2  text-sm  font-bold `}
@@ -95,10 +90,7 @@ const ReplaceChangeView = ({
           })}
         </div>
 
-        <AdditionalUtilitiesGroup
-          index={index}
-          toBeCopiedText={toBeCopiedAddedString}
-        />
+        <AdditionalUtilitiesGroup index={index} toBeCopiedText={addedText} />
       </div>
     </div>
   );

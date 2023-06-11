@@ -52,16 +52,19 @@ const CustomCompetitorInput = ({
   
 
   return (
-    <div className="md:flex md:flex-col items-center justify-center hidden ">
+    <div className="md:flex md:flex-col items-center justify-center hidden  ">
       <Image
         src="/competitorBorder.svg"
         width={1000}
         height={100}
+
         alt="competitor border"
+        // sizes={obj}
+        className=" hidden xl:block   "
       />
 
-      <div className="relative bottom-24 mt-2 flex h-16 w-full flex-col justify-between  space-y-4 px-8 ">
-        <div className="flex justify-between font-bold ">
+      <div className=" mt-2  relative xl:bottom-24 flex h-16 w-full flex-col justify-between  space-y-4 px-8 ">
+        <div className="flex justify-between font-bold  ">
           <span className="text-customPurple">
             Insert a link to a competitor &apos;s page:
           </span>

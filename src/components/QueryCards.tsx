@@ -38,16 +38,21 @@ const QueryCards = ({
 
         const json = await res.json();
         setCompetitorArray(json.competitors);
+
       } catch (error: unknown) {
         if (error instanceof Error) console.log(error.message);
       }
     }
 
-    if(userSession?.user?.id){
+    if(userSession?.user?.id ){
     fetchQuerySummary();
-      setTotalChanges(getTotalChangesPerWebsite(competitorArray));
     }
-  }, [ competitorArray]);
+  }, []);
+
+
+  useEffect(() => {
+    setTotalChanges(getTotalChangesPerWebsite(competitorArray));
+    }, [competitorArray]);
 
 //   if(competitorArray.length === 0) return (<></>)
   return (

@@ -35,6 +35,7 @@ const Step2 = (props: Props) => {
   );
   const userId = useUserId();
 
+  let loading = false;
   const handleSelectCompetitor = (competitorKey: string) => {
     setSelectedCompetitors((prevSelectedCompetitors: string[]) =>
       prevSelectedCompetitors.includes(competitorKey)
@@ -42,7 +43,10 @@ const Step2 = (props: Props) => {
         : [...prevSelectedCompetitors, competitorKey]
     );
   };
+
   const handleSave = async () => {
+    if (loading) return;
+    else loading = true;
     if (selectedCompetitors.length === 0 && totalCustomCompetitors === 0) {
       alert('Please select at least one competitor');
       return;
@@ -57,7 +61,7 @@ const Step2 = (props: Props) => {
         if (customCompetitorArray.includes(item)) {
           return item;
         }
-        return ;
+        return;
       }
     );
 
@@ -73,13 +77,12 @@ const Step2 = (props: Props) => {
         isPC: formState.isPC,
         competitors: filteredQuery,
         competitors_tracked:
-        filteredQuery.length + customCompetitorArray.length,
+          filteredQuery.length + customCompetitorArray.length,
         customCompetitors: selectedCustomCompetitors,
         userId: userId,
       }),
     });
 
-    
     const data = await response.json();
     // //check if error then throw alert
     if (data.error) {
@@ -162,7 +165,7 @@ const Step2 = (props: Props) => {
             setCustomCompetitorArray={setCustomCompetitorArray}
           />
         </div>
-        <div className="mt-8 flex flex-row-reverse">
+        <div className={`mt-8 flex flex-row-reverse `}>
           <SaveButton handleSave={handleSave} />
         </div>
       </div>

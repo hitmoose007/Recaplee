@@ -14,7 +14,7 @@ export default function CountrySelect({ country, setCountry }: props) {
   const onSelect = (code: string) => setCountry(code);
   return (
     <div
-         className={`${page === PageView.STEP2VIEW || page === PageView.SUMMARYVIEW && 'step2 ' }    `}
+         className={`${(page === PageView.STEP2VIEW || page === PageView.SUMMARYVIEW) && 'step2 ' }    `}
         >
       <ReactFlagsSelect
         selected={country}

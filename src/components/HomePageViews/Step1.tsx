@@ -18,7 +18,7 @@ const Step1 = (props: Props) => {
        the device and the location to be used to search.`}
       />
 
-      <NewQueryForm setIsLoading={setIsLoading} />
+      <NewQueryForm isLoading={isLoading} setIsLoading={setIsLoading} />
       <div className="mt-8">
         <Header
           svgPath="headerIcons/tickIcon.svg"

@@ -11,10 +11,11 @@ import DomainSelect from './DomainSelect';
 import {useUserContext} from '@/context/user'
 import { QueryResultContext } from '../../context/QueryResultContext';
 type Props = {
+    isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
 };
 
-const NewQueryForm = ({ setIsLoading }: Props) => {
+const NewQueryForm = ({ setIsLoading,isLoading }: Props) => {
     const {user} = useUserContext()
   const { formState, setFormState } = useContext(FormContext);
   const { queryResult, setQueryResult } = useContext(QueryResultContext);
@@ -75,17 +76,20 @@ const NewQueryForm = ({ setIsLoading }: Props) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form 
+    className={`${isLoading && "pointer-events-none animate-pulse"}`}
+    onSubmit={onSubmit}>
+
       <div className="md: mt-4 flex flex-col  items-center justify-between  space-y-8 rounded-[30px] bg-[#EEF6FF] pt-4  md:h-[125px] md:flex-row md:space-y-0 md:px-10">
         <div className="flex flex-col md:flex-row  lg:space-x-6 xl:space-x-10">
-          <div className=" min-w-[140px] flex-col space-y-2">
+          <div className={` min-w-[140px] flex-col space-y-2 `}>
             <p>Type the query:</p>
             <input
               onChange={(e) =>
                 setFormState({ ...formState, query: e.target.value })
               }
               type="text"
-              className="h-[34px] w-full   rounded-full pl-4 focus:outline-none "
+              className={`${isLoading && "pointer-events-none"} h-[34px] w-full   rounded-full pl-4 focus:outline-none `}
             />
           </div>
 

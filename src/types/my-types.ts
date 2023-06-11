@@ -17,6 +17,7 @@ export interface QuerySummary {
 export type User = {
   id?: string;
   email?: string;
+  email_enabled?: boolean;
   query_monitored?: number;
   competitors_tracked?: number;
   query_research?: number;

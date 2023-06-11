@@ -52,12 +52,6 @@ const Step2 = (props: Props) => {
       return selectedCompetitors.includes(item.link);
     });
 
-    // const selectedCustomCompetitors = selectedCompetitors.filter(
-    //   (item: string) => {
-    //     return item <= 0;
-    //   }
-    // );
-    //use custom competitor array to filter out selected competetitors
     const selectedCustomCompetitors = selectedCompetitors.filter(
       (item: string) => {
         if (customCompetitorArray.includes(item)) {

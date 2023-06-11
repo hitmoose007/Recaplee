@@ -1,5 +1,3 @@
-
-
 import isLoggedIn from '@/lib/isLoggedIn';
 
 import { prisma } from '@/lib/prisma';
@@ -8,7 +6,8 @@ export default isLoggedIn(async (req, res, user) => {
   try {
     const userId = user.id;
     const userIdBody = req.body['userId'];
-
+    const emailEnabled = req.body['emailEnabled'];
+console.log(emailEnabled, 'emailEnabled')
 
     if (userIdBody !== userId) {
       res.status(209).json({
@@ -17,13 +16,21 @@ export default isLoggedIn(async (req, res, user) => {
       });
     }
 
-   
 
-    
+    //
+    const profile = await prisma.profiles.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        email_enabled: emailEnabled,
+      },
+    });
+    console.log(profile);
 
     //  console.log('healo')
     // console.log(previousQueries);
-    res.status(200).json({});
+    res.status(200).json({ profile });
   } catch (error: unknown) {
     if (error instanceof Error) {
       // handle error of type Error

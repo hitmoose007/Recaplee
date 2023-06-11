@@ -8,10 +8,10 @@ import {PageView} from '@/utils/enums';
 type Props = {
   domain: string;
   setDomain: (domain: string) => void;
+  
 };
 
 export default function DomainSelect({ domain, setDomain }: Props) {
-console.log(domain, ' this is domain');
 
     const { page } = useContext(PageContext);
   const onChange = (code: string) => setDomain(code);
@@ -26,7 +26,7 @@ console.log(domain, ' this is domain');
               height={22}
               alt="mobileIcon"
             />
-            <span className="block truncate">{domain}</span>
+            <span className={`block truncate ${ page === PageView.SUMMARYVIEW  &&"text-customPurple font-bold"}`}>{domain}</span>
           </div>
         </Listbox.Button>
         <Transition
@@ -40,7 +40,7 @@ console.log(domain, ' this is domain');
               <Listbox.Option
                 key={key}
                 className={({ active }) =>
-                  `relative cursor-default  select-none py-2 pl-10 pr-4 ${
+                  ` }relative cursor-default  select-none py-2 pl-10 pr-4 ${
                     active ? 'bg-customBlue' : 'text-gray-900'
                   }`
                 }

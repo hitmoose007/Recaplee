@@ -32,6 +32,8 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
         <div className=" pointer-events-none  md:space-y-2">
           <p>Search Engine:</p>
           <DomainSelect
+          
+
             domain={
               isQuerySummaryPage
                 ? querySummary?.google_domain || ''
@@ -40,7 +42,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
             setDomain={() => {}}
           />
         </div>
-        <div className="pointer-events-none space-y-2">
+        <div className="pointer-events-none space-y-2 ">
           <p>Country:</p>
           <CountrySelect
             country={

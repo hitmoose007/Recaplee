@@ -20,6 +20,18 @@ export default isLoggedIn(async (req, res, user) => {
         id: queryId,
       },
     });
+    //reduce query monitored by one
+    await prisma.profiles.update({
+        where: {
+            id: userId,
+        },
+        data: {
+            query_monitored: {
+                decrement: 1,
+            },
+        },
+    });
+
 
     
 

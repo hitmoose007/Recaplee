@@ -13,7 +13,7 @@ const PageTitle = ({}: Props) => {
       {page === PageView.STEP1VIEW && 'Add new Query'}
       {page === PageView.STEP2VIEW&& 'Add new Query'}
       {page === PageView.SUMMARYVIEW&& 'Query Summary'}
-      {page === PageView.STEP2VIEW&& 'Competitor Analysis'}
+      {page === PageView.COMPETITORVIEW&& 'Competitor Analysis'}
     </div>
   );
 };

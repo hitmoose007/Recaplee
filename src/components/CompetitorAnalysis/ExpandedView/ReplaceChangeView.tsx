@@ -4,6 +4,7 @@ import CopyButton from './CopyButton';
 import { diff_match_patch } from 'diff-match-patch';
 import { Change } from '@/types/my-types';
 import wordsCount from 'words-count';
+import 'diff-match-patch-line-and-word'; // import globally to  enhanse the class.
 import AdditionalUtilitiesGroup from './AdditionalUtilitiesGroup';
 type Props = {
   tag: Change;
@@ -22,13 +23,11 @@ const ReplaceChangeView = ({
 }: Props) => {
   const dmp = new diff_match_patch();
 
-  const response = dmp.diff_main(tag?.value.__old, tag?.value.__new);
+  const response = dmp.diff_wordMode(tag?.value.__old, tag?.value.__new);
 
   let addedText = '';
   let removedText = '';
-  dmp.diff_cleanupSemantic(response);
 
-  //   console.log('response', response);
 
   useEffect(() => {
     if (hasRenderedRef.current) {
@@ -38,7 +37,6 @@ const ReplaceChangeView = ({
   useEffect(() => {
     if (hasRenderedRef.current) {
       setRemovedCopyAllTextHandler(removedText);
-      console.log('removedText', removedText);
     }
   }, [removedText]);
 
@@ -54,7 +52,6 @@ const ReplaceChangeView = ({
             if (item[0] === 0) {
               //span affecting padding how?
 
-              //   console.log('item[1]', item[1]);
               removedText += item[1];
 
               return (

@@ -71,7 +71,6 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
           }
 
           if (change[0] === '~') {
-            //   console.log('hello');
 
             // let response
             const tag = printTagIfExists(change);

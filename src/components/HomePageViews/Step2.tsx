@@ -84,12 +84,10 @@ const Step2 = (props: Props) => {
     });
 
     const data = await response.json();
-    // //check if error then throw alert
     if (data.error) {
       alert(data.error);
       return;
     }
-    // console.log(queryResult, 'queryResult')
     setPage(PageView.DASHBOARD);
   };
   return (

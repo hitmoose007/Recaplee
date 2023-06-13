@@ -35,8 +35,6 @@ export default isLoggedIn(async (req, res, user) => {
 
     
 
-    //  console.log('healo')
-    // console.log(previousQueries);
     res.status(200).json(queryDeleted);
   } catch (error: unknown) {
     if (error instanceof Error) {

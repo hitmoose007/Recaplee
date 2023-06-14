@@ -16,7 +16,6 @@ body {
 }
 button.ReactFlagsSelect-module_selectBtn__19wW7 {
   border-radius: 25px;
-  width: 200px;
   /* border: 1px solid #000; */
   background-color: #fff;
   height: 35px;
@@ -24,6 +23,7 @@ button.ReactFlagsSelect-module_selectBtn__19wW7 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: fit-content;
 }
 
 .ReactFlagsSelect-module_selectBtn__19wW7:before {

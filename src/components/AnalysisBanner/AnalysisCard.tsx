@@ -61,7 +61,7 @@ const AnalysisCard = ({
     <div className="flex flex-col items-center justify-around space-y-2 rounded-[50px] bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:rounded-full md:px-4 md:py-4">
       <div className="flex w-3 text-customYellow">
         <p className="text-2xl font-bold text-customPurple ">
-          {competitor.current_position || '#'}
+          {competitor.current_position || '#'}.
         </p>
         {positionChange !== undefined && positionChange !== 0 && (
           <p
@@ -82,7 +82,8 @@ const AnalysisCard = ({
         <div className="flex  space-x-2">
           <a
             href={competitor.link}
-            className="mx-auto w-40 truncate   text-sm font-bold text-customGray hover:underline md:mx-0 md:w-80 "
+            target='_blank'
+            className="mx-auto w-40 truncate   text-sm font-bold text-customGray hover:underline md:mx-0 md:max-w-80 "
           >
             {' '}
             {competitor.link}

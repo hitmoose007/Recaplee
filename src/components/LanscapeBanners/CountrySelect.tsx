@@ -17,6 +17,7 @@ export default function CountrySelect({ country, setCountry }: props) {
          className={`${(page === PageView.STEP2VIEW || page === PageView.SUMMARYVIEW) && 'step2 ' }    `}
         >
       <ReactFlagsSelect
+      searchable={true}
         selected={country}
         onSelect={onSelect}
         countries={countries}

@@ -56,7 +56,7 @@ const QueryCards = ({
 
 //   if(competitorArray.length === 0) return (<></>)
   return (
-    <div className="md:mx-none mx-auto my-6  flex h-[160px] w-[180px] flex-col items-center justify-between rounded-[30px] bg-white    p-3 hover:cursor-pointer hover:brightness-95">
+    <div className="md:mx-none mx-auto   flex h-[160px] w-[180px] flex-col items-center justify-between rounded-[30px] bg-white    p-3 hover:cursor-pointer hover:brightness-95">
       <ReactCountryFlag
         countryCode={countryCode}
         svg
@@ -74,7 +74,7 @@ const QueryCards = ({
         {totalChanges!== undefined && totalChanges === 0 && <p> Last update: {lastUpdate} </p>}
         {totalChanges!== undefined && totalChanges > 0 && (
           <p className="-ml-[10px] text-customGreen">
-            &#x2022; {totalChanges} changes detected
+            &#x2022; {totalChanges} New Changes Found
           </p>
         )}
       </div>

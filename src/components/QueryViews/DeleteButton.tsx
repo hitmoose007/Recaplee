@@ -35,7 +35,7 @@ const DeleteButton = ({ queryId }: Props) => {
         deleteQuery();
         
       }}
-      className="hidden  h-9 items-center space-x-4 rounded-full bg-[#FF7A83] px-2 text-white md:flex "
+      className=" h-9 items-center space-x-4 rounded-full bg-[#FF7A83] px-3 text-white md:flex "
     >
       <Image src="/deleteIcon.svg" width={18} height={20} alt="delete icon" />
       <p>Delete query</p>

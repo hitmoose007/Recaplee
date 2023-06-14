@@ -32,7 +32,7 @@ const HeaderTagView = ({ tag }: Props) => {
   return (
     <span
       style={{ backgroundColor: color }}
-      className=" mr-4 inline-block h-6  w-6 rounded-full pt-[1px] text-center text-sm   text-white "
+      className=" mr-4 inline-block   w-6 h-6 rounded-full pt-[2px] text-center text-sm   text-white "
     >
       {tag.toUpperCase()}
     </span>

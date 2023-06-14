@@ -84,7 +84,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   if (session ) {
     return (
       <>
-        <div className={`${nunito.variable} font-sans `}>
+        <div className={`${nunito.variable} font-sans text-customGray`}>
           <PageContext.Provider value={{ page, setPage }}>
             {!isMobile && <DesktopBanner />}
             {isMobile && <MobileBanner />}

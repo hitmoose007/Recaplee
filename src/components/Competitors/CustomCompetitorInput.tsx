@@ -9,9 +9,11 @@ type Props = {
   setCustomCompetitorArray: React.Dispatch<React.SetStateAction<string[]>>;
   totalCustomCompetitors: number;
   setTotalCustomCompetitors: (totalCustomCompetitors: number) => void;
+  handleSelectCompetitor: (competitorKey: string) => void;
 };
 
 const CustomCompetitorInput = ({
+    handleSelectCompetitor,
     customCompetitorArray,
     queryResult,
   setCustomCompetitorArray,
@@ -43,27 +45,20 @@ const CustomCompetitorInput = ({
       alert('You must enter a competitor');
       return;
     }
+    handleSelectCompetitor(competitorInput);
     setTotalCustomCompetitors(totalCustomCompetitors + 1);
 
     setCustomCompetitorArray((prevArray) => [...prevArray, competitorInput]);
+    
     setCompetitorInput('');
   };
 
   
 
   return (
-    <div className="md:flex md:flex-col items-center justify-center hidden  ">
-      <Image
-        src="/competitorBorder.svg"
-        width={1000}
-        height={100}
+    <div className="md:flex md:flex-col mt-2 border-dotted  border-[3px] rounded-[25px] border-customPurple   flex h-24 py-2 w-full flex-col justify-between   px-4 ">
+      
 
-        alt="competitor border"
-        // sizes={obj}
-        className=" hidden xl:block   "
-      />
-
-      <div className=" mt-2  relative xl:bottom-24 flex h-16 w-full flex-col justify-between  space-y-4 px-8 ">
         <div className="flex justify-between font-bold  ">
           <span className="text-customPurple">
             Insert a link to a competitor &apos;s page:
@@ -79,6 +74,7 @@ const CustomCompetitorInput = ({
         >
           <div className="flex justify-between space-x-4 md:h-[34px]">
             <input
+            placeholder='https://aaaa.com/aaa-bbb-cccc-dddd'
               value={competitorInput}
               onChange={(e) => setCompetitorInput(e.target.value)}
               type="text"
@@ -100,7 +96,6 @@ const CustomCompetitorInput = ({
             </button>
           </div>
         </form>
-      </div>
     </div>
   );
 };

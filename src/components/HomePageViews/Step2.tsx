@@ -115,7 +115,7 @@ const Step2 = (props: Props) => {
         <div className="flex justify-between">
           <div>
             <span className="font-bold  ">
-              {selectedCompetitors.length} out of 10{' '}
+              {selectedCompetitors.length} out of {queryResult.length}{' '}
             </span>
             competitors selected
           </div>
@@ -161,6 +161,7 @@ const Step2 = (props: Props) => {
             totalCustomCompetitors={totalCustomCompetitors}
             setTotalCustomCompetitors={setTotalCustomCompetitors}
             setCustomCompetitorArray={setCustomCompetitorArray}
+            handleSelectCompetitor={handleSelectCompetitor}
           />
         </div>
         <div className={`mt-8 flex flex-row-reverse `}>

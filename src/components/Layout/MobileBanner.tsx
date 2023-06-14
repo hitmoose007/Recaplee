@@ -19,12 +19,12 @@ const DesktopBanner = (props: Props) => {
 
   return (
     <div
-      className="flex h-40 w-full justify-between  rounded-b-2xl text-white"
+      className="h-40 w-full rounded-b-2xl text-white px-6 pt-3 text-[13px]"
       style={{
         background: 'linear-gradient(90deg, #111827 0%, #051840 100%)',
       }}
     >
-      <div className="ml-4 flex flex-col items-center justify-center">
+      <div className="flex justify-between  ">
         <Image
           onClick={() => {
             setPage(PageView.DASHBOARD);
@@ -37,6 +37,17 @@ const DesktopBanner = (props: Props) => {
           height={35}
           className="hover:cursor-pointer"
         />
+        <Image
+          quality={100}
+          src="/logoutIcon.svg"
+          alt="logout icon"
+          width={20}
+          height={20}
+          className=""
+        />
+      </div>
+     <div className="flex justify-between"> 
+      <div className="flex flex-col items-center justify-center">
         <div className="mt-3 flex-col justify-center space-y-2 ">
           {user.renewal_date && (
             <div className="text-center">
@@ -62,18 +73,10 @@ const DesktopBanner = (props: Props) => {
           supabase.auth.signOut();
           router.push('/login');
         }}
-        className="mr-8 mt-4 flex flex-col items-end hover:cursor-pointer "
+        className=" mt-4 flex flex-col items-end hover:cursor-pointer "
       >
         {/* <p className="text-xl">Logout</p> */}
 
-        <Image
-          quality={100}
-          src="/logoutIcon.svg"
-          alt="logout icon"
-          width={20}
-          height={20}
-          className=""
-        />
         {user.renewal_date && (
           <>
             <p className="mr-3 font-bold">Monthly Limits:</p>
@@ -98,6 +101,7 @@ const DesktopBanner = (props: Props) => {
           </>
         )}
       </div>
+</div>
     </div>
   );
 };

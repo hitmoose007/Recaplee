@@ -16,6 +16,7 @@ module.exports = {
         customGreen: '#57DA41',
         customRed: '#FF5959',
         customYellow: '#FFA149',
+        customBlack : '#111827'
       },
       //custom breakpoints
       screens: {

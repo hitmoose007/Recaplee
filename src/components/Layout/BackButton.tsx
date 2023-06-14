@@ -34,7 +34,7 @@ const BackButton = (props: Props) => {
     return <></>;
   }
   return (
-    <div className="flex items-center  justify-between md:w-[75px] ">
+    <div className="flex items-center  justify-between md:w-[75px] mb-4 ">
       <button onClick={() => onClick()}>
         <Image
           src="/backButton.svg"

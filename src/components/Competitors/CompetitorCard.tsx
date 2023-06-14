@@ -64,7 +64,7 @@ const CompetitorCard = ({
     >
       <div className="flex  space-x-10 px-6 py-3 ">
         <p className="text-[20px] font-bold text-[#705CF6]">
-          {customCompetitor ? '#' : position}
+          {customCompetitor ? '#' : position}.
         </p>
         <div className="flex w-9/12 md:w-11/12 flex-col">
           <div className="flex justify-between ">
@@ -89,24 +89,27 @@ const CompetitorCard = ({
             )}
           </div>
 
-          <p className="w-8/12 truncate font-bold ">{title}</p>
+          <p className="w-11/12 truncate font-bold ">{title}</p>
 
-          <div className="flex w-9/12 truncate max-w-40 ">
+          <div className="flex w-11/12 truncate ">
             <a
+            target="_blank"
               href={link}
-              className=" cursor-pointer mr-2  text-clip text-sm hover:underline "
+              className=" cursor-pointer mr-2  overflow-hidden overflow-ellipsis w-fit text-sm hover:underline "
             >
                 {link}
             </a>
             <a
+            target="_blank"
               href={link}
-              className="flex cursor-pointer items-center truncate "
+              className="flex cursor-pointer items-center  "
             >
               <Image
                 src="/linkIcon.svg"
                 width={10}
                 height={10}
                 alt="link icon"
+                className=""
               />
             </a>
           </div>

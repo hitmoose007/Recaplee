@@ -16,7 +16,7 @@ export default function DomainSelect({ domain, setDomain }: Props) {
     const { page } = useContext(PageContext);
   const onChange = (code: string) => setDomain(code);
   return (
-    <Listbox value={domain} onChange={onChange}>
+    <Listbox  value={domain} onChange={onChange}>
       <div className={`relative  ${page ===PageView.STEP2VIEW && "text-customPurple font-bold "}`}>
         <Listbox.Button className=" relative w-full cursor-default rounded-full bg-white px-4  py-[6px] ">
           <div className="flex space-x-2">

@@ -32,10 +32,11 @@ const CompetitorAnalysis = ({
       <div className="mt-2 flex justify-between ">
         <div>
           <SubHeader title={'Monitored competitor page: '} />
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 truncate w-[300px]">
             <a
+            target="_blank"
               href=""
-              className=" w-[300px] truncate text-sm font-bold text-customGray hover:underline "
+              className=" w-fit truncate text-sm font-bold text-customGray hover:underline "
             >
               {' '}
               {competitorAnalysed.link}

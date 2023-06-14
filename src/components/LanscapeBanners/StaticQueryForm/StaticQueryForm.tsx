@@ -14,7 +14,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
   const { formState, setFormState } = useContext(FormContext);
 
   return (
-    <div className=" inline-flex py-4 md:py-0 md:pt-4   items-center rounded-[30px]  bg-[#EEF6FF] mt-4 md:h-[100px] px-6 pt-4">
+    <div className=" inline-flex py-4 md:py-0 md:pt-4 text-customBlack   items-center rounded-[30px]  bg-[#EEF6FF] mt-4 md:h-[100px] px-6 pt-4">
       <div className="flex flex-col   md:flex-row md:space-x-10">
         {!isQuerySummaryPage && (
           <div className=" flex-col  space-y-2">

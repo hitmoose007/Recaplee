@@ -79,21 +79,21 @@ const AnalysisCard = ({
         <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-80 md:text-start">
           {competitor.title}
         </p>
-        <div className="flex  space-x-2">
+        <div className="flex  w-96 space-x-2 truncate">
           <a
             href={competitor.link}
-            target='_blank'
-            className="mx-auto w-40 truncate   text-sm font-bold text-customGray hover:underline md:mx-0 md:max-w-80 "
+            target="_blank"
+            className="mx-auto w-auto  overflow-hidden overflow-ellipsis text-sm font-bold text-customGray hover:underline md:mx-0 md:w-fit"
           >
-            {' '}
             {competitor.link}
           </a>
+
           <Image src="/linkIcon.svg" width={10} height={10} alt="link icon" />
         </div>
       </div>
       <div className="hidden lg:flex lg:flex-col ">
         <p className="text-center font-bold ">{old_update}</p>
-        <p className="text-sm md:mt-1">Compared analysis date</p>
+        <p className="text-sm md:mt-1 ">Compared analysis date</p>
       </div>
       <div className="hidden text-center lg:flex lg:flex-col">
         <p className="font-bold ">{recent_update}</p>
@@ -106,7 +106,9 @@ const AnalysisCard = ({
         <p className="text-sm md:mt-1">of content changed</p>
       </div>
       <div className="flex flex-col text-center">
-        <p className={`font-bold    text-${changesColorValue} `}>{competitor.changes_detected || 0}</p>
+        <p className={`font-bold    text-${changesColorValue} `}>
+          {competitor.changes_detected || 0}
+        </p>
         <p className="text-sm md:mt-1">Changes detected</p>
       </div>
 

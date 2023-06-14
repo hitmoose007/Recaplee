@@ -82,9 +82,10 @@ const NewQueryForm = ({ setIsLoading,isLoading }: Props) => {
 
       <div className="md: mt-4 flex flex-col  items-center justify-between  space-y-8 rounded-[30px] bg-[#EEF6FF] pt-4  md:h-[125px] md:flex-row md:space-y-0 md:px-10">
         <div className="flex flex-col md:flex-row  lg:space-x-6 xl:space-x-10">
-          <div className={` min-w-[140px] flex-col space-y-2 `}>
+          <div className={` min-w-[140px] flex-col space-y-2 text-customBlack `}>
             <p>Type the query:</p>
-            <input
+            <input 
+            maxLength={200}
               onChange={(e) =>
                 setFormState({ ...formState, query: e.target.value })
               }
@@ -94,14 +95,14 @@ const NewQueryForm = ({ setIsLoading,isLoading }: Props) => {
           </div>
 
           <div className="z-50 space-y-2 md:z-auto  ">
-            <p className="truncate ">Select Search Engine:</p>
+            <p className="truncate text-customBlack ">Select Search Engine:</p>
 
             <DomainSelect
               domain={formState.countryDomain}
               setDomain={handleDomainChange}
             />
           </div>
-          <div className="space-y-2 ">
+          <div className="space-y-2 text-customBlack">
             <p>Select Country:</p>
             <CountrySelect
               country={formState.country}
@@ -109,8 +110,8 @@ const NewQueryForm = ({ setIsLoading,isLoading }: Props) => {
             />
           </div>
 
-          <div className="space flex-col text-[#4B5563] md:space-y-2">
-            <p className="text-[#111827]">Select device:</p>
+          <div className="space flex-col md:space-y-2">
+            <p className="text-customBlack">Select device:</p>
             <div className="flex     ">
               <div
                 onClick={() => setFormState({ ...formState, isPC: true })}
@@ -147,14 +148,14 @@ const NewQueryForm = ({ setIsLoading,isLoading }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-end">
           <div className="-mt-8 mb-3 text-[#4B5563] md:hidden lg:block lg:truncate  ">
-            <span className="font-semibold  ">{user.query_research}/{user.maxResearchQuery}</span> monthly query
+            <span className="font-bold">{user.query_research}/{user.maxResearchQuery}</span> monthly query
             researches used
           </div>
           <button
             type="submit"
-            className="mb-8 md:mb-0 flex cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] px-12 py-2 font-bold  text-white hover:brightness-90"
+            className="mb-8 md:mb-0 flex cursor-pointer space-x-5 rounded-full bg-[#705CF6] px-12 py-2 font-bold  text-white hover:brightness-90"
           >
             <Image
               src="/landscapeIcons/simpleGlass.svg"

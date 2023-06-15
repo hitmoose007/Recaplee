@@ -21,7 +21,7 @@ export async function mailSender() {
     include: {
       TargetQuery: {
         include: {
-          Competitor: {},
+          Competitor: true,
         },
       },
     },
@@ -35,24 +35,37 @@ export async function mailSender() {
     //collect changes for each query and send email to user
 
     const queryArray: QueryType[] = [];
+    const updateQueries: Promise<any>[] = [];
 
     profile.TargetQuery.map((query, index) => {
-      let totalChanges = 0;
-      query.Competitor.map((competitor) => {
-        totalChanges += competitor.changes_detected || 0;
-      });
+      const totalChanges = query.Competitor.reduce(
+        (prev, competitor) => (prev += competitor.changes_detected || 0),
+        0
+      );
 
       if (totalChanges > 0) {
         queryArray.push({
           id: query.id,
           queryName: query.query_name || 'No query name',
-          totalChanges: totalChanges,
+          totalChanges,
           queryUrl:
             process.env.NEXT_PUBLIC_BASE_URL + '/querySummary/' + query.id,
         });
+
+        updateQueries.push(
+          prisma.targetQuery.update({
+            where: {
+              id: query.id,
+            },
+            data: {
+              new_changes: totalChanges,
+            },
+          })
+        );
       }
     });
 
+    await Promise.all(updateQueries);
     //create template for email put query name and their total changes in same line
     const template = queryArray
       .map((query) => {

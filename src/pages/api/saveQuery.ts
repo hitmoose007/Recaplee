@@ -104,7 +104,6 @@ export default isLoggedIn(async (req, res, user) => {
         };
       }),
     });
-    //get filtered query length and custom query length
 
     //increment the number of queries
     await prisma.profiles.update({

@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import PageTitle from './PageTitle';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 
-import {useUserContext} from '@/context/user';
+import { useUserContext } from '@/context/user';
 type Props = {};
 
 const DesktopBanner = (props: Props) => {
@@ -14,7 +14,7 @@ const DesktopBanner = (props: Props) => {
   const { page, setPage } = useContext(PageContext);
   const router = useRouter();
   const supabase = useSupabaseClient();
-  const {user, setUser} = useUserContext();
+  const { user, setUser } = useUserContext();
   const renewalDate = new Date(user.renewal_date || '');
 
   return (
@@ -27,8 +27,7 @@ const DesktopBanner = (props: Props) => {
       <div className="flex items-center">
         <Image
           onClick={() => {
-            setPage(PageView.DASHBOARD);
-            router.push('/');
+            router.push('/dashboard');
           }}
           quality={100}
           src="/logo.svg"
@@ -41,33 +40,49 @@ const DesktopBanner = (props: Props) => {
       </div>
 
       <div className="mr-8 flex  items-center justify-between space-x-12 text-sm ">
-        {user.renewal_date &&
-        <div className="flex ">
-            
-          <p className="mr-3 font-bold">Monthly Limits:</p>
-          <div className="flex flex-col ">
-            <p>
-              <span className="text-[#30A3E4]">{ user.query_monitored}/{user.maxMonitoredQuery} </span> query monitored
-            </p>
-            <p>
-              <span className="text-[#6864F3]">{user.query_research}/{user.maxResearchQuery}</span> query research
-            </p>
-            <p>
-              <span className="text-[#993ED0]">{user.competitors_tracked}/{user.maxScrape}</span> scrape
-            </p>
+        {user.renewal_date && (
+          <div className="flex ">
+            <p className="mr-3 font-bold">Monthly Limits:</p>
+            <div className="flex flex-col ">
+              <p>
+                <span className="text-[#30A3E4]">
+                  {user.query_monitored}/{user.maxMonitoredQuery}{' '}
+                </span>{' '}
+                query monitored
+              </p>
+              <p>
+                <span className="text-[#6864F3]">
+                  {user.query_research}/{user.maxResearchQuery}
+                </span>{' '}
+                query research
+              </p>
+              <p>
+                <span className="text-[#993ED0]">
+                  {user.competitors_tracked}/{user.maxScrape}
+                </span>{' '}
+                scrape
+              </p>
+            </div>
           </div>
-        </div>}
+        )}
         <div className="mt-3 flex-col justify-center space-y-2 ">
           <button
             className="h-[35px] w-[150px] rounded-full bg-[#705CF6] font-bold hover:brightness-90"
-            onClick={() => {setPage(PageView.SUBSCRIPTION); router.push('/subscribe')}}
+            onClick={() => {
+              setPage(PageView.SUBSCRIPTION);
+              router.push('/subscribe');
+            }}
           >
-           {user.renewal_date ? 'Your Subscription': 'Subscribe Now'}
+            {user.renewal_date ? 'Your Subscription' : 'Subscribe Now'}
           </button>
-          {user.renewal_date&&
-          <div className="text-center">
-            Renewal on <span className="font-bold">{renewalDate.toLocaleDateString()}</span>
-          </div>}
+          {user.renewal_date && (
+            <div className="text-center">
+              Renewal on{' '}
+              <span className="font-bold">
+                {renewalDate.toLocaleDateString()}
+              </span>
+            </div>
+          )}
         </div>
         <div
           onClick={() => {

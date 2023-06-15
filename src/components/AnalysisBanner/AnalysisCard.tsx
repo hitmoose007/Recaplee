@@ -5,6 +5,7 @@ import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import { useContext } from 'react';
 import { useSerpContext } from '@/context/SerpChangesContext';
+
 type Props = {
   competitor: Competitor;
   querySummary: QuerySummary;
@@ -75,9 +76,8 @@ const AnalysisCard = ({
         )}
       </div>
       <div className="flex flex-col   ">
-        {' '}
         <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-80 md:text-start">
-          {competitor.title}
+          {competitor.domain}
         </p>
         <div className="flex  w-96 space-x-2 truncate">
           <a

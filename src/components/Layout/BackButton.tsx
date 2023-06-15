@@ -11,6 +11,7 @@ const BackButton = (props: Props) => {
   const router = useRouter();
 
   const { page, setPage } = useContext(PageContext);
+
   const onClick = () => {
     if (page === PageView.STEP1VIEW) {
       setPage(PageView.DASHBOARD);
@@ -22,7 +23,7 @@ const BackButton = (props: Props) => {
 
     if (page === PageView.SUMMARYVIEW) {
       setPage(PageView.DASHBOARD);
-      router.push('/');
+      router.push('/dashboard');
     }
 
     if (page === PageView.COMPETITORVIEW) {
@@ -34,7 +35,7 @@ const BackButton = (props: Props) => {
     return <></>;
   }
   return (
-    <div className="flex items-center  justify-between md:w-[75px] mb-4 ">
+    <div className="mb-4 flex  items-center justify-between md:w-[75px] ">
       <button onClick={() => onClick()}>
         <Image
           src="/backButton.svg"

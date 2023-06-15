@@ -3,6 +3,8 @@ import Image from 'next/image';
 import validUrl from 'valid-url';
 import { TotalCustomCompetitorsContext } from '../../context/TotalCustomCompetitorsContext';
 import { Competitor } from '@prisma/client';
+
+import {useUserContext} from '@/context/user';
 type Props = {
     customCompetitorArray: string[];
     queryResult: Competitor[];
@@ -22,6 +24,7 @@ const CustomCompetitorInput = ({
 }: Props) => {
   const [competitorInput, setCompetitorInput] = useState('');
   //   const [totalCustomCompetitors, setTotalCompetitors] = useState(0);
+  const{user} = useUserContext();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -37,8 +40,8 @@ const CustomCompetitorInput = ({
       return;
     }
 
-    if (totalCustomCompetitors === 3) {
-      alert('You can only add 3 competitors');
+    if (totalCustomCompetitors === user.maxCustomScrape) {
+      alert('You have reached ur custom competitor limit');
       return;
     }
     if (competitorInput === '') {
@@ -63,7 +66,7 @@ const CustomCompetitorInput = ({
           <span className="text-customPurple">
             Insert a link to a competitor &apos;s page:
           </span>
-          <span className="text-customGray">{totalCustomCompetitors}/3</span>
+          <span className="text-customGray">{totalCustomCompetitors}/{user.maxCustomScrape}</span>
         </div>
 
         <form

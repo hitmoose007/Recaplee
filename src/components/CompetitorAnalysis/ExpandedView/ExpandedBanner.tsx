@@ -16,8 +16,8 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary,addedCopyAllText,remo
     const recent_update = new Date(querySummary.recent_update).toLocaleDateString();
   return (
     <>
-      <div className="md:flex space-x-20 hidden">
-        <div className="flex w-1/2 justify-between text-customGray">
+      <div className="md:flex space-x-20 ">
+        <div className="md:flex w-1/2 justify-between text-customGray hidden">
           <p>Analysis page date: <span className='font-bold'>{old_update}</span></p>
           <p>
             The content had  {' '}
@@ -30,7 +30,7 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary,addedCopyAllText,remo
           <p>Analysis page date: <span className='font-bold'>{recent_update}</span></p>
           <p>
             The content had  {' '} 
-            <span className="font-bold">
+            <span className="font-bold ">
             {competitorAnalysed.current_content ?
               JSON.stringify(competitorAnalysed.current_content).split(' ').length: 0}{' '} </span>words
           </p>

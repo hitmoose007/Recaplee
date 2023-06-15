@@ -41,9 +41,9 @@ const ReplaceChangeView = ({
   }, [removedText]);
 
   return (
-    <div key={index} className="flex  space-x-8 md:space-x-20">
+    <div key={index} className="flex md:flex-row flex-col space-y-4 md:space-y-0 md:space-x-20">
       <div
-        className={`  flex w-1/2 justify-between space-x-2 rounded-[30px]  bg-white  px-4 py-2   text-sm font-bold  `}
+        className={`  flex md:w-1/2 w-full justify-between space-x-2 rounded-[30px]  bg-white  px-4 py-2   text-sm font-bold  `}
       >
         <div>
           <HeaderTagView tag={tag?.tag || ''} />
@@ -67,7 +67,7 @@ const ReplaceChangeView = ({
         <AdditionalUtilitiesGroup index={index} toBeCopiedText={removedText} />
       </div>
       <div
-        className={`flex w-1/2 justify-between rounded-[30px] bg-white  px-4  py-2  text-sm  font-bold `}
+        className={`flex md:w-1/2 w-full  justify-between rounded-[30px] bg-white  px-4  py-2  text-sm  font-bold `}
       >
         <div>
           <HeaderTagView tag={tag?.tag || ''} />

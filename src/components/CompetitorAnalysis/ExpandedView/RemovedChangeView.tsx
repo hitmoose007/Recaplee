@@ -19,9 +19,9 @@ const RemovedChangeView = ({ hasRenderedRef, removedChange, index,setRemovedCopy
     
     
   return (
-    <div key={index} className="flex space-x-8 md:space-x-20">
+    <div key={index} className="flex md:flex-row flex-col space-x-8 md:space-x-20">
       <div
-        className={` flex w-1/2 justify-between rounded-[30px] bg-white  px-4 py-2   text-sm font-bold text-customRed md:space-x-4  `}
+        className={` flex w-full md:w-1/2 justify-between rounded-[30px] bg-white  px-4 py-2   text-sm font-bold text-customRed md:space-x-4  `}
       >
         <p>
           <HeaderTagView tag={removedChange?.tag || ''} />
@@ -33,7 +33,7 @@ const RemovedChangeView = ({ hasRenderedRef, removedChange, index,setRemovedCopy
         />
       </div>
       <div
-        className={` pointer-events-none flex w-1/2 justify-between rounded-[30px] bg-[#E0E8F0]   px-4 py-2 text-sm font-bold md:space-x-4`}
+        className={` pointer-events-none  hidden md:flex w-full md:w-1/2 justify-between rounded-[30px] bg-[#E0E8F0]   px-4 py-2 text-sm font-bold md:space-x-4`}
       >
         <p className={'invisible'}>{removedChange?.value}</p>
 

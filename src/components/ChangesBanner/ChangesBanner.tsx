@@ -24,7 +24,7 @@ const QueryBanner = ({
   const serpChanges = getSerpChanges(competitors || []);
   const averageChangesPerWebsite = getAverageChangesPerWebsite(competitors || []);
   return (
-    <div className="hidden rounded-[30px] bg-customBlue  md:mt-4 md:space-x-4 md:px-8 md:py-4 lg:flex">
+    <div className="md:rounded-[30px]  bg-customBlue  md:mt-4 md:space-x-4 md:px-8 md:py-4 flex">
       {page === PageView.SUMMARYVIEW && (
         <>
           <ChangeCard

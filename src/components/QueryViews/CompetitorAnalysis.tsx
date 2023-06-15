@@ -9,6 +9,8 @@ import 'react-toggle/style.css';
 import QueryBanner from '@/components/ChangesBanner/ChangesBanner';
 import ExpandedView from '@/components/CompetitorAnalysis/ExpandedView/ExpandedView';
 import { Competitor, QuerySummary } from '@/types/my-types';
+import useMobileStatus from '@/hooks/useMobileStatus';
+
 type Props = {
   querySummary: QuerySummary;
   competitors: Competitor[];
@@ -22,6 +24,7 @@ const CompetitorAnalysis = ({
 }: Props) => {
   const [showExpandedView, setShowExpandedView] = useState(true);
 
+  const isMobile= useMobileStatus();
   return (
     <>
       <QueryHeader
@@ -29,10 +32,10 @@ const CompetitorAnalysis = ({
         isCompetitor={true}
       />
       <HelperHeader description="Read and analyse all the differences found between two versions. You can compare all the changes made in the web page content." />
-      <div className="mt-2 flex justify-between ">
+      <div className="mt-2 flex md:flex-row flex-col justify-between ">
         <div>
           <SubHeader title={'Monitored competitor page: '} />
-          <div className="flex space-x-2 truncate w-[300px]">
+          <div className="flex space-x-2 truncate w-[300px] py-4">
             <a
             target="_blank"
               href=""
@@ -43,7 +46,7 @@ const CompetitorAnalysis = ({
             </a>
             <Image src="/linkIcon.svg" width={10} height={10} alt="link icon" />
           </div>
-          <div className="mt-4 flex items-center space-x-4">
+         { !isMobile && <div className="mt-4 flex items-center space-x-4">
             <SubHeader title={'Expanded view:'} />{' '}
             <Toggle
               defaultChecked={showExpandedView}
@@ -52,7 +55,7 @@ const CompetitorAnalysis = ({
               icons={false}
               className=" toggle-custom bg-customPurple hover:brightness-90"
             />
-          </div>
+          </div>}
         </div>
         <QueryBanner
           competitors={competitors}
@@ -60,7 +63,7 @@ const CompetitorAnalysis = ({
         />
       </div>
 
-      {showExpandedView && (
+      {(showExpandedView) && (
         <div className="mt-8 flex  space-x-12 ">
           <ExpandedView
             querySummary={querySummary}
@@ -70,6 +73,9 @@ const CompetitorAnalysis = ({
         <ExpandedCard isRemoved={false} /> */}
         </div>
       )}
+
+
+      
     </>
   );
 };

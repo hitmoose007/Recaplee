@@ -78,7 +78,8 @@ const Home = (props: Props) => {
         description={`These are the queries that are currently monitored. We will analyze and report to you the changes that have been made on your competitors’ website.`}
       />
 
-      <div className="mt-4 min-h-[220px] flex-col  rounded-[30px] bg-[#EEF6FF] py-2 pb-5 md:flex md:w-auto   md:flex-row md:flex-wrap md:space-x-8 md:space-y-5 md:px-0">
+       {user && <div className="hidden md:flex  justify-end relative top-7 right-12"><span className="font-bold "> {user.query_monitored}/{user.maxMonitoredQuery} </span> &nbsp; query monitored</div>}
+      <div className="mt-4 md:mt-0 md:pt-4 min-h-[220px] flex-col  rounded-[30px] bg-[#EEF6FF] py-2 pb-5 md:flex md:w-auto   md:flex-row md:flex-wrap md:space-x-8 md:space-y-5 md:px-0">
         <Image
           onClick={() => setPage(PageView.STEP1VIEW)}
           className="mx-auto pt-2 md:pt-0 cursor-pointer hover:brightness-50 md:mx-0 md:ml-8 md:mt-4"

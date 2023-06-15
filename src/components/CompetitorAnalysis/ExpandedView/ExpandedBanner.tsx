@@ -36,7 +36,7 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary,addedCopyAllText,remo
           </p>
         </div>
       </div>
-      <div className="flex space-x-20">
+      <div className="hidden md:flex space-x-20">
       <div
         className="flex w-1/2 space-x-2 text-customGray hover:cursor-pointer "
         onClick={() => {

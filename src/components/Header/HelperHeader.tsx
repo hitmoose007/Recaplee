@@ -7,7 +7,7 @@ type Props = {
 const HelperHeader = ({description}: Props) => {
   return (
       
-    <div className="flex space-x-4 md:ml-[3px] flex-col md:flex-row items-center">
+    <div className="flex space-x-4 md:ml-[3px]  md:flex-row ">
       <Image
         src='/headerIcons/helperIcon.svg'
         alt="logo"

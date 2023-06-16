@@ -59,6 +59,36 @@ export default async function handler(
       } else if (event.type === 'customer.subscription.created') {
         const subscription = event.data.object as Stripe.Subscription;
 
+        const price = await stripe.prices.retrieve(
+          subscription.metadata.priceId as string
+        );
+
+        await prisma.profiles.update({
+          where: {
+            id: subscription.metadata.userId as string,
+          },
+          data: {
+            stripe_id: subscription.customer as string,
+            renewal_date: new Date(subscription.current_period_end * 1000),
+            maxMonitoredQuery:
+              (price.metadata.maxMonitoredQuery &&
+                +price.metadata.maxMonitoredQuery) ||
+              null,
+            maxResearchQuery:
+              (price.metadata.maxResearchQuery &&
+                +price.metadata.maxResearchQuery) ||
+              null,
+
+            maxScrape:
+              (price.metadata.maxScrape && +price.metadata.maxScrape) || null,
+            maxCustomScrape:
+              (price.metadata.maxCustomScrape &&
+                +price.metadata.maxCustomScrape) ||
+              null,
+            query_research: 0,
+            competitors_tracked: 0,
+          },
+        });
         await prisma.profiles.update({
           where: {
             id: subscription.metadata.userId as string,

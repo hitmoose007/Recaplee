@@ -71,7 +71,7 @@ const Subscribe = () => {
             icon={SiMicrosoft}
             button={
               <ActionButton
-                onClick={(e) => onSubmit(e, 'price_1NJM8JEwJCgTqEWBt5vhuZ45')}
+                onClick={(e) => onSubmit(e, 'price_1NJM8JEwJCgTqEWBdqgdjfCo')}
                 variant="outline"
                 borderWidth="2px"
               >
@@ -89,7 +89,7 @@ const Subscribe = () => {
             icon={SiMarketo}
             button={
               <ActionButton
-                onClick={(e) => onSubmit(e, 'price_1NJM8JEwJCgTqEWBdqgdjfCo')}
+                onClick={(e) => onSubmit(e, 'price_1N96v9EwJCgTqEWBTMwMEV7F')}
                 variant="outline"
                 borderWidth="2px"
               >
@@ -107,7 +107,7 @@ const Subscribe = () => {
             icon={SiMarketo}
             button={
               <ActionButton
-                onClick={(e) => onSubmit(e, 'price_1N96v9EwJCgTqEWBTMwMEV7F')}
+                onClick={(e) => onSubmit(e, 'price_1NJM8JEwJCgTqEWBt5vhuZ45')}
                 variant="outline"
                 borderWidth="2px"
               >

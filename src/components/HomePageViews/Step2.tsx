@@ -112,16 +112,16 @@ const Step2 = (props: Props) => {
         />
       </div>
       <div className="mt-4 rounded-[30px] bg-[#EEF6FF]  px-10 py-4 text-[#4B5563]">
-        <div className="flex justify-between">
+        <div className="flex justify-between md:flex-row flex-col">
           <div>
             <span className="font-bold  ">
               {selectedCompetitors.length} out of {queryResult.length}{' '}
             </span>
             competitors selected
           </div>
-          <div className="hidden md:block">
-            <SaveButton handleSave={handleSave} />
-          </div>
+        <div className={`mt-4 flex md:h-auto  w-full justify-center md:justify-end`}>
+          <SaveButton handleSave={handleSave} />
+        </div>
         </div>
 
         <div className="mt-10  flex-col space-y-4 md:grid md:flex-none  md:grid-cols-2 md:gap-x-14 md:gap-y-6 md:space-y-0">

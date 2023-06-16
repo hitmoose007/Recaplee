@@ -5,15 +5,7 @@ import { prisma } from '@/lib/prisma';
 export default isLoggedIn(async (req, res, user) => {
   try {
     const userId = user.id;
-    const userIdBody = req.body['userId'];
     const emailEnabled = req.body['emailEnabled'];
-
-    if (userIdBody !== userId) {
-      res.status(209).json({
-        id: userId,
-        idBody: userIdBody,
-      });
-    }
 
     //
     const profile = await prisma.profiles.update({

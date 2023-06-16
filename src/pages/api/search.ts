@@ -75,7 +75,6 @@ export default isLoggedIn(async (req, res, user) => {
       where: { id: userId },
       data: { query_research: { increment: 1 } },
     });
-    // console.log(update)
 
     res.status(200).json(topResults);
   } catch (error: unknown) {

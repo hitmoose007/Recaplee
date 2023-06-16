@@ -56,8 +56,6 @@ export default async function handler(
       } else if (event.type === 'invoice.payment_succeeded') {
         const invoice = event.data.object as Stripe.Invoice;
 
-        // const subscription = event.data.object as Stripe.Subscription;
-        // console.log(subscription.metadata);
         const subscription = await stripe.subscriptions.retrieve(
           invoice.subscription as string
         );
@@ -65,8 +63,6 @@ export default async function handler(
         const price = await stripe.prices.retrieve(
           subscription.metadata.priceId as string
         );
-
-        // console.log(invoice);
 
         await prisma.profiles.update({
           where: {

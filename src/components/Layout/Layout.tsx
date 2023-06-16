@@ -24,25 +24,14 @@ function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [page, setPage] = useState<PageView>(PageView.DASHBOARD);
   const { user, setUser } = useUserContext();
-  
+
   useEffect(() => {
     if (!isLoading) {
       if (!session && router.pathname !== '/login') {
         router.push('/login');
       }
-    //   if(session && user.stripe_id === null && router.pathname !== '/subscribe'){
-    //     console.log('no stripe id')
-    //     router.push('/subscribe')
-    //   }
     }
-    console.log('eah');
   }, [isLoading, session]);
-
-  //   useEffect(() => {
-  //     //cause page refresh anyways
-  //     router.push('/');
-  //   }, [router]);
-  //fetch user
 
   useEffect(() => {
     if (session) {
@@ -75,13 +64,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     );
   }
 
-  //   console.log(session, 'session')
-
-  //   if (!session) {
-  //     return <></>;
-  //   }
-  //   console.log(session)
-  if (session ) {
+  if (session) {
     return (
       <>
         <div className={`${nunito.variable} font-sans text-customGray`}>

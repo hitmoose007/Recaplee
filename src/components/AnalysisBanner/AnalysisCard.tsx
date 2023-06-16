@@ -5,6 +5,7 @@ import { PageContext } from '@/context/PageContext';
 import { PageView } from '@/utils/enums';
 import { useContext } from 'react';
 import { useSerpContext } from '@/context/SerpChangesContext';
+
 type Props = {
   competitor: Competitor;
   querySummary: QuerySummary;
@@ -58,7 +59,7 @@ const AnalysisCard = ({
   }, [competitor]);
 
   return (
-    <div className="flex flex-col items-center justify-around space-y-2 rounded-[25px] bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:rounded-full md:px-4 md:py-4">
+    <div className="flex flex-col items-center justify-between space-y-2 rounded-[25px] bg-white px-[20px] py-6 align-middle text-customGray md:flex-row md:space-y-0 md:rounded-full md:py-4">
       <div className="flex w-3 text-customYellow">
         <p className="text-2xl font-bold text-customPurple ">
           {competitor.current_position || '#'}.
@@ -74,10 +75,9 @@ const AnalysisCard = ({
           </p>
         )}
       </div>
-      <div className="flex flex-col items-center md:items-stretch  ">
-        {' '}
-        <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-96 md:text-start">
-          {competitor.title}
+      <div className="flex flex-col   ">
+        <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-80 md:text-start">
+          {competitor.domain}
         </p>
         <div className="flex w-60 justify-center md:justify-normal md:w-96 space-x-2 truncate">
           <a
@@ -88,7 +88,6 @@ const AnalysisCard = ({
           >
             {competitor.link}
           </a>
-
           <Image src="/linkIcon.svg" width={10} height={10} alt="link icon" />
         </div>
       </div>
@@ -113,7 +112,7 @@ const AnalysisCard = ({
         <p className="text-sm md:mt-1">Changes detected</p>
       </div>
 
-      {competitor?.changes_detected || 0 > 0 ? (
+      {(competitor?.old_content && competitor?.changes_detected) || 0 > 0 ? (
         <button
           onClick={() => {
             setCompetitorAnalysed(competitor);

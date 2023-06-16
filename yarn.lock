@@ -3810,6 +3810,11 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
+qnton-tld-extract@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/qnton-tld-extract/-/qnton-tld-extract-2.0.2.tgz#da45d0e946b4105aec1a829450d8d80e36ed19d1"
+  integrity sha512-P1ui1tHYFwnXbR272k5gipgQtUGN4K1aGq3P1a58JBArzSzAjKgFLx7mQ73g+2Lh0/G65XCJtr9i0qh8FVyzcA==
+
 qs@^6.11.0:
   version "6.11.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.2.tgz#64bea51f12c1f5da1bc01496f48ffcff7c69d7d9"

@@ -6,22 +6,17 @@ import isLoggedIn from '@/lib/isLoggedIn';
 export default isLoggedIn(async (req, res, user) => {
   try {
     const { id } = req.query;
-    // console.log(req.query, 'the real mvp');
 
     const userIdBody = req.body['userId'];
 
     if (userIdBody !== user.id) {
-        console.log(userIdBody, user.id)
-        console.log('hello')
       res.status(403).json({
         error: `You don't have permission to access this query.`,
-        
       });
-      
+
       return;
     }
 
-    // console.log(id, 'the real mvp')
     const queryResult = await prisma.targetQuery.findFirst({
       where: {
         id: id as Prisma.UuidFilter,
@@ -41,7 +36,15 @@ export default isLoggedIn(async (req, res, user) => {
         query_id: id as Prisma.UuidFilter,
       },
     });
-    // console.log(competitorsResult);
+
+    if (req.body?.reset_changes === true) {
+      await prisma.targetQuery.update({
+        where: { id: id as string },
+        data: {
+          new_changes: null,
+        },
+      });
+    }
 
     res
       .status(200)

@@ -15,17 +15,33 @@ export default isLoggedIn(async (req, res, user) => {
     const userId = req.body['userId'];
     // const origin = req.headers.origin || 'http://localhost:3000';
 
-    console.log('the real mvp', userId);
-    //find from prisma user id and see if he has stripe id
-
     const user = await prisma.profiles.findFirst({
       where: {
         id: userId,
       },
       select: {
         stripe_id: true,
+        renewal_date: true,
       },
     });
+
+    if (!user) {
+      return res.status(400).json({
+        error: 'You are not a registered user.',
+      });
+    }
+
+    if (!user?.stripe_id) {
+      return res.status(400).json({
+        error: 'You do not have an active subscription.',
+      });
+    }
+
+    if (user?.renewal_date && user?.renewal_date > new Date()) {
+      return res.status(400).json({
+        error: 'You already have an active subscription.',
+      });
+    }
 
     const params: Stripe.Checkout.SessionCreateParams = {
       customer: user?.stripe_id ?? undefined,
@@ -44,8 +60,8 @@ export default isLoggedIn(async (req, res, user) => {
         },
       },
       allow_promotion_codes: true,
-      success_url: `http://localhost:3000/subscribe`,
-      cancel_url: `http://localhost:3000/subscribe`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/subscribe`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/subscribe`,
     };
 
     const checkoutSession: Stripe.Checkout.Session =

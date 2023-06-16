@@ -11,10 +11,9 @@ import getStripe from '@/utils/getStripe';
 import { stripe } from '@/lib/stripe';
 const Subscribe = () => {
   const session = useSession();
-  const onSubmit = async (e: any, priceId:string) => {
+  const onSubmit = async (e: any, priceId: string) => {
     e.preventDefault();
     // Create a Checkout Session.
-    console.log(window.location.origin);
     const data = await fetch('/api/checkout_sessions', {
       //set req.body['userId'] = userId
       method: 'POST',
@@ -65,34 +64,50 @@ const Subscribe = () => {
         >
           <PricingCard
             data={{
-              price: '$10',
+              price: '$5',
               name: 'Bronze',
-              features: [
-                'Bronze plan',
-                
-              ],
+              features: ['Bronze plan'],
             }}
             icon={SiMicrosoft}
             button={
-              <ActionButton onClick={(e)=> onSubmit(e,'price_1N96v9EwJCgTqEWBTMwMEV7F')} variant="outline" borderWidth="2px">
+              <ActionButton
+                onClick={(e) => onSubmit(e, 'price_1NJM8JEwJCgTqEWBt5vhuZ45')}
+                variant="outline"
+                borderWidth="2px"
+              >
                 Buy now
               </ActionButton>
             }
           />
-         
+
           <PricingCard
             data={{
-              price: '$5',
-              name: 'Test',
-              features: [
-                'Test plan',
-                
-              ],
+              price: '$10',
+              name: 'Gold',
+              features: ['Gold plan'],
             }}
             icon={SiMarketo}
             button={
               <ActionButton
-                onClick={(e) => onSubmit(e,'price_1N96wGEwJCgTqEWBOtlRv6gQ' )}
+                onClick={(e) => onSubmit(e, 'price_1NJM8JEwJCgTqEWBdqgdjfCo')}
+                variant="outline"
+                borderWidth="2px"
+              >
+                Buy now
+              </ActionButton>
+            }
+          />
+
+          <PricingCard
+            data={{
+              price: '$25',
+              name: 'Platinum',
+              features: ['Platinum plan'],
+            }}
+            icon={SiMarketo}
+            button={
+              <ActionButton
+                onClick={(e) => onSubmit(e, 'price_1N96v9EwJCgTqEWBTMwMEV7F')}
                 variant="outline"
                 borderWidth="2px"
               >

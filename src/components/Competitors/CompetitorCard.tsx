@@ -56,19 +56,19 @@ const CompetitorCard = ({
 
         setIsSelected(!isSelected);
       }}
-      className={`h-[101px] w-full cursor-pointer  rounded-[30px] bg-white hover:brightness-95 ${
+      className={`w-full cursor-pointer  rounded-[30px] bg-white hover:brightness-95 ${
         isSelected
           ? 'border-[3px] border-[#7E5DEB]'
           : 'border-[3px] border-transparent'
       }`}
     >
-      <div className="flex  space-x-10 px-6 py-3 ">
-        <p className="text-[20px] font-bold text-[#705CF6]">
+      <div className="flex flex-col px-6 py-3 md:flex-row md:space-x-10 ">
+        <p className="w-full text-[20px] font-bold text-[#705CF6] md:w-auto">
           {customCompetitor ? '#' : position}.
         </p>
-        <div className="flex w-9/12 md:w-11/12 flex-col">
+        <div className="flex w-full flex-col md:w-11/12">
           <div className="flex justify-between ">
-            <p className="w-10/12 truncate text-[17px] font-bold text-[#705CF6] md:text-[20px]">
+            <p className="truncate text-[17px] font-bold text-[#705CF6] md:w-10/12 md:text-[20px]">
               {domain}
             </p>
             {customCompetitor && (
@@ -88,21 +88,19 @@ const CompetitorCard = ({
               />
             )}
           </div>
-
-          <p className="w-11/12 truncate font-bold ">{title}</p>
-
-          <div className="flex w-11/12 truncate ">
+          <p className="w-full truncate font-bold md:w-11/12 ">{title}</p>
+          <div className="flex w-full truncate md:w-11/12">
             <a
-            target="_blank"
+              target="_blank"
               href={link}
-              className=" cursor-pointer mr-2  overflow-hidden overflow-ellipsis w-fit text-sm hover:underline "
+              className="mr-2 w-8/12 cursor-pointer  overflow-hidden overflow-ellipsis text-sm hover:underline md:w-fit "
             >
-                {link}
+              {link}
             </a>
             <a
-            target="_blank"
+              target="_blank"
               href={link}
-              className="flex cursor-pointer items-center  "
+              className="flex w-4/12 cursor-pointer items-center md:w-fit"
             >
               <Image
                 src="/linkIcon.svg"

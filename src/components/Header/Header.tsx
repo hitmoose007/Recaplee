@@ -8,7 +8,7 @@ type Props = {
 
 const Header = ({ svgPath, description, isBookIcon }: Props) => {
   return (
-    <div className="flex text-black space-x-2 md:space-x-4 md:flex-row   ">
+    <div className="flex space-x-2 text-black md:flex-row md:space-x-4   ">
       <Image
         src={svgPath}
         alt="logo"
@@ -16,7 +16,7 @@ const Header = ({ svgPath, description, isBookIcon }: Props) => {
         height={25}
         className=""
       />
-      <div className=" text-2xl md:text-[32px] font-bold">{description}</div>
+      <div className=" text-2xl font-bold md:text-[32px]">{description}</div>
     </div>
   );
 };

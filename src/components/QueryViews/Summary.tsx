@@ -29,6 +29,7 @@ const Summary = ({
   });
 
   const { serpChanges, setSerpChanges } = useSerpContext();
+
   return (
     <>
       <SerpContext.Provider value={{ serpChanges, setSerpChanges }}>
@@ -44,18 +45,6 @@ const Summary = ({
         </div>
         <div className="md:flex md:justify-between">
           <StaticQuery querySummary={querySummary} isQuerySummaryPage={true} />
-          {/* <div className="flex rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">
-          <ChangeCard
-            value={querySummary?.serp_chnages || -1}
-            topTitle="Detection of"
-            bottomTitle="SERP Changes"
-          />
-          <ChangeCard
-            value={querySummary?.new_changes || -1}
-            topTitle="Average of"
-            bottomTitle="changes per webiste"
-          />
-        </div> */}
 
           <ChangesBanner
             competitors={competitorArray}
@@ -75,7 +64,7 @@ const Summary = ({
             if (querySummary) {
               return (
                 <AnalysisCard
-                key={competitor.id}
+                  key={competitor.id}
                   setCompetitorAnalysed={setCompetitorAnalysed}
                   competitor={competitor}
                   querySummary={querySummary}

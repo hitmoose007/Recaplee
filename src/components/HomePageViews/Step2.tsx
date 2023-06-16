@@ -164,7 +164,7 @@ const Step2 = (props: Props) => {
             handleSelectCompetitor={handleSelectCompetitor}
           />
         </div>
-        <div className={`mt-8 flex flex-row-reverse `}>
+        <div className={`mt-8 flex w-full justify-center md:justify-end`}>
           <SaveButton handleSave={handleSave} />
         </div>
       </div>

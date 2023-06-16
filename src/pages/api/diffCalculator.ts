@@ -41,8 +41,6 @@ export default async function handler(
       return query;
     });
 
-    // use promise .all
-    // console.log('hello')
     let competitors = await prisma.competitor.findMany({
       where: {
         query_id: {
@@ -93,7 +91,6 @@ export default async function handler(
       currentContentArray.push(filterResponse(parsedContent));
       return filterResponse(parsedContent);
     });
-    // console.log('hello')
 
     const diffArray: any[] = [];
     const changesCountArray: number[] = [];

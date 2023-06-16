@@ -2,7 +2,6 @@ import { supabase } from '@/lib/supabase';
 
 import React from 'react';
 
-
 export async function signIn(): Promise<void> {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -13,7 +12,5 @@ export async function signIn(): Promise<void> {
   }
 }
 export async function signOut(): Promise<void> {
-  console.log('heal');
   const signOut = await supabase.auth.signOut();
 }
-

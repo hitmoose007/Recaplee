@@ -1,12 +1,5 @@
-import Header from '@/components/Header/Header';
 import React, { useEffect, useState } from 'react';
-import QueryHeader from '@/components/Header/QueryHeader';
-import StaticQuery from '@/components/LanscapeBanners/StaticQueryForm/StaticQueryForm';
-import QueryBanner from '@/components/ChangesBanner/ChangesBanner';
-import ChangeCard from '@/components/ChangesBanner/ChangeCard';
-import HelperHeader from '@/components/Header/HelperHeader';
 import { QuerySummary, Competitor } from '@/types/my-types';
-import AnalysisCard from '@/components/AnalysisBanner/AnalysisCard';
 import { useRouter } from 'next/router';
 import Summary from '@/components/QueryViews/Summary';
 
@@ -40,6 +33,7 @@ const QuerySummary = (props: Props) => {
 
             body: JSON.stringify({
               userId: user?.id,
+              reset_changes: true,
             }),
           });
 
@@ -58,10 +52,8 @@ const QuerySummary = (props: Props) => {
     if (querySummary) {
       setLoading(false);
     }
-    if (page === PageView.COMPETITORVIEW)
-    return
+    if (page === PageView.COMPETITORVIEW) return;
     setPage(PageView.SUMMARYVIEW);
-    
   }, [querySummary, setPage]);
 
   if (loading) {

@@ -50,7 +50,7 @@ export default async function handler(
           },
           data: {
             stripe_id: null,
-            renewal_date: null,
+            renewal_date: new Date(),
           },
         });
       } else if (event.type === 'invoice.payment_succeeded') {
@@ -118,7 +118,7 @@ export default async function handler(
             stripe_id: subscription.id,
           },
           data: {
-            renewal_date: null,
+            renewal_date: new Date(),
           },
         });
       } else {

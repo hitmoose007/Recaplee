@@ -74,7 +74,6 @@ const Home = (props: Props) => {
       <HelperHeader
         description={`These are the queries that are currently monitored. We will analyze and report to you the changes that have been made on your competitors’ website.`}
       />
-
       {user && (
         <div className="relative right-12  top-7 hidden justify-end md:flex">
           <span className="font-bold ">
@@ -97,7 +96,7 @@ const Home = (props: Props) => {
         {Array.isArray(queryArray) &&
           queryArray.map((query: QuerySummary, index) => {
             return (
-              <div key={query.id}>
+              <div key={query.id} className="py-2">
                 <Link key={query.id} href={`/querySummary/${query.id}`}>
                   <QueryCards
                     key={query.id}

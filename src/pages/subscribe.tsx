@@ -14,7 +14,6 @@ const Subscribe = () => {
   const onSubmit = async (e: any, priceId: string) => {
     e.preventDefault();
     // Create a Checkout Session.
-    console.log(window.location.origin);
     const data = await fetch('/api/checkout_sessions', {
       //set req.body['userId'] = userId
       method: 'POST',
@@ -65,7 +64,7 @@ const Subscribe = () => {
         >
           <PricingCard
             data={{
-              price: '$10',
+              price: '$5',
               name: 'Bronze',
               features: ['Bronze plan'],
             }}
@@ -83,9 +82,9 @@ const Subscribe = () => {
 
           <PricingCard
             data={{
-              price: '$5',
-              name: 'Test',
-              features: ['Test plan'],
+              price: '$10',
+              name: 'Gold',
+              features: ['Gold plan'],
             }}
             icon={SiMarketo}
             button={
@@ -101,9 +100,9 @@ const Subscribe = () => {
 
           <PricingCard
             data={{
-              price: '$12',
-              name: 'Test',
-              features: ['Test plan 3'],
+              price: '$25',
+              name: 'Platinum',
+              features: ['Platinum plan'],
             }}
             icon={SiMarketo}
             button={

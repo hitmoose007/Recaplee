@@ -7,7 +7,6 @@ export default isLoggedIn(async (req, res, user) => {
     const userId = user.id;
     const userIdBody = req.body['userId'];
     const emailEnabled = req.body['emailEnabled'];
-console.log(emailEnabled, 'emailEnabled')
 
     if (userIdBody !== userId) {
       res.status(209).json({
@@ -15,7 +14,6 @@ console.log(emailEnabled, 'emailEnabled')
         idBody: userIdBody,
       });
     }
-
 
     //
     const profile = await prisma.profiles.update({
@@ -26,10 +24,7 @@ console.log(emailEnabled, 'emailEnabled')
         email_enabled: emailEnabled,
       },
     });
-    console.log(profile);
 
-    //  console.log('healo')
-    // console.log(previousQueries);
     res.status(200).json({ profile });
   } catch (error: unknown) {
     if (error instanceof Error) {

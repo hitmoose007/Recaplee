@@ -6,13 +6,10 @@ import isLoggedIn from '@/lib/isLoggedIn';
 export default isLoggedIn(async (req, res, user) => {
   try {
     const { id } = req.query;
-    // console.log(req.query, 'the real mvp');
 
     const userIdBody = req.body['userId'];
 
     if (userIdBody !== user.id) {
-      console.log(userIdBody, user.id);
-      console.log('hello');
       res.status(403).json({
         error: `You don't have permission to access this query.`,
       });
@@ -20,7 +17,6 @@ export default isLoggedIn(async (req, res, user) => {
       return;
     }
 
-    // console.log(id, 'the real mvp')
     const queryResult = await prisma.targetQuery.findFirst({
       where: {
         id: id as Prisma.UuidFilter,

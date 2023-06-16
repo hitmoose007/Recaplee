@@ -9,13 +9,13 @@ type Props = {
   isQuerySummaryPage?: boolean;
   querySummary?: QuerySummary;
 };
- 
+
 const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
   const { formState, setFormState } = useContext(FormContext);
 
   return (
-    <div className=" inline-flex py-4 md:py-0 md:pt-4 text-customBlack   items-center rounded-[30px]  bg-[#EEF6FF] mt-4 md:h-[100px] px-6 pt-4">
-      <div className="flex flex-col   md:flex-row md:space-x-10">
+    <div className="mt-4 inline-flex w-full items-center rounded-[30px] bg-[#EEF6FF] px-6  py-4 pt-4  text-customBlack md:h-[100px] md:py-0 md:pt-4">
+      <div className="flex w-full flex-col md:flex-row md:space-x-10">
         {!isQuerySummaryPage && (
           <div className=" flex-col  space-y-2">
             <p>Your query:</p>
@@ -24,7 +24,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
                 isQuerySummaryPage ? querySummary?.query_name : formState.query
               }
               type="text"
-              className="pointer-events-none rounded-full font-bold text-[#334DD9] h-[34px] w-[245px] pl-4"
+              className="pointer-events-none h-[34px] w-full rounded-full pl-4 font-bold text-[#334DD9]"
             />
           </div>
         )}
@@ -32,8 +32,6 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
         <div className=" pointer-events-none  md:space-y-2">
           <p>Search Engine:</p>
           <DomainSelect
-          
-
             domain={
               isQuerySummaryPage
                 ? querySummary?.google_domain || ''
@@ -54,7 +52,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
           />
         </div>
 
-        <div className="space flex-col text-[#4B5563] space-y-2">
+        <div className="space flex-col space-y-2 text-[#4B5563]">
           <p className="text-[#111827]">Device:</p>
           <div className="flex ">
             <div
@@ -63,7 +61,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
                 isQuerySummaryPage
                   ? !querySummary?.is_pc && 'hidden'
                   : !formState.isPC && 'hidden'
-              } pointer-events-none flex items-center space-x-3 rounded-full bg-white font-bold text-[#334DD9] hover:brightness-95 px-4 py-1`}
+              } pointer-events-none flex items-center space-x-3 rounded-full bg-white px-4 py-1 font-bold text-[#334DD9] hover:brightness-95`}
             >
               <Image
                 src="/landscapeIcons/pcIcon.svg"
@@ -79,7 +77,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
                 isQuerySummaryPage
                   ? querySummary?.is_pc && 'hidden'
                   : formState.isPC && 'hidden'
-              } pointer-events-none flex items-center rounded-full bg-white font-bold text-[#334DD9] hover:brightness-95 px-4 py-1`}
+              } pointer-events-none flex items-center rounded-full bg-white px-4 py-1 font-bold text-[#334DD9] hover:brightness-95`}
             >
               <Image
                 src="/landscapeIcons/mobileIcon.svg"

@@ -21,11 +21,9 @@ export default isLoggedIn(async (req, res, user) => {
     const profile = await prisma.profiles.findFirst({
       where: {
         id: userId,
-      }
+      },
     });
 
-    //  console.log('healo')
-    // console.log(previousQueries);
     res.status(200).json(profile);
   } catch (error: unknown) {
     if (error instanceof Error) {

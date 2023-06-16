@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useUserContext } from '@/context/user';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import PageTitle from './PageTitle';
+import useScrollPosition from '@/hooks/useScrollPosition';
 
 type Props = {};
 
@@ -16,15 +17,16 @@ const DesktopBanner = (props: Props) => {
   const supabase = useSupabaseClient();
   const { user } = useUserContext();
   const date = new Date(user.renewal_date || '');
+  const scrollPosition = useScrollPosition();
 
   return (
     <div
-      className="h-40 w-full rounded-b-2xl px-6 pt-3 text-[13px] text-white"
+      className="sticky -top-1 z-[1000] w-full rounded-b-2xl px-6 pb-5 pt-3 text-[13px] text-white transition-all duration-100"
       style={{
         background: 'linear-gradient(90deg, #111827 0%, #051840 100%)',
       }}
     >
-      <div className="flex justify-between  mb-3 ">
+      <div className="mb-3 flex  justify-between ">
         <Image
           onClick={() => {
             setPage(PageView.DASHBOARD);
@@ -46,30 +48,31 @@ const DesktopBanner = (props: Props) => {
           className=""
         />
       </div>
-
-      <p className=" flex justify-end font-bold">Monthly Limits:</p>
+      {scrollPosition <= 0 && (
+        <p className=" flex justify-end font-bold">Monthly Limits:</p>
+      )}
       <div className="flex justify-between">
-        <div className="flex flex-col items-center justify-center">
-          <div className=" flex-col justify-center space-y-1 ">
-            {user.renewal_date && (
-              <div className="text-center">
-                Renewal on{' '}
-                <span className="font-bold">{date.toLocaleDateString()}</span>
-              </div>
-            )}
-            <button
-              className="h-8 w-40 text-sm rounded-full bg-[#705CF6] font-bold hover:brightness-90"
-              onClick={() => {
-                setPage(PageView.SUBSCRIPTION);
-                router.push('/subscribe');
-              }}
-            >
-              {user.renewal_date ? ' Your Subscription' : 'Subscribe Now'}
-            </button>
+        {scrollPosition <= 0 && (
+          <div className="flex flex-col items-center justify-center">
+            <div className=" flex-col justify-center space-y-1 ">
+              {user.renewal_date && (
+                <div className="text-center">
+                  Renewal on{' '}
+                  <span className="font-bold">{date.toLocaleDateString()}</span>
+                </div>
+              )}
+              <button
+                className="h-8 w-40 rounded-full bg-[#705CF6] text-sm font-bold hover:brightness-90"
+                onClick={() => {
+                  setPage(PageView.SUBSCRIPTION);
+                  router.push('/subscribe');
+                }}
+              >
+                {user.renewal_date ? ' Your Subscription' : 'Subscribe Now'}
+              </button>
+            </div>
           </div>
-          {/* <PageTitle /> */}
-        </div>
-
+        )}
         <div
           onClick={() => {
             supabase.auth.signOut();
@@ -77,9 +80,7 @@ const DesktopBanner = (props: Props) => {
           }}
           className="  flex flex-col items-end hover:cursor-pointer "
         >
-          {/* <p className="text-xl">Logout</p> */}
-
-          {user.renewal_date && (
+          {user.renewal_date && scrollPosition <= 0 && (
             <>
               <p>
                 <span className="text-[#30A3E4]">

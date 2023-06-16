@@ -95,12 +95,10 @@ export async function mailSender() {
 
   Promise.all(promises)
     .then(() => {
-      // All promises have resolved successfully
       console.log('All promises resolved');
     })
 
     .catch((error) => {
-      // Handle any errors that occurred during promise execution
       console.error('An error occurred:', error);
     });
 }

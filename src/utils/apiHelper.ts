@@ -1,7 +1,7 @@
 export const maxPage = 3;
 export const maxResults = 10;
-export const maxQueryResearch=30;
-export const maxCompetitors=150;
+export const maxQueryResearch = 30;
+export const maxCompetitors = 150;
 
 export function filterResponse(response: any) {
   if (response === undefined || response === null) {
@@ -11,16 +11,15 @@ export function filterResponse(response: any) {
     const filteredResponse = response.filter((item: any) => {
       return item[0] !== ' ';
     });
-  return filteredResponse;
+    return filteredResponse;
   }
 
-  return []
+  return [];
   // Loop through the words in the first string
 }
 export function parseObject(jsonObject: any) {
   let outputArray = [];
 
-  //   console.log(jsonObject);
   if (jsonObject === undefined || jsonObject === null) {
     return [];
   }
@@ -102,10 +101,9 @@ export function parseObject(jsonObject: any) {
 }
 
 export const validSubscription = (renewalDate: Date) => {
-    const today = new Date();
-    if (today > renewalDate) {
-      return false;
-    }
-    return true;
-    };
-    
+  const today = new Date();
+  if (today > renewalDate) {
+    return false;
+  }
+  return true;
+};

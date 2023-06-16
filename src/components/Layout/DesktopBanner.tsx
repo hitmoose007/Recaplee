@@ -68,9 +68,21 @@ const DesktopBanner = (props: Props) => {
         <div className="mt-3 flex-col justify-center space-y-2 ">
           <button
             className="h-[35px] w-[150px] rounded-full bg-[#705CF6] font-bold hover:brightness-90"
-            onClick={() => {
-              setPage(PageView.SUBSCRIPTION);
-              router.push('/subscribe');
+            onClick={async () => {
+              if (!user.renewal_date) {
+                setPage(PageView.SUBSCRIPTION);
+                router.push('/subscribe');
+              } else {
+                const data = await fetch(
+                  '/api/checkout_sessions/billing_portal',
+                  {
+                    method: 'GET',
+                  }
+                );
+
+                const checkoutSession = await data.json();
+                router.push(checkoutSession.url);
+              }
             }}
           >
             {user.renewal_date ? 'Your Subscription' : 'Subscribe Now'}

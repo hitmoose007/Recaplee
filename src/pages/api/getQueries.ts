@@ -33,8 +33,6 @@ export default isLoggedIn(async (req, res, user) => {
       take: 15,
     });
 
-    //  console.log('healo')
-    // console.log(previousQueries);
     res.status(200).json(previousQueries);
   } catch (error: unknown) {
     if (error instanceof Error) {

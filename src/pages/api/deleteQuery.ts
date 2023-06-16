@@ -5,35 +5,38 @@ import { prisma } from '@/lib/prisma';
 export default isLoggedIn(async (req, res, user) => {
   try {
     const userId = user.id;
-    const userIdBody = req.body['userId'];
-
     const queryId = req.body['queryId'];
-    if (userIdBody !== userId) {
-      res.status(209).json({
-        id: userId,
-        idBody: userIdBody,
-      });
+
+    if (!queryId) {
+      res.status(400).json({ error: 'Missing query id' });
+      return;
     }
 
-    const queryDeleted= await prisma.targetQuery.delete({
+    const queryDeleted = await prisma.targetQuery.deleteMany({
       where: {
         id: queryId,
+        user_id: userId,
       },
     });
+
+    if (queryDeleted.count === 0) {
+      res.status(403).json({
+        error: `You don't have permission to delete this query.`,
+      });
+      return;
+    }
+
     //reduce query monitored by one
     await prisma.profiles.update({
-        where: {
-            id: userId,
+      where: {
+        id: userId,
+      },
+      data: {
+        query_monitored: {
+          decrement: 1,
         },
-        data: {
-            query_monitored: {
-                decrement: 1,
-            },
-        },
+      },
     });
-
-
-    
 
     res.status(200).json(queryDeleted);
   } catch (error: unknown) {

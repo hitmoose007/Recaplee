@@ -51,6 +51,9 @@ export default async function handler(
           data: {
             stripe_id: null,
             renewal_date: null,
+            maxResearchQuery: 0,
+            maxScrape: 0,
+            maxCustomScrape: 0,
           },
         });
       } else if (event.type === 'invoice.payment_succeeded') {
@@ -119,6 +122,9 @@ export default async function handler(
           },
           data: {
             renewal_date: null,
+            maxResearchQuery: 0,
+            maxScrape: 0,
+            maxCustomScrape: 0,
           },
         });
       } else {

@@ -50,11 +50,30 @@ select {
 
 .toggle-custom.react-toggle:hover:not(.react-toggle--disabled)
   .react-toggle-track {
+  border: 1px solid #00000;
   background-color: #9c8ff3;
 }
 
-.toggle-custom.react-toggle--checked .react-toggle-track {
+.toggle-custom.react-toggle--checked .react-toggle-thumb {
+  box-shadow: none;
+}
+.toggle-custom.react-toggle--focus .react-toggle-thumb {
+  box-shadow: none;
+}
+.toggle-custom.react-toggle--active .react-toggle-thumb {
+  box-shadow: none;
+}
+.toggle-custom.react-toggle--active .react-toggle-thumb {
+  box-shadow: none;
+}
+.toggle-custom.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {
+  box-shadow: none;
+}
 
+
+
+.toggle-custom.react-toggle--checked .react-toggle-track {
+ border: 1px solid #00000;
   background-color: #705cf6;
 }
 .toggle-custom.react-toggle--checked:hover:not(.react-toggle--disabled)

@@ -60,8 +60,8 @@ const AnalysisCard = ({
 
   return (
     <div className="flex flex-col items-center justify-between space-y-2 rounded-[25px] bg-white px-[20px] py-6 align-middle text-customGray md:flex-row md:space-y-0 md:rounded-full md:py-4">
-      <div className="flex w-3 text-customYellow">
-        <p className="text-2xl font-bold text-customPurple ">
+      <div className="flex w-6 text-customYellow">
+        <p className="text-2xl font-bold text-customPurple  ">
           {competitor.current_position || '#'}.
         </p>
         {positionChange !== undefined && positionChange !== 0 && (
@@ -75,11 +75,11 @@ const AnalysisCard = ({
           </p>
         )}
       </div>
-      <div className="flex flex-col   ">
+      <div className="flex flex-col  md:ml-10 xl:ml-0 ">
         <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-80 md:text-start">
           {competitor.domain}
         </p>
-        <div className="flex w-60 justify-center md:justify-normal md:w-96 space-x-2 truncate">
+        <div className="flex w-60 justify-center md:justify-normal md:w-80 space-x-2 truncate">
           <a
             href={competitor.link}
             target="_blank"

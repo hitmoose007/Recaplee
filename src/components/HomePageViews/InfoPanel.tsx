@@ -10,8 +10,6 @@ import { useSession } from '@supabase/auth-helpers-react';
 type Props = {
     isEmailEnabled: boolean;
     setIsEmailEnabled: (value: boolean) => void;
-   
-
 }
 
 const InfoPanel = ({isEmailEnabled, setIsEmailEnabled}: Props) => {
@@ -42,7 +40,7 @@ const InfoPanel = ({isEmailEnabled, setIsEmailEnabled}: Props) => {
       fetchEmailEnabled();
   }, [isEmailEnabled]);
   return (
-      <div className="mt-6 flex  flex-col justify-between  md:flex-row">
+      <div className="mt-6 flex  flex-col justify-between md:space-x-8  md:flex-row">
         <div>
           <Header
           isBookIcon={true}
@@ -170,14 +168,16 @@ const InfoPanel = ({isEmailEnabled, setIsEmailEnabled}: Props) => {
                   <li className=" font-bold">Email Notification Disabled</li>
                 )}
                 <Toggle
+
                   checked={isEmailEnabled}
                   onChange={() => {
                     setIsEmailEnabled(!isEmailEnabled);
                     
                   }}
+                  
                   aria-label="No label tag"
                   icons={false}
-                  className=" toggle-custom bg-customPurple hover:brightness-90"
+                  className=" toggle-custom bg-customPurple hover:brightness-90 border-0"
                 />
               </div>
             </div>

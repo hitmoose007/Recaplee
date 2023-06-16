@@ -60,7 +60,7 @@ const CustomCompetitorInput = ({
   };
 
   return (
-    <div className="mt-2 flex h-24 w-full  flex-col justify-between rounded-[25px]   border-[3px] border-dotted border-customPurple px-4 py-2 md:flex   md:flex-col ">
+    <div className="mt-2 flex h-24 w-full  flex-col justify-between rounded-[25px]   border-[3px] border-dashed  border-customPurple px-4 py-2 md:flex   md:flex-col ">
       <div className="flex justify-between font-bold  ">
         <span className="text-customPurple">
           Insert a link to a competitor &apos;s page:

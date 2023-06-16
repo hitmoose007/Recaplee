@@ -151,7 +151,7 @@ const NewQueryForm = ({ setIsLoading, isLoading }: Props) => {
           </div>
         </div>
         <div className="flex w-full flex-col md:items-end px-4 md:px-0 items-stretch md:w-auto">
-          <div className="-mt-8 mb-3 text-[#4B5563] md:hidden lg:block lg:truncate  ">
+          <div className="-mt-8 md:-mt-2 mb-3 text-[#4B5563] md:hidden lg:block lg:truncate  ">
             <span className="font-bold">
               {user.query_research}/{user.maxResearchQuery}
             </span>{' '}

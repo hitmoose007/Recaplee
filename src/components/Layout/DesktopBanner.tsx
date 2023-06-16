@@ -27,6 +27,7 @@ const DesktopBanner = (props: Props) => {
       <div className="flex items-center">
         <Image
           onClick={() => {
+            setPage(PageView.DASHBOARD);
             router.push('/dashboard');
           }}
           quality={100}

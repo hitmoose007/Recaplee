@@ -112,7 +112,7 @@ const AnalysisCard = ({
         <p className="text-sm md:mt-1">Changes detected</p>
       </div>
 
-      {(competitor?.old_content && competitor?.changes_detected) || 0 > 0 ? (
+      {((competitor?.current_content?.length && competitor?.old_content?.length) && competitor?.changes_detected) || 0 > 0 ? (
         <button
           onClick={() => {
             setCompetitorAnalysed(competitor);

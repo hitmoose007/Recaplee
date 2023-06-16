@@ -42,6 +42,7 @@ export type Competitor = {
   changes_detected?: number;
   current_content?: CurrentContent[];
   old_content?: CurrentContent[];
+
   changed_content?: ChangedContent[];
 };
 type ChangedContent = [

@@ -26,6 +26,7 @@ export type User = {
   maxResearchQuery?: number;
   maxMonitoredQuery?: number;
   maxScrape?: number;
+  maxCustomScrape?: number;
 };
 
 export type Competitor = {

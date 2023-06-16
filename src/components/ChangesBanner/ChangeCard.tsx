@@ -20,7 +20,7 @@ const ChangeCard = ({
 
     
   return (
-    <div className="flex flex-col items-center justify-center space-y-1 rounded-[30px] bg-white text-sm text-customGray md:w-44 md:px-4 md:py-1">
+    <div className="flex flex-col rounded-[25px]  items-center justify-center space-y-1 md:rounded-[30px] bg-white text-sm text-customGray md:w-44 md:px-4 md:py-1">
       <p>{topTitle}</p>
       <p className="text-[20px] font-bold text-customPurple ">
         {showHashtag && '#'}

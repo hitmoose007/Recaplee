@@ -321,6 +321,7 @@ model profiles {
   maxMonitoredQuery   Int?
   maxScrape           Int?
   email_enabled       Boolean?      @default(false)
+  maxCustomScrape     Int?
   TargetQuery         TargetQuery[]
   users               users         @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 

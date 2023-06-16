@@ -11,6 +11,7 @@ import ExpandedView from '@/components/CompetitorAnalysis/ExpandedView/ExpandedV
 import { Competitor, QuerySummary } from '@/types/my-types';
 import useMobileStatus from '@/hooks/useMobileStatus';
 
+import UnExpandedView from '@/components/CompetitorAnalysis/ExpandedView/UnExpandedView';
 type Props = {
   querySummary: QuerySummary;
   competitors: Competitor[];
@@ -24,7 +25,7 @@ const CompetitorAnalysis = ({
 }: Props) => {
   const [showExpandedView, setShowExpandedView] = useState(true);
 
-  const isMobile= useMobileStatus();
+  const isMobile = useMobileStatus();
   return (
     <>
       <QueryHeader
@@ -32,12 +33,12 @@ const CompetitorAnalysis = ({
         isCompetitor={true}
       />
       <HelperHeader description="Read and analyse all the differences found between two versions. You can compare all the changes made in the web page content." />
-      <div className="mt-2 flex md:flex-row flex-col justify-between ">
+      <div className="mt-2 flex flex-col justify-between md:flex-row ">
         <div>
           <SubHeader title={'Monitored competitor page: '} />
-          <div className="flex space-x-2 truncate w-[300px] py-4">
+          <div className="flex w-[300px] space-x-2 truncate py-4">
             <a
-            target="_blank"
+              target="_blank"
               href=""
               className=" w-fit truncate text-sm font-bold text-customGray hover:underline "
             >
@@ -46,16 +47,18 @@ const CompetitorAnalysis = ({
             </a>
             <Image src="/linkIcon.svg" width={10} height={10} alt="link icon" />
           </div>
-         { !isMobile && <div className="mt-4 flex items-center space-x-4">
-            <SubHeader title={'Expanded view:'} />{' '}
-            <Toggle
-              defaultChecked={showExpandedView}
-              onChange={() => setShowExpandedView(!showExpandedView)}
-              aria-label="No label tag"
-              icons={false}
-              className=" toggle-custom bg-customPurple hover:brightness-90"
-            />
-          </div>}
+          {!isMobile && (
+            <div className="mt-4 flex items-center space-x-4">
+              <SubHeader title={'Expanded view:'} />{' '}
+              <Toggle
+                defaultChecked={showExpandedView}
+                onChange={() => setShowExpandedView(!showExpandedView)}
+                aria-label="No label tag"
+                icons={false}
+                className=" toggle-custom bg-customPurple hover:brightness-90"
+              />
+            </div>
+          )}
         </div>
         <QueryBanner
           competitors={competitors}
@@ -63,19 +66,21 @@ const CompetitorAnalysis = ({
         />
       </div>
 
-      {(showExpandedView) && (
-        <div className="mt-8 flex  space-x-12 ">
+      <div className="mt-8 flex space-x-12 ">
+        {(showExpandedView || isMobile) && (
           <ExpandedView
             querySummary={querySummary}
             competitorAnalysed={competitorAnalysed}
           />
-          {/* <ExpandedCard isRemoved={true} />
-        <ExpandedCard isRemoved={false} /> */}
-        </div>
+        )}
+
+      {(!showExpandedView && !isMobile) &&(
+        <UnExpandedView
+          querySummary={querySummary}
+          competitorAnalysed={competitorAnalysed}
+        />
       )}
-
-
-      
+      </div>
     </>
   );
 };

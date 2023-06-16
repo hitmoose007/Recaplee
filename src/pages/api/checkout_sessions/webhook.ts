@@ -99,7 +99,7 @@ export default async function handler(
         });
       } else if (event.type === 'customer.subscription.updated') {
         //     // // Update the price id and set the new period end.
-        const subscriptipon = event.data.object as Stripe.Subscription;
+        const subscription = event.data.object as Stripe.Subscription;
         await prisma.profiles.update({
           where: {
             id: subscription.metadata.userId as string,

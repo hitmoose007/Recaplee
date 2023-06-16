@@ -30,6 +30,7 @@ const CompetitorCard = ({
   const [isSelected, setIsSelected] = useState(false);
   const onDelete = () => {
     setIsSelected(false);
+    handleSelectCompetitor(link);
 
     if (setCustomCompetitorArray) {
       setCustomCompetitorArray((prevArray) =>

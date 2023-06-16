@@ -28,9 +28,9 @@ const ExpandedBanner = ({ competitorAnalysed, querySummary,addedCopyAllText,remo
         </div>
         <div className="flex w-1/2 justify-between text-customGray">
           <p>Analysis page date: <span className='font-bold'>{recent_update}</span></p>
-          <p>
+          <p className="md:block hidden">
             The content had  {' '} 
-            <span className="font-bold ">
+            <span className="font-bold  ">
             {competitorAnalysed.current_content ?
               JSON.stringify(competitorAnalysed.current_content).split(' ').length: 0}{' '} </span>words
           </p>

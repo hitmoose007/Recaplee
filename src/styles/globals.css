@@ -12,7 +12,7 @@
   */
 
 body {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 button.ReactFlagsSelect-module_selectBtn__19wW7 {
@@ -45,6 +45,7 @@ select {
 
 .toggle-custom .react-toggle-track {
   background-color: #9c8ff3;
+  border: 1px solid #00000;
 }
 
 .toggle-custom.react-toggle:hover:not(.react-toggle--disabled)
@@ -53,6 +54,7 @@ select {
 }
 
 .toggle-custom.react-toggle--checked .react-toggle-track {
+
   background-color: #705cf6;
 }
 .toggle-custom.react-toggle--checked:hover:not(.react-toggle--disabled)

@@ -12,7 +12,7 @@ const Header = ({ svgPath, description, isBookIcon }: Props) => {
       <Image
         src={svgPath}
         alt="logo"
-        width={isBookIcon ? 20 : 25}
+        width={isBookIcon ? 19 : 25}
         height={25}
         className=""
       />

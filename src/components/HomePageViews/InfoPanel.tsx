@@ -45,6 +45,7 @@ const InfoPanel = ({isEmailEnabled, setIsEmailEnabled}: Props) => {
       <div className="mt-6 flex  flex-col justify-between  md:flex-row">
         <div>
           <Header
+          isBookIcon={true}
             svgPath="headerIcons/bookIcon.svg"
             description="How Recaplee works?"
           />

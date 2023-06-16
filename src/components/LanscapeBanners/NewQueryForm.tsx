@@ -150,7 +150,7 @@ const NewQueryForm = ({ setIsLoading, isLoading }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-end md:w-auto">
+        <div className="flex w-full flex-col md:items-end px-4 md:px-0 items-stretch md:w-auto">
           <div className="-mt-8 mb-3 text-[#4B5563] md:hidden lg:block lg:truncate  ">
             <span className="font-bold">
               {user.query_research}/{user.maxResearchQuery}
@@ -159,7 +159,7 @@ const NewQueryForm = ({ setIsLoading, isLoading }: Props) => {
           </div>
           <button
             type="submit"
-            className="mb-8 flex w-full cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] px-12 py-2 font-bold text-white hover:brightness-90  md:mb-0 md:w-auto"
+            className="mb-8 flex w-full  cursor-pointer justify-center space-x-5 rounded-full bg-[#705CF6] px-12 py-2 font-bold text-white hover:brightness-90  md:mb-0 md:w-auto"
           >
             <Image
               src="/landscapeIcons/simpleGlass.svg"

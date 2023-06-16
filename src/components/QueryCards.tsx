@@ -64,11 +64,11 @@ const QueryCards = ({
         {queryTitle}
       </p>
 
-      <div className="flex flex-col space-y-1 text-xs text-[#4B5563]">
+      <div className="flex flex-col space-y-1 text-xs text-center text-[#4B5563]">
         <p className="">{competitorsTracked} competitors tracked</p>
         {lastUpdate && <p> Last update: {lastUpdate} </p>}
         {totalChanges !== undefined && totalChanges > 0 && (
-          <p className="-ml-[10px] text-customGreen">
+          <p className=" text-customGreen">
             &#x2022; {totalChanges} New Changes Found
           </p>
         )}

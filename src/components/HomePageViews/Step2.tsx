@@ -90,6 +90,8 @@ const Step2 = (props: Props) => {
     }
     setPage(PageView.DASHBOARD);
   };
+
+  console.log(selectedCompetitors,'this is number selected ooo aa a')
   return (
     <div>
       <Header
@@ -112,9 +114,9 @@ const Step2 = (props: Props) => {
         />
       </div>
       <div className="mt-4 rounded-[30px] bg-[#EEF6FF]  px-10 py-4 text-[#4B5563]">
-        <div className="flex justify-between md:flex-row flex-col">
-          <div>
-            <span className="font-bold  ">
+        <div className="flex  justify-between md:flex-row flex-col">
+          <div className="w-full ">
+            <span className="font-bold    ">
               {selectedCompetitors.length} out of {queryResult.length}{' '}
             </span>
             competitors selected

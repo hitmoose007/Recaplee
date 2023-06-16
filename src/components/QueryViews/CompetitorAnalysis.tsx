@@ -39,7 +39,7 @@ const CompetitorAnalysis = ({
           <div className="flex w-[300px] space-x-2 truncate py-4">
             <a
               target="_blank"
-              href=""
+              href={competitorAnalysed.link}
               className=" w-fit truncate text-sm font-bold text-customGray hover:underline "
             >
               {' '}

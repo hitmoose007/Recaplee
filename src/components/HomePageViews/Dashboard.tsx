@@ -86,7 +86,7 @@ const Home = (props: Props) => {
       <div className="mt-4 min-h-[220px] flex-col rounded-[30px] bg-[#EEF6FF]  py-2 pb-5 md:mt-0 md:flex md:w-auto md:flex-row   md:flex-wrap md:space-x-8 md:space-y-5 md:px-0 md:pt-4">
         <Image
           onClick={() => setPage(PageView.STEP1VIEW)}
-          className="mx-auto cursor-pointer pt-2 hover:brightness-50 md:mx-0 md:ml-8 md:mt-4 md:pt-0"
+          className="mb-3 md:mb-0 mx-auto cursor-pointer pt-2 hover:brightness-50 md:mx-0 md:ml-8 md:mt-4 md:pt-0"
           width={180}
           height={160}
           src="/landscapeIcons/addNewBigIcon.svg"

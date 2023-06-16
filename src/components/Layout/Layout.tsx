@@ -71,8 +71,8 @@ function Layout({ children }: { children: React.ReactNode }) {
           <PageContext.Provider value={{ page, setPage }}>
             {!isMobile && <DesktopBanner />}
             {isMobile && <MobileBanner />}
-            <div className=" mx-6 my-8 md:mx-10">
-              <div className="md:mb-1">{!isMobile && <BackButton />}</div>
+            <div className=" mx-6 md:my-8 my-6 md:mx-10">
+              <div className="md:mb-1">{<BackButton />}</div>
               <main>{children}</main>
             </div>
           </PageContext.Provider>

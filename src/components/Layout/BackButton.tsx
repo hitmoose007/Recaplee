@@ -35,7 +35,7 @@ const BackButton = (props: Props) => {
     return <></>;
   }
   return (
-    <div className="mb-4 flex  items-center justify-between md:w-[75px] ">
+    <div className="md:mb-4 mb-2 flex  items-center justify-between md:w-[75px] ">
       <button onClick={() => onClick()}>
         <Image
           src="/backButton.svg"
@@ -45,7 +45,7 @@ const BackButton = (props: Props) => {
           className="hover:brightness-75"
         />
       </button>
-      <p className="text-[#4B5563] ">Back</p>
+      <p className="text-[#4B5563] md:block hidden ">Back</p>
     </div>
   );
 };

@@ -56,12 +56,8 @@ export default async function handler(
             maxCustomScrape: 0,
           },
         });
-      } else if (event.type === 'invoice.payment_succeeded') {
-        const invoice = event.data.object as Stripe.Invoice;
-
-        const subscription = await stripe.subscriptions.retrieve(
-          invoice.subscription as string
-        );
+      } else if (event.type === 'customer.subscription.created') {
+        const subscription = event.data.object as Stripe.Subscription;
 
         const price = await stripe.prices.retrieve(
           subscription.metadata.priceId as string
@@ -69,9 +65,10 @@ export default async function handler(
 
         await prisma.profiles.update({
           where: {
-            stripe_id: subscription.customer as string,
+            id: subscription.metadata.userId as string,
           },
           data: {
+            stripe_id: subscription.customer as string,
             renewal_date: new Date(subscription.current_period_end * 1000),
             maxMonitoredQuery:
               (price.metadata.maxMonitoredQuery &&
@@ -92,9 +89,6 @@ export default async function handler(
             competitors_tracked: 0,
           },
         });
-      } else if (event.type === 'customer.subscription.created') {
-        const subscription = event.data.object as Stripe.Subscription;
-
         await prisma.profiles.update({
           where: {
             id: subscription.metadata.userId as string,
@@ -108,7 +102,7 @@ export default async function handler(
         const subscriptipon = event.data.object as Stripe.Subscription;
         await prisma.profiles.update({
           where: {
-            stripe_id: subscription.id,
+            id: subscription.metadata.userId as string,
           },
           data: {
             renewal_date: new Date(subscription.current_period_end * 1000),
@@ -118,7 +112,7 @@ export default async function handler(
         const subscription = event.data.object as Stripe.Subscription;
         await prisma.profiles.update({
           where: {
-            stripe_id: subscription.id,
+            id: subscription.metadata.userId as string,
           },
           data: {
             renewal_date: null,

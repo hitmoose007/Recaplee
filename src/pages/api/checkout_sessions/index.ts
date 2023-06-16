@@ -22,18 +22,13 @@ export default isLoggedIn(async (req, res, user) => {
       select: {
         stripe_id: true,
         renewal_date: true,
+        email: true,
       },
     });
 
     if (!user) {
       return res.status(400).json({
         error: 'You are not a registered user.',
-      });
-    }
-
-    if (!user?.stripe_id) {
-      return res.status(400).json({
-        error: 'You do not have an active subscription.',
       });
     }
 
@@ -45,6 +40,7 @@ export default isLoggedIn(async (req, res, user) => {
 
     const params: Stripe.Checkout.SessionCreateParams = {
       customer: user?.stripe_id ?? undefined,
+      customer_email: user?.stripe_id ? undefined : user.email,
       payment_method_types: ['card'],
       mode: 'subscription',
       line_items: [

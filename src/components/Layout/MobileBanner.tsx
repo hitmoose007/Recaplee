@@ -30,7 +30,7 @@ const DesktopBanner = (props: Props) => {
         <Image
           onClick={() => {
             setPage(PageView.DASHBOARD);
-            router.push('/');
+            router.push('/dashboard');
           }}
           quality={100}
           src="/logo.svg"

@@ -19,7 +19,6 @@ export default function CountrySelect({ country, setCountry }: props) {
         (page === PageView.STEP2VIEW || page === PageView.SUMMARYVIEW) &&
         'step2'
       }  w-full  `}
-        searchable={true}
         selected={country}
         onSelect={onSelect}
         countries={countries}

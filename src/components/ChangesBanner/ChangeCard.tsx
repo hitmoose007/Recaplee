@@ -45,7 +45,6 @@ const ChangeCard = ({
       <p className="text-[20px] font-bold text-customPurple ">
         {showHashtag && '#'}
         <span className={`${showColor && 'text-' + colorValue}`}>
-          {' '}
           {value}
           {showPercentage && '%'}
         </span>

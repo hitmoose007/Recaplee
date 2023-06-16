@@ -19,6 +19,8 @@ const DesktopBanner = (props: Props) => {
   const date = new Date(user.renewal_date || '');
   const scrollPosition = useScrollPosition();
 
+  
+
   return (
     <div
       className="sticky -top-1 z-[1000] w-full rounded-b-2xl px-6 pb-5 pt-3 text-[13px] text-white transition-all duration-100"

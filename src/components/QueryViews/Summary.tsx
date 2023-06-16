@@ -32,14 +32,16 @@ const Summary = ({
   return (
     <>
       <SerpContext.Provider value={{ serpChanges, setSerpChanges }}>
-        <div className="flex justify-between">
+        <div className="flex md:flex-row flex-col justify-between md:space-y-0 space-y-4">
           <QueryHeader
             isCompetitor={false}
             highlightedText={querySummary?.query_name || ''}
           />
           <DeleteButton queryId={querySummary?.id} />
         </div>
+        <div className="mt-8 md:mt-0">
         <HelperHeader description="Here you find the summary of the competitor analysis that we made for you. If you want to know more about one of them, just click the button “Analyse”." />
+        </div>
         <div className="md:flex md:justify-between">
           <StaticQuery querySummary={querySummary} isQuerySummaryPage={true} />
           {/* <div className="flex rounded-[30px]  bg-customBlue md:mt-4 md:space-x-4 md:px-8 md:py-4">

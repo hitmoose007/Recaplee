@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Competitor, QuerySummary } from '@/types/my-types';
 import AddedChangeView from './UnExpandedAdded';
-import RemovedChangeView from './UnexpandedRemoved';
+import RemovedChangeView from './UnExpandedRemoved';
 import ReplaceChangeView from './UnExpandedReplace';
 import ExpandedBanner from './ExpandedBanner';
 import { useEffect } from 'react';
@@ -15,7 +15,6 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   const hasRenderedRef = useRef(false);
   const [removedCopyAllText, setRemovedCopyAllText] = useState<string>('');
   const [addedCopyAllText, setAddedCopyAllText] = useState<string>('');
-
   const setRemovedCopyAllTextHandler = (text: string) => {
     //add it incrementally
     setRemovedCopyAllText((prev) => prev + text);
@@ -27,7 +26,10 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
   useEffect(() => {
     hasRenderedRef.current = true;
   }, []);
+//   console.log('competitorAnalysed', competitorAnalysed);
 
+  let i = 0;
+  let j = 0;
   return (
     <>
       <div className="flex w-full flex-col space-y-4 rounded-[30px] bg-customBlue px-4 py-4 text-sm ">
@@ -40,14 +42,9 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
 
         <div className="flex w-full  space-x-20 ">
           <div className="w-1/2  space-y-4">
-            {competitorAnalysed.changed_content?.map((change, index) => {
-                
-                // var i = 0;
+            {competitorAnalysed.changed_content?.filter((change)=> change[0]==='-' || change[0] ==='~').map((change, index) => {
               if (change[0] === '-') {
-                // i++
                 const removedChange = printTagIfExists(change);
-                // setRemovedCopyAllTextHandler(removedChange?.value);
-                // oldContentWords += wordsCount(removedChange?.value);
                 return (
                   <RemovedChangeView
                     hasRenderedRef={hasRenderedRef}
@@ -59,38 +56,37 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
                 );
               }
 
-              
-          if (change[0] === '~') {
+              if (change[0] === '~') {
+                // let response
+                const tag = printTagIfExists(change);
 
-            // let response
-            const tag = printTagIfExists(change);
-            if (!tag) {
-              return null;
-            }
-            return (
-              <ReplaceChangeView
-              isRemoved={true}
-              isAdded={false}
-                hasRenderedRef={hasRenderedRef}
-                setRemovedCopyAllTextHandler={setRemovedCopyAllTextHandler}
-                setAddedCopyAllTextHandler={setAddedCopyAllTextHandler}
-                key={index}
-                index={index}
-                tag={tag}
-              />
-            );
-          }
+                if (!tag) {
+                  return null;
+                }
+                // i++;
+                return (
+                  <ReplaceChangeView
+                    isRemoved={true}
+                    isAdded={false}
+                    hasRenderedRef={hasRenderedRef}
+                    setRemovedCopyAllTextHandler={setRemovedCopyAllTextHandler}
+                    setAddedCopyAllTextHandler={setAddedCopyAllTextHandler}
+                    key={index}
+                    index={index}
+                    tag={tag}
+                  />
+                );
+              }
               return null;
             })}
-
-        
           </div>
           <div className="w-1/2 space-y-4 ">
-            {competitorAnalysed.changed_content?.map((change, index) => {
+            {competitorAnalysed.changed_content?.filter((change)=> change[0]==='+' || change[0] ==='~').map((change, index) => {
               if (change[0] === '+') {
                 const addedChange = printTagIfExists(change);
                 // newContentWords += wordsCount(addedChange?.value);
                 // setAddedCopyAllTextHandler(addedChange?.value);
+                j++;
                 return (
                   <AddedChangeView
                     setAddedCopyAllTextHandler={setAddedCopyAllTextHandler}
@@ -102,24 +98,26 @@ const ExpandedView = ({ competitorAnalysed, querySummary }: Props) => {
                 );
               }
 
-          if (change[0] === '~') {
-
-            // let response
-            const tag = printTagIfExists(change);
-            if (!tag) {
-              return null;
-            }
-            return (
-              <ReplaceChangeView
-              isRemoved={false}
-              isAdded={true}
-                hasRenderedRef={hasRenderedRef}
-                key={index}
-                index={index}
-                tag={tag}
-              />
-            );
-          }
+              if (change[0] === '~') {
+                // let response
+                const tag = printTagIfExists(change);
+                if (!tag) {
+                  return null;
+                }
+                j++;
+                return (
+                  <ReplaceChangeView
+                    isRemoved={false}
+                    isAdded={true}
+                    setAddedCopyAllTextHandler={setAddedCopyAllTextHandler}
+                    setRemovedCopyAllTextHandler={setRemovedCopyAllTextHandler}
+                    hasRenderedRef={hasRenderedRef}
+                    key={index}
+                    index={index}
+                    tag={tag}
+                  />
+                );
+              }
               return null;
             })}
           </div>

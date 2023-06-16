@@ -100,6 +100,7 @@ const DesktopBanner = (props: Props) => {
         <div
           onClick={() => {
             supabase.auth.signOut();
+            
           }}
           className="flex justify-center space-x-4 hover:cursor-pointer"
         >

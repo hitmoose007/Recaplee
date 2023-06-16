@@ -42,6 +42,10 @@ const DesktopBanner = (props: Props) => {
           className="hover:cursor-pointer"
         />
         <Image
+          onClick={() => {
+            supabase.auth.signOut();
+            
+          }}
           quality={100}
           src="/logoutIcon.svg"
           alt="logout icon"
@@ -76,10 +80,6 @@ const DesktopBanner = (props: Props) => {
           </div>
         )}
         <div
-          onClick={() => {
-            supabase.auth.signOut();
-            router.push('/login');
-          }}
           className="  flex flex-col items-end hover:cursor-pointer "
         >
           {user.renewal_date && scrollPosition <= 0 && (

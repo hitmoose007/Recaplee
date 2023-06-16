@@ -56,42 +56,6 @@ export default async function handler(
             maxCustomScrape: 0,
           },
         });
-      } else if (event.type === 'invoice.payment_succeeded') {
-        const invoice = event.data.object as Stripe.Invoice;
-
-        const subscription = await stripe.subscriptions.retrieve(
-          invoice.subscription as string
-        );
-
-        const price = await stripe.prices.retrieve(
-          subscription.metadata.priceId as string
-        );
-
-        await prisma.profiles.update({
-          where: {
-            stripe_id: subscription.customer as string,
-          },
-          data: {
-            renewal_date: new Date(subscription.current_period_end * 1000),
-            maxMonitoredQuery:
-              (price.metadata.maxMonitoredQuery &&
-                +price.metadata.maxMonitoredQuery) ||
-              null,
-            maxResearchQuery:
-              (price.metadata.maxResearchQuery &&
-                +price.metadata.maxResearchQuery) ||
-              null,
-
-            maxScrape:
-              (price.metadata.maxScrape && +price.metadata.maxScrape) || null,
-            maxCustomScrape:
-              (price.metadata.maxCustomScrape &&
-                +price.metadata.maxCustomScrape) ||
-              null,
-            query_research: 0,
-            competitors_tracked: 0,
-          },
-        });
       } else if (event.type === 'customer.subscription.created') {
         const subscription = event.data.object as Stripe.Subscription;
 
@@ -108,7 +72,7 @@ export default async function handler(
         const subscription = event.data.object as Stripe.Subscription;
         await prisma.profiles.update({
           where: {
-            stripe_id: subscription.id,
+            id: subscription.metadata.userId as string,
           },
           data: {
             renewal_date: new Date(subscription.current_period_end * 1000),
@@ -118,7 +82,7 @@ export default async function handler(
         const subscription = event.data.object as Stripe.Subscription;
         await prisma.profiles.update({
           where: {
-            stripe_id: subscription.id,
+            id: subscription.metadata.userId as string,
           },
           data: {
             renewal_date: null,

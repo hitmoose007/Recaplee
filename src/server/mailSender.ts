@@ -17,17 +17,21 @@ interface QueryType {
 }
 
 export async function mailSender() {
+  const currentDate = new Date();
+
   const profiles = await prisma.profiles.findMany({
+    where: {
+      email_enabled: true,
+      renewal_date: {
+        gte: currentDate,
+      },
+    },
     include: {
       TargetQuery: {
         include: {
           Competitor: true,
         },
       },
-    },
-
-    where: {
-      email_enabled: true,
     },
   });
 

@@ -22,7 +22,15 @@ export default async function handler(
 
     const currentDate = new Date();
 
-    const allQueries = await prisma.targetQuery.findMany({});
+    const allQueries = await prisma.targetQuery.findMany({
+      where: {
+        profiles: {
+          renewal_date: {
+            gte: currentDate,
+          },
+        },
+      },
+    });
 
     const filteredQueries = allQueries.filter((query) => {
       const queryTime = query.recent_update?.getTime();

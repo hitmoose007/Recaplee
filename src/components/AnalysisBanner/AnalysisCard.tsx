@@ -91,11 +91,11 @@ const AnalysisCard = ({
           <Image src="/linkIcon.svg" width={10} height={10} alt="link icon" />
         </div>
       </div>
-      <div className="hidden lg:flex lg:flex-col ">
+      <div className=" lg:flex lg:flex-col ">
         <p className="text-center font-bold ">{old_update}</p>
         <p className="text-sm md:mt-1 ">Compared analysis date</p>
       </div>
-      <div className="hidden text-center lg:flex lg:flex-col">
+      <div className="text-center lg:flex lg:flex-col">
         <p className="font-bold ">{recent_update}</p>
         <p className="text-sm md:mt-1">Most recent update</p>
       </div>

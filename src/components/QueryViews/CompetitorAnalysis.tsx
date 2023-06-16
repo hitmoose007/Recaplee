@@ -29,7 +29,7 @@ const CompetitorAnalysis = ({
   return (
     <>
       <QueryHeader
-        highlightedText={competitorAnalysed.title || ''}
+        highlightedText={competitorAnalysed.domain || ''}
         isCompetitor={true}
       />
       <HelperHeader description="Read and analyse all the differences found between two versions. You can compare all the changes made in the web page content." />

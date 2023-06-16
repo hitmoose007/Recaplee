@@ -17,20 +17,20 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
     <div className="mt-4 inline-flex w-full md:w-fit items-center rounded-[30px] bg-[#EEF6FF] px-6  py-4 pt-4  text-customBlack md:h-[100px] md:py-0 md:pt-4">
       <div className="flex w-full flex-col md:flex-row md:space-x-10">
         {!isQuerySummaryPage && (
-          <div className=" flex-col  space-y-2">
+          <div className=" flex-col  space-y-2 py- md:py-0">
             <p>Your query:</p>
             <input
               value={
                 isQuerySummaryPage ? querySummary?.query_name : formState.query
               }
               type="text"
-              className="pointer-events-none h-[34px] w-full rounded-full pl-4 font-bold text-[#334DD9]"
+              className="pointer-events-none  h-[34px] w-full rounded-full pl-4 font-bold text-[#334DD9]"
             />
           </div>
         )}
 
-        <div className=" pointer-events-none  md:space-y-2">
-          <p>Search Engine:</p>
+        <div className=" pointer-events-none   space-y-2 md:py-0 py-2">
+          <p className="">Search Engine:</p>
           <DomainSelect
             domain={
               isQuerySummaryPage
@@ -40,7 +40,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
             setDomain={() => {}}
           />
         </div>
-        <div className="pointer-events-none space-y-2 ">
+        <div className="pointer-events-none space-y-2 md:py-0 py-2 ">
           <p>Country:</p>
           <CountrySelect
             country={
@@ -52,7 +52,7 @@ const StaticQuery = ({ querySummary, isQuerySummaryPage = false }: Props) => {
           />
         </div>
 
-        <div className="space flex-col space-y-2 text-[#4B5563]">
+        <div className=" flex-col space-y-2 text-[#4B5563]">
           <p className="text-[#111827]">Device:</p>
           <div className="flex ">
             <div

@@ -1,3 +1,4 @@
+import { color } from 'framer-motion';
 import React from 'react';
 
 type Props = {
@@ -11,21 +12,43 @@ type Props = {
 };
 
 const ChangeCard = ({
-    showPercentage = false,
+  showPercentage = false,
   showHashtag = false,
   topTitle,
   bottomTitle,
   value,
+  showColor = false,
 }: Props) => {
+  let colorValue = '';
+  if (value !== undefined && typeof value === 'string') {
+    value = parseInt(value);
+    if (value > 25) {
+      colorValue = 'customRed';
+    } else if (value > 10 && value < 25) {
+      colorValue = 'customYellow';
+    } else {
+      colorValue = 'customGreen';
+    }
+  } else if (value !== undefined && typeof value === 'number') {
+    if (value > 25) {
+      colorValue = 'customRed';
+    } else if (value > 10 && value < 25) {
+      colorValue = 'customYellow';
+    } else {
+      colorValue = 'customGreen';
+    }
+  }
 
-    
   return (
-    <div className="flex flex-col rounded-[25px]  items-center justify-center space-y-1 md:rounded-[30px] bg-white text-sm text-customGray md:w-44 md:px-4 md:py-1">
+    <div className="flex flex-col items-center  justify-center space-y-1 rounded-[25px] bg-white text-sm text-customGray md:w-44 md:rounded-[30px] md:px-4 md:py-1">
       <p>{topTitle}</p>
       <p className="text-[20px] font-bold text-customPurple ">
         {showHashtag && '#'}
-        {value}
-        {showPercentage && '%'}
+        <span className={`${showColor && 'text-' + colorValue}`}>
+          {' '}
+          {value}
+          {showPercentage && '%'}
+        </span>
       </p>
       <p>{bottomTitle}</p>
     </div>

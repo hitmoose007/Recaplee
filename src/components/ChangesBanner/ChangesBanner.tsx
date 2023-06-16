@@ -48,6 +48,7 @@ const QueryBanner = ({
             bottomTitle="on Search Engine"
           />
           <ChangeCard
+          showColor={true}
           showPercentage={true}
             value={competitorAnalysed?.content_changed}
             topTitle="A total of"
@@ -55,6 +56,7 @@ const QueryBanner = ({
           />
           <ChangeCard
     
+    showColor={true}
             value={averageChangesPerWebsite.toFixed(1)}
             topTitle="Average of"
             bottomTitle="changes per webiste"

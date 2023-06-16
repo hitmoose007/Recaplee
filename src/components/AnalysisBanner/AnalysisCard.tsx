@@ -58,7 +58,7 @@ const AnalysisCard = ({
   }, [competitor]);
 
   return (
-    <div className="flex flex-col items-center justify-around space-y-2 rounded-[50px] bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:rounded-full md:px-4 md:py-4">
+    <div className="flex flex-col items-center justify-around space-y-2 rounded-[25px] bg-white py-6 align-middle text-customGray md:flex-row md:space-x-4 md:space-y-0 md:rounded-full md:px-4 md:py-4">
       <div className="flex w-3 text-customYellow">
         <p className="text-2xl font-bold text-customPurple ">
           {competitor.current_position || '#'}.
@@ -74,16 +74,17 @@ const AnalysisCard = ({
           </p>
         )}
       </div>
-      <div className="flex flex-col   ">
+      <div className="flex flex-col items-center md:items-stretch  ">
         {' '}
-        <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-80 md:text-start">
+        <p className=" w-60 truncate text-center text-[20px] font-bold text-customPurple md:w-96 md:text-start">
           {competitor.title}
         </p>
-        <div className="flex  w-96 space-x-2 truncate">
+        <div className="flex w-60 justify-center md:justify-normal md:w-96 space-x-2 truncate">
           <a
             href={competitor.link}
             target="_blank"
-            className="mx-auto w-auto  overflow-hidden overflow-ellipsis text-sm font-bold text-customGray hover:underline md:mx-0 md:w-fit"
+            className=" overflow-hidden overflow-ellipsis text-sm font-bold text-customGray hover:underline mx-0 w-fit"
+
           >
             {competitor.link}
           </a>

@@ -69,7 +69,7 @@ To run the project correctly, you need to set up the following environment varia
 
 Make sure to assign appropriate values to these environment variables before running the project.
 4. Run the application: yarn dev or yarn start
-
+##Create Trigger for Handling New User Creation
 **File:** create_trigger_handle_new_user.sql
 
 ```sql

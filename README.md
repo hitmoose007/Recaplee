@@ -70,6 +70,32 @@ To run the project correctly, you need to set up the following environment varia
 Make sure to assign appropriate values to these environment variables before running the project.
 4. Run the application: yarn dev or yarn start
 
+**File:** create_trigger_handle_new_user.sql
+
+```sql
+-- Function to handle new user creation
+create function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email)
+  values (new.id, new.email);
+  return new;
+end;
+$$ language plpgsql security definer;
+
+-- Trigger to execute the handle_new_user function
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+```
+
+To create the trigger for handling new user creation in your Supabase project:
+
+1. Open your Supabase project.
+2. Connect to the database using a PostgreSQL client.
+3. Execute the SQL queries above in the given order.
+
+These queries will create a function called `handle_new_user` and a trigger called `on_auth_user_created`. The function inserts a new row into the `public.profiles` table with the `id` and `email` values from the newly inserted row in the `auth.users` table. The trigger ensures that the `handle_new_user` function is executed automatically after each insertion into the `auth.users` table.
 ## Contribution
 
 We welcome contributions to improve Recaplee. To contribute, follow these steps:
@@ -85,6 +111,8 @@ We welcome contributions to improve Recaplee. To contribute, follow these steps:
 Recaplee is licensed under the [MIT License](LICENSE).
 
 ## Contact
+
+
 
 For questions or suggestions, please reach out to us at [moosathebutt@gmail.com](mailto:moosathebutt@gmail.com).
 

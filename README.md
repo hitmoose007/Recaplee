@@ -69,6 +69,30 @@ To run the project correctly, you need to set up the following environment varia
 
 Make sure to assign appropriate values to these environment variables before running the project.
 4. Run the application: yarn dev or yarn start
+
+
+## Setting up database with prisma
+To use the Prisma tool for performing database pulls and pushes, follow the instructions below:
+
+
+
+1. Database Pull:
+   - To pull the database schema and generate Prisma client code, use the following command:
+     ```
+     npx prisma db pull
+     ```
+
+2. Database Push:
+   - After making changes to your Prisma schema, you need to apply those changes to the database.
+   - Use the following command to apply the changes and update the database schema:
+     ```
+     npx prisma db push
+     ```
+
+Note: Make sure you have the necessary permissions and credentials to access the database. Also, ensure that your Prisma schema is correctly defined before performing a database push.
+
+For more information on how to use Prisma and its various features, refer to the official Prisma documentation: [https://www.prisma.io/docs/](https://www.prisma.io/docs/)
+
 ## Create Trigger for Handling New User Creation
 **File:** create_trigger_handle_new_user.sql
 

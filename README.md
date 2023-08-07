@@ -8,10 +8,20 @@ Recaplee is a web application designed to monitor changes in competitors' pages 
 - Login/Signup via Email: Default form for user authentication.
 
 - Tool Homepage: Displays monitored queries and updates.
+
 ![homepage](images/dashboard.png)
-- Tool - Query Summary: Provides a summary of a selected query's data.
-- Tool - Competitor Analysis: Shows content differences between versions.
-- Tool - Add Query: Allows users to add new target queries.
+- Tool - Query Summary: Provides a summary of a selected query's data.  
+  
+![query summary](images/query-summary.png)
+- Tool - Competitor Analysis: Shows content differences between versions.  
+  
+![competitor analysis](images/competitor.png)  
+
+- Tool - Add Query: Allows users to add new target queries.  
+
+![add query](images/step1.png)
+![add query](images/step2.png)
+
 
 ## APIs Used
 
